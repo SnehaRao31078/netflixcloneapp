@@ -5,6 +5,7 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const { Resend } = require("resend");
 
 const userModel = require("./models/user");
 const productModel = require("./models/products");
@@ -12,50 +13,65 @@ const heroModel = require("./models/banners");
 const planModel = require("./models/plans");
 
 const app = express();
-
 app.use(express.json());
 app.use(cors());
 app.use("/Images", express.static("public/Images"));
 
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
+
 
 let otpStore = {};
 
+
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await userModel.findOne({ email, password });
+    if (!user) return res.json({ status: "User not found" });
 
-    if (!user) {
-      return res.json({ status: "User not found" });
-    }
-
+   
     const otp = Math.floor(100000 + Math.random() * 900000);
-    otpStore[email] = otp;
+    otpStore[email] = { otp, expiresAt: Date.now() + 5 * 60 * 1000 };
 
-    res.json({
-      status: "OTP Sent",
-      email,
-      user,
-      otp
+    
+    await resend.emails.send({
+      from: process.env.EMAIL_USER, 
+      to: email, 
+      subject: "Your OTP Code",
+      html: `<p>Hello,</p><p>Your OTP code is <strong>${otp}</strong>. It will expire in 5 minutes.</p>`
     });
 
-  } catch (error) {
-    res.json({ status: "Server Error" });
+    res.json({ status: "OTP Sent" });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: "Server Error" });
   }
 });
+
 
 app.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;
 
-  if (otpStore[email] == otp) {
+  if (!otpStore[email]) return res.json({ status: "Invalid OTP" });
+
+  const stored = otpStore[email];
+  if (Date.now() > stored.expiresAt) {
     delete otpStore[email];
-    res.json({ status: "Success" });
+    return res.json({ status: "OTP Expired" });
+  }
+
+  if (stored.otp.toString() === otp.toString()) {
+    delete otpStore[email];
+    return res.json({ status: "Success" });
   } else {
-    res.json({ status: "Invalid OTP" });
+    return res.json({ status: "Invalid OTP" });
   }
 });
 
