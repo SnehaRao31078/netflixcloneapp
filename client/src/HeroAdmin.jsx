@@ -12,8 +12,7 @@ function HeroAdmin() {
 
   useEffect(() => {
     if (id) {
-      axios
-        .get(`https://netflix-cloneapp-backend.onrender.com/banners/${id}`)
+      axios.get(`${import.meta.env.VITE_API_URL}/banners/${id}`)
         .then((res) => {
           setTitle(res.data.title);
           setDescription(res.data.description);
@@ -37,10 +36,11 @@ function HeroAdmin() {
     const data = { title, description, videoLink };
     try {
       if (id) {
-        await axios.put(`https://netflix-cloneapp-backend.onrender.com/banners/${id}`, data);
+       await axios.put(
+  `${import.meta.env.VITE_API_URL}/banners/${id}`,data);
         alert("Banner updated successfully");
       } else {
-        await axios.post("https://netflix-cloneapp-backend.onrender.com/banners", data);
+        await axios.post(`${import.meta.env.VITE_API_URL}/banners`,data);
         alert("Banner added successfully");
       }
       navigate("/heroview");

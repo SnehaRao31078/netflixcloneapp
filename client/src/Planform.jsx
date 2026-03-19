@@ -21,7 +21,10 @@ function Plan() {
     const data = { email, card, holder, country, plan, price };
 
     try {
-      const res = await axios.post("https://netflix-cloneapp-backend.onrender.com/plans", data);
+const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/plans`,
+  data
+);
 
       if (res.data.success) {
         localStorage.setItem("userPlan", plan);

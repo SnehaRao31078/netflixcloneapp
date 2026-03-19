@@ -10,8 +10,7 @@ function Player() {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("https://netflix-cloneapp-backend.onrender.com/products/" + id)
+    axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`)
 
       .then((res) => {
         setMovie(res.data);

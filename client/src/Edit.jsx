@@ -16,7 +16,7 @@ function Edit()
 
 
      useEffect(() => {
-    axios.get(`https://netflix-cloneapp-backend.onrender.com/movies/${id}`)
+   axios.get(`${import.meta.env.VITE_API_URL}/movies/${id}`)
       .then(res => {
         
         setTitle(res.data.title);
@@ -37,7 +37,10 @@ function Edit()
      formData.append("image", file); 
     formData.append("video",video) ;
 
-    axios.put(`https://netflix-cloneapp-backend.onrender.com/movies/${id}`, formData)
+    axios.put(
+  `${import.meta.env.VITE_API_URL}/movies/${id}`,
+  formData
+)
       .then(res => {
         navigate("/admindash");
       })

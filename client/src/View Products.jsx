@@ -7,8 +7,7 @@ function ViewProducts() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://netflix-cloneapp-backend.onrender.com/products")
+   axios.get(`${import.meta.env.VITE_API_URL}/products`)
 
       .then((res) => {
         setMovies(res.data);
@@ -18,8 +17,7 @@ function ViewProducts() {
   }, []);
 
   const handleDelete = (id) => {
-    axios
-      .delete("https://netflix-cloneapp-backend.onrender.com/products/" + id)
+    axios.delete(`${import.meta.env.VITE_API_URL}/products/${id}`)
 
       .then(() => {
         alert("Deleted successfully");
@@ -59,9 +57,9 @@ function ViewProducts() {
 
               <td>
                 <img
-                  src={"https://netflix-cloneapp-backend.onrender.com/Images/" + movie.file}
-                  width="100"
-                />
+  src={`${import.meta.env.VITE_API_URL}/Images/${movie.file}`}
+  width="100"
+/>
               </td>
 
               <td>

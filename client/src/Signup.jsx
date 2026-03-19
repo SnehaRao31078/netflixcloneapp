@@ -12,8 +12,10 @@ function Signup() {
 const  navigate=useNavigate();  
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://netflix-cloneapp-backend.onrender.com/signup", { name, email, password })
+    axios.post(
+  `${import.meta.env.VITE_API_URL}/signup`,
+  { name, email, password }
+)
       .then((result) => {
         console.log(result);
         alert ("signup successful");

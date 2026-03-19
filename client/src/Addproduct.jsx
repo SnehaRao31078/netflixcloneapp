@@ -14,12 +14,12 @@ function Addproduct() {
   const [category, setCategory] = useState("");
   const [videoLink, setVideoLink] = useState("");
   const [imagePreview, setImagePreview] = useState("");
-  const[plan,setPlan]=useState("");
+  const [plan, setPlan] = useState("");
 
   useEffect(() => {
     if (id) {
       axios
-        .get("https://netflix-cloneapp-backend.onrender.com/products/" + id)
+        .get(`${import.meta.env.VITE_API_URL}/${id}`)
 
         .then((res) => {
           setTitle(res.data.title);
@@ -28,14 +28,12 @@ function Addproduct() {
           setCategory(res.data.category);
           setImagePreview(res.data.file);
           setVideoLink(res.data.videoLink);
-          setPlan(res.data.plan)
-
+          setPlan(res.data.plan);
         })
 
         .catch((err) => console.log(err));
     }
   }, []);
-  
 
   const convertYoutubeLink = (link) => {
     if (link.includes("watch?v=")) {
@@ -62,7 +60,7 @@ function Addproduct() {
     formData.append("language", language);
     formData.append("category", category);
     formData.append("videoLink", videoLink);
-    formData.append("plan",plan)
+    formData.append("plan", plan);
 
     if (file) {
       formData.append("image", file);
@@ -70,11 +68,14 @@ function Addproduct() {
 
     try {
       if (id) {
-        await axios.put("https://netflix-cloneapp-backend.onrender.com/products/" + id, formData);
+        await axios.put(
+          `${import.meta.env.VITE_API_URL}/products/${id}`,
+          formData,
+        );
 
         alert("Movie updated successfully");
       } else {
-        await axios.post("https://netflix-cloneapp-backend.onrender.com/products", formData);
+        await axios.post(`${import.meta.env.VITE_API_URL}/products`, formData);
 
         alert("Movie added successfully");
       }
@@ -125,7 +126,7 @@ function Addproduct() {
               </select>
             </div>
 
-             <div>
+            <div>
               <select
                 className="inputfield"
                 value={plan}
@@ -135,7 +136,6 @@ function Addproduct() {
                 <option value="basic">Basic</option>
                 <option value="Standard">Standard</option>
                 <option value="premium">Premium</option>
-                
               </select>
             </div>
 
@@ -150,12 +150,11 @@ function Addproduct() {
                 }}
               >
                 <img
-                  src={"https://netflix-cloneapp-backend.onrender.com/Images/" + imagePreview}
+                  src={`${import.meta.env.VITE_API_URL}/Images/${imagePreview}`}
                   width="120"
                   style={{ borderRadius: "5px" }}
                 />
-
-                <p type="button"onClick={removeImage}  className="cross" >
+                <p type="button" onClick={removeImage} className="cross">
                   X
                 </p>
               </div>

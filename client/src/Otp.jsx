@@ -14,10 +14,13 @@ function Otp() {
 
     e.preventDefault();
 
-    axios.post("https://netflix-cloneapp-backend.onrender.com/verify-otp", {
-      email: email,
-      otp: otp
-    })
+   axios.post(
+  `${import.meta.env.VITE_API_URL}/verify-otp`,
+  {
+    email: email,
+    otp: otp
+  }
+)
     .then(res => {
 
       if(res.data.status === "Success"){

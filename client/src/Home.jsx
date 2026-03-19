@@ -8,7 +8,7 @@ function Home() {
   const navigate = useNavigate();
   const currentUserPlan = localStorage.getItem("userPlan") || "none";
  useEffect(() => {
-  axios.get("https://netflix-cloneapp-backend.onrender.com/products")
+ axios.get(`${import.meta.env.VITE_API_URL}/products`)
     .then((res) => {
       const filteredByPlan = res.data.filter((movie) => {
         
@@ -39,7 +39,7 @@ function Home() {
 
   useEffect(()=>
   {
-    axios.get("https://netflix-cloneapp-backend.onrender.com/banners")
+    axios.get(`${import.meta.env.VITE_API_URL}/banners`)
     .then((res)=>
     {
       setBanner(res.data[0]);
@@ -101,11 +101,11 @@ function Home() {
               .filter((movie) => movie.category === "sci-fi horror")
               .map((movie) => (
                 <img
-                  key={movie.id}
-                  src={`https://netflix-cloneapp-backend.onrender.com/Images/${movie.file}`}
-                  alt={movie.title}
-                  onClick={() => navigate("/player/" + movie._id)}
-                />
+  key={movie.id}
+  src={`${import.meta.env.VITE_API_URL}/Images/${movie.file}`}
+  alt={movie.title}
+  onClick={() => navigate("/player/" + movie._id)}
+/>
               ))}
           </div>
           <button
@@ -129,11 +129,11 @@ function Home() {
               .filter((movie) => movie.category === "made in india")
               .map((movie) => (
                 <img
-                  key={movie.id}
-                  src={`https://netflix-cloneapp-backend.onrender.com/Images/${movie.file}`}
-                  alt={movie.title}
-                  onClick={() => navigate("/player/" + movie._id)}
-                />
+  key={movie.id}
+  src={`${import.meta.env.VITE_API_URL}/Images/${movie.file}`}
+  alt={movie.title}
+  onClick={() => navigate("/player/" + movie._id)}
+/>
               ))}
           </div>
           <button

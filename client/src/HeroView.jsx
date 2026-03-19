@@ -7,8 +7,7 @@ function HeroView() {
   const [banner, setBanner] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://netflix-cloneapp-backend.onrender.com/banners")
+    axios.get(`${import.meta.env.VITE_API_URL}/banners`)
 
       .then((res) => {
         setBanner(res.data);
@@ -18,8 +17,7 @@ function HeroView() {
   }, []);
 
   const handleDelete = (id) => {
-    axios
-      .delete("https://netflix-cloneapp-backend.onrender.com/banners/" + id)
+    axios.delete(`${import.meta.env.VITE_API_URL}/banners/${id}`)
 
       .then(() => {
         alert("Deleted successfully");

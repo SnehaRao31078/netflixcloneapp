@@ -10,7 +10,10 @@ function Signin() {
   const handleSubmit = (e) => {
   e.preventDefault();
 
-  axios.post("https://netflix-cloneapp-backend.onrender.com/signin", { email, password })
+  axios.post(
+  `${import.meta.env.VITE_API_URL}/signin`,
+  { email, password }
+)
     .then((result) => {
 
       console.log(result.data);
