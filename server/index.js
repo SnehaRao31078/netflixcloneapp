@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
@@ -16,8 +17,9 @@ app.use(express.json());
 app.use(cors());
 app.use("/Images", express.static("public/Images"));
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/netflix")
+
+
+  mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
@@ -25,10 +27,10 @@ let otpStore = {};
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  auth: {
-    user: "sneha8484rao@gmail.com",
-    pass: "evaw revb fltg wzbx",
-  },
+ auth: {
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS,
+}
 });
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
@@ -44,7 +46,7 @@ app.post("/signin", async (req, res) => {
     otpStore[email] = otp;
 
     const mailOptions = {
-      from: "sneha8484rao@gmail.com",
+      from: "process.env.EMAIL_USER",
       to: email,
       subject: "Netflix OTP Verification",
       text: `Your OTP for login is: ${otp}`,
@@ -236,6 +238,8 @@ app.post("/plans", async (req, res) => {
 
 
 
-app.listen(3001, () => {
-  console.log("Server running on port 3001");
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
 });

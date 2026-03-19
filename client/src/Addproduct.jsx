@@ -19,7 +19,7 @@ function Addproduct() {
   useEffect(() => {
     if (id) {
       axios
-        .get("http://localhost:3001/products/" + id)
+        .get("https://netflix-cloneapp-backend.onrender.com/products/" + id)
 
         .then((res) => {
           setTitle(res.data.title);
@@ -70,11 +70,11 @@ function Addproduct() {
 
     try {
       if (id) {
-        await axios.put("http://localhost:3001/products/" + id, formData);
+        await axios.put("https://netflix-cloneapp-backend.onrender.com/products/" + id, formData);
 
         alert("Movie updated successfully");
       } else {
-        await axios.post("http://localhost:3001/products", formData);
+        await axios.post("https://netflix-cloneapp-backend.onrender.com/products", formData);
 
         alert("Movie added successfully");
       }
@@ -150,7 +150,7 @@ function Addproduct() {
                 }}
               >
                 <img
-                  src={"http://localhost:3001/Images/" + imagePreview}
+                  src={"https://netflix-cloneapp-backend.onrender.com/Images/" + imagePreview}
                   width="120"
                   style={{ borderRadius: "5px" }}
                 />

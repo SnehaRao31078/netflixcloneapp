@@ -8,7 +8,7 @@ function Home() {
   const navigate = useNavigate();
   const currentUserPlan = localStorage.getItem("userPlan") || "none";
  useEffect(() => {
-  axios.get("http://localhost:3001/products")
+  axios.get("https://netflix-cloneapp-backend.onrender.com/products")
     .then((res) => {
       const filteredByPlan = res.data.filter((movie) => {
         
@@ -39,7 +39,7 @@ function Home() {
 
   useEffect(()=>
   {
-    axios.get("http://localhost:3001/banners")
+    axios.get("https://netflix-cloneapp-backend.onrender.com/banners")
     .then((res)=>
     {
       setBanner(res.data[0]);
@@ -102,7 +102,7 @@ function Home() {
               .map((movie) => (
                 <img
                   key={movie.id}
-                  src={`http://localhost:3001/Images/${movie.file}`}
+                  src={`https://netflix-cloneapp-backend.onrender.com/Images/${movie.file}`}
                   alt={movie.title}
                   onClick={() => navigate("/player/" + movie._id)}
                 />
@@ -130,7 +130,7 @@ function Home() {
               .map((movie) => (
                 <img
                   key={movie.id}
-                  src={`http://localhost:3001/Images/${movie.file}`}
+                  src={`https://netflix-cloneapp-backend.onrender.com/Images/${movie.file}`}
                   alt={movie.title}
                   onClick={() => navigate("/player/" + movie._id)}
                 />

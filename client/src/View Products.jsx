@@ -8,7 +8,7 @@ function ViewProducts() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/products")
+      .get("https://netflix-cloneapp-backend.onrender.com/products")
 
       .then((res) => {
         setMovies(res.data);
@@ -19,7 +19,7 @@ function ViewProducts() {
 
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:3001/products/" + id)
+      .delete("https://netflix-cloneapp-backend.onrender.com/products/" + id)
 
       .then(() => {
         alert("Deleted successfully");
@@ -59,7 +59,7 @@ function ViewProducts() {
 
               <td>
                 <img
-                  src={"http://localhost:3001/Images/" + movie.file}
+                  src={"https://netflix-cloneapp-backend.onrender.com/Images/" + movie.file}
                   width="100"
                 />
               </td>

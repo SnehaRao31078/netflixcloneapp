@@ -14,7 +14,7 @@ function Otp() {
 
     e.preventDefault();
 
-    axios.post("http://localhost:3001/verify-otp", {
+    axios.post("https://netflix-cloneapp-backend.onrender.com/verify-otp", {
       email: email,
       otp: otp
     })

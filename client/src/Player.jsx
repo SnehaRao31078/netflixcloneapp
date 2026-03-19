@@ -11,7 +11,7 @@ function Player() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/products/" + id)
+      .get("https://netflix-cloneapp-backend.onrender.com/products/" + id)
 
       .then((res) => {
         setMovie(res.data);

@@ -16,7 +16,7 @@ function Edit()
 
 
      useEffect(() => {
-    axios.get(`http://localhost:3001/movies/${id}`)
+    axios.get(`https://netflix-cloneapp-backend.onrender.com/movies/${id}`)
       .then(res => {
         
         setTitle(res.data.title);
@@ -37,7 +37,7 @@ function Edit()
      formData.append("image", file); 
     formData.append("video",video) ;
 
-    axios.put(`http://localhost:3001/movies/${id}`, formData)
+    axios.put(`https://netflix-cloneapp-backend.onrender.com/movies/${id}`, formData)
       .then(res => {
         navigate("/admindash");
       })
