@@ -18,7 +18,7 @@ function Signin() {
 
     console.log(result.data);
 
-    if (result.data.status === "OTP Sent") {
+    if (result.data.status === otp) {
 
       alert("Your OTP is: " + result.data.otp);
 
