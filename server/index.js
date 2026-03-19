@@ -46,7 +46,7 @@ app.post("/signin", async (req, res) => {
     otpStore[email] = otp;
 
     const mailOptions = {
-      from: "process.env.EMAIL_USER",
+      from: process.env.EMAIL_USER,
       to: email,
       subject: "Netflix OTP Verification",
       text: `Your OTP for login is: ${otp}`,
