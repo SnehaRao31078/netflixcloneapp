@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  background: black;
+  font-family: Arial;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 350px;
+  padding: 40px;
+  background: #111;
+  border-radius: 8px;
+  text-align: center;
+}
+
+
+.box h2 {
+  color: white;
+}
+
+.box input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 4px;
+  border: none;
+}
+
+.box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button a {
+  color: white;
+  text-decoration: none;
+}

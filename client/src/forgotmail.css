@@ -1,0 +1,141 @@
+
+
+.box {
+  width: 500px;
+  padding: 25px;
+  margin: 50px auto;
+  background: white;
+  font-family: Arial, sans-serif;
+}
+
+.box button {
+  width: 100%;
+  padding: 12px;
+  background: red;
+  color: white;
+  border: none;
+  font-size: 15px;
+}
+
+.signin {
+  width: auto;
+  padding: 6px 14px;
+  background: red;
+  color: white;
+  border: none;
+  font-size: 14px;
+  float:right;
+}
+
+
+h2 {
+  color: black;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+p {
+  line-height: 1.4;  
+  font-size: 14px;
+  color: #333;   
+}
+
+.radio {
+  display: flex;          
+  align-items: center;    
+  
+  gap: 10px;              
+  margin: 12px 0;
+  color: black;
+}
+
+.radio input {
+  width: auto;            
+  margin: 0;
+}
+
+.info {
+  margin: 15px 0;
+  background: transparent; 
+  color: #333;              
+  font-size: 16px;          
+  line-height: 1.4;         
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+button {
+  
+  padding: 12px;
+  background: red;
+  color: white;
+  border: none;
+  font-size: 15px;
+}
+.header img{
+    width:200px;
+   
+}
+.forgot-page{
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+.signin a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.footer-links
+{
+  grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  gap: 15px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+.footer p {
+  color: white;
+}
+.help-link a {
+  color: black;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.help-link a:hover {
+  color: #333;
+}
+.captcha-wrap {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.captcha-text {
+  color: #8c8c8c;
+  font-size: 13px;
+}
+
+.more {
+  margin-top: 6px;
+}
+
+.learn-more {
+  color: white;
+  text-decoration: underline;
+}
+

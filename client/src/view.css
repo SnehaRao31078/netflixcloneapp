@@ -1,0 +1,51 @@
+body {
+  font-family: Arial;
+  
+}
+.view
+{
+  background-color: black;
+}
+h2 {
+  margin-left: 20px;
+  color:white;
+}
+
+table {
+  width: 70%;
+  margin: 20px auto;  
+  border: 2px solid black;    
+}
+th 
+{border: 1px solid white;
+  padding: 8px;
+  color:black;
+
+}
+td {
+  border: 1px solid white;
+  padding: 8px;
+  color:white;
+}
+
+th {
+  background-color: lightgray;
+}
+.up
+{
+   background-color:green;
+}
+.del
+{
+    background-color: red;
+}
+img{
+  height:80px;
+}
+td button {
+  display: inline;   
+  margin-right: 5px;
+}
+a{
+text-decoration:none;
+}

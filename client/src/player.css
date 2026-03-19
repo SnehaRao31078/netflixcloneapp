@@ -1,0 +1,23 @@
+.player-btn{
+position:absolute;
+top:20px;
+right:20px;
+background:red;
+color:white;
+border:none;
+padding:6px 14px;
+font-size:13px;
+border-radius:6px;
+cursor:pointer;
+width:auto;
+}
+
+.movie-description{
+color:whitesmoke;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-size: larger;
+}
+
+
+
+

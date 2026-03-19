@@ -1,0 +1,267 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.help-page {
+  background: #fff;
+  color: #000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.netflix-text {
+  color: #e50914;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.help-header {
+  background: #000;
+  color: #fff;
+  padding: 14px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 6px solid #e6e6e6;
+}
+.divider {
+  color: #888;
+  font-size: 18px;
+}
+
+
+
+
+.help-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e5e5e5;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid #777;
+  color: white;
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-red {
+  background: #e50914;
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.help-container {
+  display: flex;
+  padding: 40px;
+  gap: 40px;
+}
+
+.help-content {
+  flex: 3;
+}
+
+.help-sidebar {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+/* Content */
+.back-link {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.desc {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.accordion {
+  border-top: 1px solid #ddd;
+  padding: 14px 0;
+  margin: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+.accordion.open {
+  background: #f9f9f9;
+}
+
+.steps-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+ol {
+  padding-left: 20px;
+}
+
+
+.help-sidebar h3 {
+  border-top: 4px solid red;
+  padding-top: 10px;
+  margin-bottom: 15px;
+}
+
+.help-sidebar ul li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+
+
+.help-footer {
+  background: linear-gradient(to right, black, darkred);
+  color: white;
+  padding: 30px 40px;
+  margin-top: 40px;
+}
+
+.contact-btn {
+  width: 110px;          
+  height: 32px;         
+  background: white;
+  color: black;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+      
+}
+
+.contact-btn:hover {
+  background: #e6e6e6;
+}
+
+.contact-btn:hover {
+  background: #e6e6e6;
+}
+
+.footer-links span {
+  display: block;
+  margin: 6px 0;
+  color: #ccc;
+}
+
+
+.feedback {
+  margin-top: 30px;
+}
+
+.feedback span {
+  margin-left: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+a {
+  margin-right: 15px;
+  text-decoration: underline;
+  color: black;
+}
+
+.help-footer {
+  background: linear-gradient(to right, black, #5a0000);
+  color: white;
+  padding: 30px 60px;
+  margin-top: 40px;
+}
+
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-top p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.contact-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.help-footer hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 18px 0;
+}
+
+
+.language-select {
+  background: white;
+  color: black;
+  border: 1px solid #666;
+  padding: 6px 10px;
+  width: 180px;
+  margin-bottom: 18px;
+}
+
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links span {
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.footer-links span:hover {
+  text-decoration: underline;
+}
+.footer-top p{
+  color: white;
+  font-weight: bold;
+}
