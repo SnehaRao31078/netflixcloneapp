@@ -41,7 +41,7 @@ app.post("/signin", async (req, res) => {
 
     
     const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev', 
+      from: 'sneha8484rao@gmail.com', 
       to: email, 
       subject: 'Netflix OTP Verification',
       html: `<p>Your OTP for login is: <strong>${otp}</strong></p>`,
