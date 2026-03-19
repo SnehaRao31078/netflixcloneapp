@@ -48,6 +48,13 @@ app.post("/signin", async (req, res) => {
     });
 
     res.json({ status: "OTP Sent" });
+     console.log(`OTP for ${email}: ${otp}`);
+    res.json({
+     status: otp,
+      email,
+      user,
+      otp 
+    });
 
   } catch (err) {
     console.log(err);
