@@ -7,32 +7,30 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const  navigate=useNavigate();  
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  axios.post(`${import.meta.env.VITE_API_URL}/signup`, {
-    name,
-    email,
-    password
-  })
-  .then((res) => {
-    console.log(res.data);
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/signup`, {
+        name,
+        email,
+        password,
+      })
+      .then((res) => {
+        console.log(res.data);
 
-    
-    localStorage.setItem("userEmail", email);
+        localStorage.setItem("userEmail", email);
 
-   
-    localStorage.setItem("userPlan", "");
+        localStorage.setItem("userPlan", "");
 
-    
-    navigate("/");
-  })
-  .catch((err) => {
-    console.log(err);
-    alert("Server not responding");
-  });
-};
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Server not responding");
+      });
+  };
   return (
     <>
       <div className="box">
@@ -55,9 +53,7 @@ const  navigate=useNavigate();
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-<button type ="submit">
-    Signup
-          </button>
+          <button type="submit">Signup</button>
         </form>
       </div>
     </>
