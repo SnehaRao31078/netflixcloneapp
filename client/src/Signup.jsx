@@ -9,19 +9,35 @@ function Signup() {
   const [password, setPassword] = useState("");
 const  navigate=useNavigate();  
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post(
-  `${import.meta.env.VITE_API_URL}/signup`,
-  { name, email, password }
-)
-      .then((result) => {
-        console.log(result);
-        alert ("signup successful");
-        navigate("/");
-        
-      })
-      .catch((err) => console.log(err));
-  };
+  e.preventDefault();
+
+  console.log(import.meta.env.VITE_API_URL); 
+
+  axios.post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+    .then((res) => {
+      console.log(res.data);
+
+      if (res.data.status === "SUCCESS") {
+        const user = res.data.user;
+
+        localStorage.setItem("userEmail", user.email);
+        localStorage.setItem("userPlan", user.plan || "");
+
+        if (user.plan) {
+          navigate("/home");
+        } else {
+          navigate("/subscribe");
+        }
+
+      } else {
+        alert(res.data.status);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("Server not responding");
+    });
+};
   return (
     <>
       <div className="box">

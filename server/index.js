@@ -27,33 +27,27 @@ mongoose.connect(process.env.MONGODB_URL)
 
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
+
   try {
-    const user = await userModel.findOne({ email, password });
-    if (!user){ return res.json({ status: "User not found" });}
-     return res.json({ status: "SUCCESS", user });
+  
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.json({ status: "User not found" });
     }
 
-    /*const otp = Math.floor(100000 + Math.random() * 900000);
-    otpStore[email] = otp;
+  
+    if (user.password !== password) {
+      return res.json({ status: "Invalid password" });
+    }
 
-    
-    console.log(`OTP for ${email}: ${otp}`);
-    
-
-    await resend.emails.send({
-  from: "onboarding@resend.dev", 
-  to: email, 
-  subject: "Your OTP Code",
-  html: `<p>Your OTP code is <strong>${otp}</strong>.</p>`
-});
-    res.json({ 
-      status: "OTP_SENT", 
-      email, 
-      user ,
-       otp:otp
+   
+    return res.json({
+      status: "SUCCESS",
+      user
     });
-*/
-   catch (err) {
+
+  } catch (err) {
     console.log(err);
     res.status(500).json({ status: "Server Error" });
   }
