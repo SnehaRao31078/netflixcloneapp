@@ -6,7 +6,7 @@ const movieSchema = new mongoose.Schema({
   language: String,
   category: String,
   file: String,
-  videoLink: String,
+  video: String,
   plan:String
 });
 
