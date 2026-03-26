@@ -32,7 +32,7 @@ function Player() {
       <iframe
         width="800"
         height="450"
-        src={movie.videoLink + "?autoplay=1&controls=1"}
+        src={movie.video + "?autoplay=1&controls=1"}
         title="trailer"
         
         allow="autoplay; encrypted-media"
