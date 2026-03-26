@@ -14,16 +14,30 @@ function Signin() {
  const handleSubmit = (e) => {
   e.preventDefault();
 
-  axios.post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+  axios
+    .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
     .then((res) => {
-      console.log(res.data); 
+      console.log(res.data);
+
       if (res.data.status === "SUCCESS") {
-        navigate("/subscribe", { state: { email: email } });
+        const user = res.data.user;
+
+        localStorage.setItem("userEmail", user.email);
+        localStorage.setItem("userPlan", user.plan || "");
+
+        if (user.plan) {
+          navigate("/home");
+        } else {
+          navigate("/subscribe");
+        }
+
       } else {
         alert(res.data.status);
       }
     })
-    .catch((err) => console.log(err));
+    .catch(() => {
+      alert("Server is waking up, try again in few seconds");
+    });
 };
 
 

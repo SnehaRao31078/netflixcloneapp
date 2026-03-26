@@ -29,22 +29,23 @@ app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-  
     const user = await userModel.findOne({ email });
 
     if (!user) {
       return res.json({ status: "User not found" });
     }
 
-  
     if (user.password !== password) {
       return res.json({ status: "Invalid password" });
     }
 
-   
+    
+    const userPlan = await planModel.findOne({ email });
+
     return res.json({
       status: "SUCCESS",
-      user
+      user,
+      plan: userPlan ? userPlan.plan : null
     });
 
   } catch (err) {
