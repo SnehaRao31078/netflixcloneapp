@@ -79,7 +79,7 @@ const handleSubmit = (e) => {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-<button onClick={()=>handleSubmit}>
+<button type="submit">
     Signup
           </button>
         </form>
