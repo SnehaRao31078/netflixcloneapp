@@ -25,6 +25,7 @@ function Signup() {
         localStorage.setItem("userPlan", "");
 
         navigate("/");
+        alert("Signup successful");
       })
       .catch((err) => {
         console.log(err);
