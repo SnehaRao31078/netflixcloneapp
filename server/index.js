@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URL)
 
 
 
-  app.post("/signin", async (req, res) => {
+ app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email, password });
@@ -36,14 +36,17 @@ mongoose.connect(process.env.MONGODB_URL)
     return res.json({ status: "User not found" });
   }
 
+
+  const userPlan = await planModel.findOne({ email });
+
   res.json({
     status: "SUCCESS",
     user: {
       email: user.email,
-      plan: user.plan   
+      plan: userPlan ? userPlan.plan : null
     }
   });
-}) ;
+});
 
 /*app.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;

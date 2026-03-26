@@ -13,7 +13,7 @@ const  navigate=useNavigate();
 
   console.log(import.meta.env.VITE_API_URL); 
 
-  axios.post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+  axios.post(`${import.meta.env.VITE_API_URL}/signup`, { name, email, password })
     .then((res) => {
       console.log(res.data);
 
@@ -60,7 +60,7 @@ const  navigate=useNavigate();
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-<button onClick={()=>handleSubmit}>
+<button >
     Signup
           </button>
         </form>
