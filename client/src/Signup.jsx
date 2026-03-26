@@ -11,27 +11,21 @@ const  navigate=useNavigate();
   const handleSubmit = (e) => {
   e.preventDefault();
 
-  console.log(import.meta.env.VITE_API_URL); 
-
-  axios.post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+  axios
+    .post(`${import.meta.env.VITE_API_URL}/signup`, {
+      name,
+      email,
+      password,
+    })
     .then((res) => {
       console.log(res.data);
 
-      if (res.data.status === "SUCCESS") {
-        const user = res.data.user;
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPlan", "");
 
-        localStorage.setItem("userEmail", user.email);
-        localStorage.setItem("userPlan", user.plan || "");
+      alert("Signup successful");
 
-        if (user.plan) {
-          navigate("/home");
-        } else {
-          navigate("/subscribe");
-        }
-
-      } else {
-        alert(res.data.status);
-      }
+      navigate("/");
     })
     .catch((err) => {
       console.log(err);
