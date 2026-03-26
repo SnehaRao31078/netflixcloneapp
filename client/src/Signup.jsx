@@ -11,32 +11,27 @@ const  navigate=useNavigate();
   const handleSubmit = (e) => {
   e.preventDefault();
 
-  console.log(import.meta.env.VITE_API_URL); 
+  axios.post(`${import.meta.env.VITE_API_URL}/signup`, {
+    name,
+    email,
+    password
+  })
+  .then((res) => {
+    console.log(res.data);
 
-  axios.post(`${import.meta.env.VITE_API_URL}/signup`, { name, email, password })
-    .then((res) => {
-      console.log(res.data);
+    
+    localStorage.setItem("userEmail", email);
 
-      if (res.data.status === "SUCCESS") {
-        const user = res.data.user;
+   
+    localStorage.setItem("userPlan", "");
 
-        localStorage.setItem("userEmail", user.email);
-        localStorage.setItem("userPlan", user.plan || "");
-
-        if (user.plan) {
-          navigate("/home");
-        } else {
-          navigate("/subscribe");
-        }
-
-      } else {
-        alert(res.data.status);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      alert("Server not responding");
-    });
+    
+    navigate("/");
+  })
+  .catch((err) => {
+    console.log(err);
+    alert("Server not responding");
+  });
 };
   return (
     <>
@@ -60,7 +55,7 @@ const  navigate=useNavigate();
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-<button type="submit">
+<button type ="submit">
     Signup
           </button>
         </form>
