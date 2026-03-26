@@ -29,9 +29,11 @@ app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await userModel.findOne({ email, password });
-    if (!user) return res.json({ status: "User not found" });
+    if (!user){ return res.json({ status: "User not found" });}
+     return res.json({ status: "SUCCESS", user });
+    }
 
-    {/*const otp = Math.floor(100000 + Math.random() * 900000);
+    /*const otp = Math.floor(100000 + Math.random() * 900000);
     otpStore[email] = otp;
 
     
@@ -50,8 +52,8 @@ app.post("/signin", async (req, res) => {
       user ,
        otp:otp
     });
-*/}
-  } catch (err) {
+*/
+   catch (err) {
     console.log(err);
     res.status(500).json({ status: "Server Error" });
   }

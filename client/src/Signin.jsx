@@ -16,6 +16,7 @@ function Signin() {
 
   axios.post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
     .then((res) => {
+      console.log(res.data); 
       if (res.data.status === "SUCCESS") {
         navigate("/subscribe", { state: { email: email } });
       } else {
