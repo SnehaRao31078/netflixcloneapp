@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import  "/product.css";
 
 function Addproduct() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [file, setFile] = useState(null);       // image
-  const [video, setVideo] = useState(null);     // video
+  const [file, setFile] = useState(null);       
+  const [video, setVideo] = useState(null);    
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [language, setLanguage] = useState("");
