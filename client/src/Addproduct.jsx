@@ -135,7 +135,13 @@ function Addproduct() {
            
 
           
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <input 
+  type="file" 
+  name="file"                 
+  onChange={(e) => setFile(e.target.files[0])} 
+/>
+
+
 
             {imagePreview && (
               <div style={{ position: "relative", display: "inline-block" }}>
@@ -149,12 +155,16 @@ function Addproduct() {
             )}
 
             
-            <input type="file" onChange={(e) => setVideo(e.target.files[0])} />
+           <input 
+  type="file" 
+  name="video"               
+  onChange={(e) => setVideo(e.target.files[0])} 
+/>
 
             {videoPreview && (
               <div style={{ position: "relative", display: "inline-block" }}>
                 <video
-                  src={`${import.meta.env.VITE_API_URL}/Videos/${videoPreview}`}
+                  src={`${import.meta.env.VITE_API_URL}/Images/${videoPreview}`}
                   width="120"
                   controls
                 />
