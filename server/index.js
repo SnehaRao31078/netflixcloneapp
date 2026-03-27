@@ -15,17 +15,19 @@ const planModel = require("./models/plans");
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use("/Images", express.static(path.join(__dirname, "public/Images")));
+app.use("/Images", express.static("public/Images"));
 
-const imagesDir = path.join(__dirname, "public", "Images");
-if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
-
+/*const resend = new Resend(process.env.RESEND_API_KEY);*/
 
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-app.post("/signin", async (req, res) => {
+//let otpStore = {};
+
+
+
+ app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email, password });
@@ -83,17 +85,72 @@ app.post("/signup", async (req, res) => {
 
 
 
+/*const upload = multer({ storage: storage });
+
+app.post("/products", upload.single("image"), (req, res) => {
+  const movieObject = {
+    title: req.body.title,
+    description: req.body.description,
+    language: req.body.language,
+    category: req.body.category,
+    file: req.file.filename,
+    videoLink: req.body.videoLink,
+    plan: req.body.plan
+  };
+  productModel.create(movieObject)
+    .then((movie) => res.json(movie))
+    .catch((err) => res.json(err));
+});
+
+app.get("/products", (req, res) => {
+  productModel.find()
+    .then((products) => res.json(products))
+    .catch((err) => res.json(err));
+});
+
+app.get("/products/:id", (req, res) => {
+  productModel.findById(req.params.id)
+    .then((movie) => res.json(movie))
+    .catch((err) => res.json(err));
+});
+
+app.put("/products/:id", upload.single("image"), (req, res) => {
+  let updateData = {
+    title: req.body.title,
+    description: req.body.description,
+    language: req.body.language,
+    category: req.body.category,
+    videoLink: req.body.videoLink,
+    plan: req.body.plan
+  };
+  if (req.file) updateData.file = req.file.filename;
+  productModel.findByIdAndUpdate(req.params.id, updateData)
+    .then(() => res.json("Updated Successfully"))
+    .catch((err) => res.json(err));
+});
+
+app.delete("/products/:id", async (req, res) => {
+  try {
+    const movie = await productModel.findById(req.params.id);
+    if (movie.file) fs.unlinkSync("./public/Images/" + movie.file);
+    await productModel.findByIdAndDelete(req.params.id);
+    res.json("Deleted Successfully");
+  } catch (err) {
+    res.json(err);
+  }
+});*/
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, imagesDir);
+    cb(null, "./public/Images");
   },
   filename: (req, file, cb) => {
     const name = Date.now() + path.extname(file.originalname);
     cb(null, name);
   },
 });
-const upload = multer({ storage });
 
+const upload = multer({ storage });
 
 app.post(
   "/products",
@@ -101,54 +158,38 @@ app.post(
     { name: "file", maxCount: 1 },
     { name: "video", maxCount: 1 },
   ]),
-  async (req, res) => {
-    try {
-      console.log("REQ.BODY:", req.body);
-      console.log("REQ.FILES:", req.files);
+  (req, res) => {
+    const movieObject = {
+      title: req.body.title,
+      description: req.body.description,
+      language: req.body.language,
+      category: req.body.category,
 
-      if (!req.files || !req.files.file) {
-        return res.status(400).json({ error: "Image is required" });
-      }
+      file: req.files.file && req.files.file[0].filename,
+      video: req.files.video && req.files.video[0].filename,
 
-      const newProduct = {
-        title: req.body.title,
-        description: req.body.description,
-        language: req.body.language,
-        category: req.body.category,
-        plan: req.body.plan,
-        file: req.files.file[0].filename,
-        video: req.files.video ? req.files.video[0].filename : null,
-      };
+      plan: req.body.plan,
+    };
 
-      const created = await productModel.create(newProduct);
-      res.json(created);
-    } catch (err) {
-      console.error("Error creating product:", err);
-      res.status(500).json({ error: err.message });
-    }
-  }
+    productModel
+      .create(movieObject)
+      .then((data) => res.json(data))
+      .catch((err) => res.json(err));
+  },
 );
-
-
-app.get("/products", async (req, res) => {
-  try {
-    const products = await productModel.find();
-    res.json(products);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+app.get("/products", (req, res) => {
+  productModel
+    .find()
+    .then((data) => res.json(data))
+    .catch((err) => res.json(err));
 });
 
-
-app.get("/products/:id", async (req, res) => {
-  try {
-    const product = await productModel.findById(req.params.id);
-    res.json(product);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+app.get("/products/:id", (req, res) => {
+  productModel
+    .findById(req.params.id)
+    .then((data) => res.json(data))
+    .catch((err) => res.json(err));
 });
-
 
 app.put(
   "/products/:id",
@@ -156,39 +197,41 @@ app.put(
     { name: "file", maxCount: 1 },
     { name: "video", maxCount: 1 },
   ]),
-  async (req, res) => {
-    try {
-      const updateData = { ...req.body };
+  (req, res) => {
+    let updateData = { ...req.body };
 
-      if (req.files.file) updateData.file = req.files.file[0].filename;
-      if (req.files.video) updateData.video = req.files.video[0].filename;
-
-      await productModel.findByIdAndUpdate(req.params.id, updateData);
-      res.json({ message: "Updated Successfully" });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
+    if (req.files.file) {
+      updateData.file = req.files.file[0].filename;
     }
-  }
-);
 
+    if (req.files.video) {
+      updateData.video = req.files.video[0].filename;
+    }
+
+    productModel
+      .findByIdAndUpdate(req.params.id, updateData)
+      .then(() => res.json("Updated Successfully"))
+      .catch((err) => res.json(err));
+  },
+);
 
 app.delete("/products/:id", async (req, res) => {
   try {
-    const product = await productModel.findById(req.params.id);
+    const movie = await productModel.findById(req.params.id);
 
-    if (product.file) {
-      const filePath = path.join(imagesDir, product.file);
-      if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-    }
-    if (product.video) {
-      const videoPath = path.join(imagesDir, product.video);
-      if (fs.existsSync(videoPath)) fs.unlinkSync(videoPath);
+    if (movie.file) {
+      const filePath = "./public/Images/" + movie.file;
+
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
     }
 
     await productModel.findByIdAndDelete(req.params.id);
-    res.json({ message: "Deleted Successfully" });
+
+    res.json("Deleted Successfully");
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json(err);
   }
 });
 
@@ -245,5 +288,8 @@ app.post("/plans", async (req, res) => {
     res.status(500).json({ success: false, message: "Error" });
   }
 });
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log("Server running on port", PORT));
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
+});
