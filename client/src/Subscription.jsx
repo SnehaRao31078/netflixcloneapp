@@ -2,6 +2,7 @@ import "./sub.css";
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+function Subscription()
     {
         const navigate = useNavigate();
          useEffect(() => {
