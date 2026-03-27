@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -6,8 +5,12 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+/*const { Resend } = require("resend");*/
 
+const userModel = require("./models/user");
 const productModel = require("./models/products");
+const heroModel = require("./models/banners");
+const planModel = require("./models/plans");
 
 const app = express();
 app.use(express.json());
@@ -21,6 +24,7 @@ if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
+
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
