@@ -2,10 +2,11 @@ import "./sub.css";
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
-function Subscription()
-    {
-        const navigate = useNavigate();
-         useEffect(() => {
+function Subscription() {
+  const navigate = useNavigate();
+
+ 
+  useEffect(() => {
     const plan = localStorage.getItem("userPlan");
     if (plan) {
       navigate("/home");
@@ -31,17 +32,18 @@ function Subscription()
       .then((res) => {
         console.log(res.data);
 
+      
         localStorage.setItem("userPlan", plan);
 
-       
-        navigate("/home");
+        
+        navigate("/plan", { state: { plan, price } });
       })
       .catch((err) => {
         console.log(err);
         alert("Subscription failed");
       });
   };
-        return(
+ return(
             <>
             <p className="logo-signin">NETFLIX</p>
             <h1>Choose the plan that is right for u </h1>
