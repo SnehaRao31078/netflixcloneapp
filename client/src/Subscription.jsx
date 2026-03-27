@@ -1,11 +1,11 @@
 import "./sub.css";
-import { useNavigate} from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
 function Subscription() {
   const navigate = useNavigate();
 
- 
+
   useEffect(() => {
     const plan = localStorage.getItem("userPlan");
     if (plan) {
@@ -13,7 +13,7 @@ function Subscription() {
     }
   }, []);
 
-  
+
   const handlePlan = (plan, price) => {
     const email = localStorage.getItem("userEmail");
 
@@ -23,25 +23,8 @@ function Subscription() {
       return;
     }
 
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/plans`, {
-        email,
-        plan,
-        price,
-      })
-      .then((res) => {
-        console.log(res.data);
 
-      
-        localStorage.setItem("userPlan", plan);
-
-        
-        navigate("/plan", { state: { plan, price } });
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Subscription failed");
-      });
+    navigate("/plan", { state: { plan, price } });
   };
  return(
             <>
