@@ -6,10 +6,6 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 /*const { Resend } = require("resend");*/
-const ffmpeg = require("fluent-ffmpeg");
-const ffmpegPath = require("ffmpeg-static");
-
-ffmpeg.setFfmpegPath(ffmpegPath);
 
 const userModel = require("./models/user");
 const productModel = require("./models/products");
@@ -104,50 +100,37 @@ const upload = multer({ storage });
 app.post(
   "/products",
   upload.fields([
-    { name: "file", maxCount: 1 },   
-    { name: "video", maxCount: 1 }, 
+    { name: "file", maxCount: 1 },
+    { name: "video", maxCount: 1 },
   ]),
   async (req, res) => {
     try {
-      const videoFile = req.files.video[0].filename;
+      console.log("REQ.BODY:", req.body);
+      console.log("REQ.FILES:", req.files);
 
-      
-      const thumbnailName = "thumb-" + Date.now() + ".png";
+      if (!req.files || !req.files.file) {
+        return res.status(400).json({ error: "Image is required" });
+      }
 
-    
-      ffmpeg(`./public/Images/${videoFile}`)
-        .screenshots({
-          timestamps: ["2"], 
-          filename: thumbnailName,
-          folder: "./public/Images",
-          size: "320x240",
-        })
-        .on("end", async () => {
-          const movieObject = {
-            title: req.body.title,
-            description: req.body.description,
-            language: req.body.language,
-            category: req.body.category,
-            plan: req.body.plan,
+      const newProduct = {
+        title: req.body.title,
+        description: req.body.description,
+        language: req.body.language,
+        category: req.body.category,
+        plan: req.body.plan,
+        file: req.files.file[0].filename,
+        video: req.files.video ? req.files.video[0].filename : null,
+      };
 
-            file: thumbnailName, 
-            video: videoFile,
-          };
-
-          const data = await productModel.create(movieObject);
-          res.json(data);
-        })
-        .on("error", (err) => {
-          console.error("FFmpeg error:", err);
-          res.status(500).json({ error: "Thumbnail generation failed" });
-        });
-
+      const created = await productModel.create(newProduct);
+      res.json(created);
     } catch (err) {
-      console.error(err);
+      console.error("Error creating product:", err);
       res.status(500).json({ error: err.message });
     }
   }
 );
+
 
 app.get("/products", async (req, res) => {
   try {
