@@ -26,7 +26,7 @@ function Signin() {
         localStorage.setItem("userPlan", user.plan || "");
 
         if (user.plan) {
-          alert("Login to successful");
+          alert("Login successful");
           navigate("/home");
         } else {
           navigate("/subscribe");
