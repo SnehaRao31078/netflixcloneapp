@@ -159,7 +159,6 @@ app.post(
     { name: "video", maxCount: 1 },
   ]),
   (req, res) => {
-    console.log("=== UPLOAD HIT ===", "FILES:", req.files ? req.files : "NO FILES");
     const movieObject = {
       title: req.body.title,
       description: req.body.description,

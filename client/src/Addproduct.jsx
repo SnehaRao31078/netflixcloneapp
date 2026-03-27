@@ -64,14 +64,11 @@ function Addproduct() {
       if (id) {
         await axios.put(
           `${import.meta.env.VITE_API_URL}/products/${id}`,
-          formData
+          formData,
         );
         alert("Updated Successfully");
       } else {
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/products`,
-          formData
-        );
+        await axios.post(`${import.meta.env.VITE_API_URL}/products`, formData);
         alert("Added Successfully");
       }
 
@@ -105,7 +102,7 @@ function Addproduct() {
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
             />
-<div>
+            <div>
               <select
                 className="inputfield"
                 value={category}
@@ -116,8 +113,7 @@ function Addproduct() {
                 <option value="sci-fi horror">Sci-Fi Horror</option>
               </select>
             </div>
-            
-         
+
             <div>
               <select
                 className="inputfield"
@@ -131,17 +127,11 @@ function Addproduct() {
               </select>
             </div>
 
-            
-           
-
-          
-            <input 
-  type="file" 
-  name="file"                 
-  onChange={(e) => setFile(e.target.files[0])} 
-/>
-
-
+            <input
+              type="file"
+              name="file"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
 
             {imagePreview && (
               <div style={{ position: "relative", display: "inline-block" }}>
@@ -150,16 +140,17 @@ function Addproduct() {
                   width="120"
                   alt="preview"
                 />
-                <p className="cross" onClick={removeImage}>X</p>
+                <p className="cross" onClick={removeImage}>
+                  X
+                </p>
               </div>
             )}
 
-            
-           <input 
-  type="file" 
-  name="video"               
-  onChange={(e) => setVideo(e.target.files[0])} 
-/>
+            <input
+              type="file"
+              name="video"
+              onChange={(e) => setVideo(e.target.files[0])}
+            />
 
             {videoPreview && (
               <div style={{ position: "relative", display: "inline-block" }}>
@@ -168,13 +159,13 @@ function Addproduct() {
                   width="120"
                   controls
                 />
-                <p className="cross" onClick={removeVideo}>X</p>
+                <p className="cross" onClick={removeVideo}>
+                  X
+                </p>
               </div>
             )}
 
-            <button type="submit">
-              {id ? "Update Movie" : "Add Movie"}
-            </button>
+            <button type="submit">{id ? "Update Movie" : "Add Movie"}</button>
           </form>
         </div>
       </div>
