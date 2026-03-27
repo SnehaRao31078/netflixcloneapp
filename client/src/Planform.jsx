@@ -8,10 +8,10 @@ function Plan() {
   const [holder, setHolder] = useState("");
   const [country, setCountry] = useState("");
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
+
+const { plan, price } = location.state || {};
   const [status, setStatus] = useState("");
-  const plan = queryParams.get("type");
-  const price = queryParams.get("price");
+  
 
   const navigate = useNavigate();
 
