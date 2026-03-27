@@ -5,6 +5,7 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+/*const { Resend } = require("resend");*/
 
 const userModel = require("./models/user");
 const productModel = require("./models/products");
@@ -14,38 +15,30 @@ const planModel = require("./models/plans");
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use("/Images", express.static(path.join(__dirname, "public/Images")));
 
 
-app.use("/Images", express.static("public/Images"));
+const imagesDir = path.join(__dirname, "public", "Images");
+if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
 
 
-const uploadPath = "./public/Images";
-if (!fs.existsSync(uploadPath)) {
-  fs.mkdirSync(uploadPath, { recursive: true });
-}
-
-
-mongoose
-  .connect(process.env.MONGODB_URL)
+mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
+
+//let otpStore = {};
 
 
 
-app.post("/signup", async (req, res) => {
-  try {
-    const user = await userModel.create(req.body);
-    res.json({ status: "SUCCESS", user });
-  } catch (err) {
-    res.status(500).json({ status: "ERROR", error: err.message });
-  }
-});
-
-app.post("/signin", async (req, res) => {
+ app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email, password });
-  if (!user) return res.json({ status: "User not found" });
+
+  if (!user) {
+    return res.json({ status: "User not found" });
+  }
+
 
   const userPlan = await planModel.findOne({ email });
 
@@ -53,62 +46,109 @@ app.post("/signin", async (req, res) => {
     status: "SUCCESS",
     user: {
       email: user.email,
-      plan: userPlan ? userPlan.plan : null,
-    },
+      plan: userPlan ? userPlan.plan : null
+    }
   });
 });
 
+/*app.post("/verify-otp", (req, res) => {
+  const { email, otp } = req.body;
+  if (!otpStore[email]) return res.json({ status: "Invalid OTP" });
 
+  const stored = otpStore[email];
+  
+
+  if (stored.otp.toString() === otp.toString()) {
+    delete otpStore[email];
+    return res.json({ status: "Success" });
+  } else {
+    return res.json({ status: "Invalid OTP" });
+  }
+});*/
+
+app.post("/signup", async (req, res) => {
+  try {
+    const user = await userModel.create(req.body);
+
+    res.json({
+      status: "SUCCESS",
+      message: "Signup successful",
+      user: user,
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      status: "ERROR",
+      message: "Signup failed",
+      error: err.message,
+    });
+  }
+});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, uploadPath);
+    cb(null, imagesDir);
   },
   filename: (req, file, cb) => {
     const name = Date.now() + path.extname(file.originalname);
     cb(null, name);
   },
 });
-
 const upload = multer({ storage });
 
 
 app.post(
   "/products",
   upload.fields([
-    { name: "file", maxCount: 1 },   
-    { name: "video", maxCount: 1 },  
+    { name: "file", maxCount: 1 },
+    { name: "video", maxCount: 1 },
   ]),
   async (req, res) => {
     try {
-      const movieObject = {
+      console.log("REQ.BODY:", req.body);
+      console.log("REQ.FILES:", req.files);
+
+      if (!req.files || !req.files.file) {
+        return res.status(400).json({ error: "Image is required" });
+      }
+
+      const newProduct = {
         title: req.body.title,
         description: req.body.description,
         language: req.body.language,
         category: req.body.category,
-        file: req.files.file ? req.files.file[0].filename : null,
-        video: req.files.video ? req.files.video[0].filename : null,
         plan: req.body.plan,
+        file: req.files.file[0].filename,
+        video: req.files.video ? req.files.video[0].filename : null,
       };
 
-      const data = await productModel.create(movieObject);
-      res.json(data);
+      const created = await productModel.create(newProduct);
+      res.json(created);
     } catch (err) {
-      res.status(500).json(err);
+      console.error("Error creating product:", err);
+      res.status(500).json({ error: err.message });
     }
   }
 );
 
 
 app.get("/products", async (req, res) => {
-  const data = await productModel.find();
-  res.json(data);
+  try {
+    const products = await productModel.find();
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 
 app.get("/products/:id", async (req, res) => {
-  const data = await productModel.findById(req.params.id);
-  res.json(data);
+  try {
+    const product = await productModel.findById(req.params.id);
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 
@@ -120,74 +160,93 @@ app.put(
   ]),
   async (req, res) => {
     try {
-      let updateData = { ...req.body };
+      const updateData = { ...req.body };
 
-      if (req.files.file) {
-        updateData.file = req.files.file[0].filename;
-      }
-
-      if (req.files.video) {
-        updateData.video = req.files.video[0].filename;
-      }
+      if (req.files.file) updateData.file = req.files.file[0].filename;
+      if (req.files.video) updateData.video = req.files.video[0].filename;
 
       await productModel.findByIdAndUpdate(req.params.id, updateData);
-      res.json("Updated Successfully");
+      res.json({ message: "Updated Successfully" });
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ error: err.message });
     }
   }
 );
 
 
-
 app.delete("/products/:id", async (req, res) => {
   try {
-    const movie = await productModel.findById(req.params.id);
+    const product = await productModel.findById(req.params.id);
 
-    
-    if (movie.file) {
-      const filePath = uploadPath + "/" + movie.file;
+    if (product.file) {
+      const filePath = path.join(imagesDir, product.file);
       if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
     }
-
-    
-    if (movie.video) {
-      const videoPath = uploadPath + "/" + movie.video;
+    if (product.video) {
+      const videoPath = path.join(imagesDir, product.video);
       if (fs.existsSync(videoPath)) fs.unlinkSync(videoPath);
     }
 
     await productModel.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted Successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
-    res.json("Deleted Successfully");
+app.post("/banners", async (req, res) => {
+  try {
+    const hero = await heroModel.create(req.body);
+    res.json(hero);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-
-
-app.post("/banners", async (req, res) => {
-  const hero = await heroModel.create(req.body);
-  res.json(hero);
-});
-
 app.get("/banners", async (req, res) => {
-  const heroes = await heroModel.find();
-  res.json(heroes);
+  try {
+    const heroes = await heroModel.find();
+    res.json(heroes);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch banners" });
+  }
 });
 
+app.get("/banners/:id", async (req, res) => {
+  try {
+    const hero = await heroModel.findById(req.params.id);
+    res.json(hero);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch banner" });
+  }
+});
 
+app.put("/banners/:id", async (req, res) => {
+  try {
+    await heroModel.findByIdAndUpdate(req.params.id, req.body);
+    res.json({ message: "Updated Successfully" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+app.delete("/banners/:id", async (req, res) => {
+  try {
+    await heroModel.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted Successfully" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 app.post("/plans", async (req, res) => {
   try {
     const data = await planModel.create(req.body);
-    res.json({ success: true, data });
-  } catch {
-    res.json({ success: false });
+    res.json({ success: true, message: "Payment successful", data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Error" });
   }
 });
-
-
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
