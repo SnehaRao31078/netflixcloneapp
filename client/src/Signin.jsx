@@ -21,7 +21,7 @@ function Signin() {
 
       if (res.data.status === "SUCCESS") {
         const user = res.data.user;
-
+alert("Signup successful");
         localStorage.setItem("userEmail", user.email);
         localStorage.setItem("userPlan", user.plan || "");
 
