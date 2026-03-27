@@ -24,6 +24,7 @@ const handleSubmit = (e) => {
 
   if (res.data.status === "SUCCESS") {
     alert(res.data.message);
+    navigate("/subscribe");
 
     localStorage.setItem("userEmail", email);
 
