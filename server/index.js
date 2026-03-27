@@ -1,4 +1,4 @@
-// server.js
+
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -14,16 +14,15 @@ app.use(express.json());
 app.use(cors());
 app.use("/Images", express.static(path.join(__dirname, "public/Images")));
 
-// Ensure Images folder exists
 const imagesDir = path.join(__dirname, "public", "Images");
 if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
 
-// MongoDB connection
+
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-// Multer Storage
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, imagesDir);
@@ -35,9 +34,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// -------------------- PRODUCT ROUTES -------------------- //
 
-// Create product
 app.post(
   "/products",
   upload.fields([
@@ -72,7 +69,7 @@ app.post(
   }
 );
 
-// Get all products
+
 app.get("/products", async (req, res) => {
   try {
     const products = await productModel.find();
@@ -82,7 +79,7 @@ app.get("/products", async (req, res) => {
   }
 });
 
-// Get single product
+
 app.get("/products/:id", async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
@@ -92,7 +89,7 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
-// Update product
+
 app.put(
   "/products/:id",
   upload.fields([
@@ -114,7 +111,7 @@ app.put(
   }
 );
 
-// Delete product
+
 app.delete("/products/:id", async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
@@ -135,6 +132,58 @@ app.delete("/products/:id", async (req, res) => {
   }
 });
 
-// -------------------- START SERVER -------------------- //
+app.post("/banners", async (req, res) => {
+  try {
+    const hero = await heroModel.create(req.body);
+    res.json(hero);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+app.get("/banners", async (req, res) => {
+  try {
+    const heroes = await heroModel.find();
+    res.json(heroes);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch banners" });
+  }
+});
+
+app.get("/banners/:id", async (req, res) => {
+  try {
+    const hero = await heroModel.findById(req.params.id);
+    res.json(hero);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch banner" });
+  }
+});
+
+app.put("/banners/:id", async (req, res) => {
+  try {
+    await heroModel.findByIdAndUpdate(req.params.id, req.body);
+    res.json({ message: "Updated Successfully" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+app.delete("/banners/:id", async (req, res) => {
+  try {
+    await heroModel.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted Successfully" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+app.post("/plans", async (req, res) => {
+  try {
+    const data = await planModel.create(req.body);
+    res.json({ success: true, message: "Payment successful", data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Error" });
+  }
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log("Server running on port", PORT));
