@@ -45,7 +45,7 @@ const handleSubmit = (e) => {
   console.log(res.data);
 
   if (res.data.status === "SUCCESS") {
-    alert("Signup successful");
+    alert(res.data.message);
 
     localStorage.setItem("userEmail", email);
 
