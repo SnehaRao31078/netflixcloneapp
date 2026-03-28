@@ -8,7 +8,8 @@ function ViewScription()
    
     useEffect(()=>
     {
-        axios.get("http://localhost:3001/plans")
+        axios
+        .get(`${import.meta.env.VITE_API_URL}/plans`)
         .then((res)=>
         {
             setSubscribe(res.data);
@@ -18,7 +19,9 @@ function ViewScription()
     },[]);
     const handleDelete =(id)=>
     {
-        axios.delete(`http://localhost:3001/plans/${id}`)
+        
+        axios
+        .delete(`${import.meta.env.VITE_API_URL}/plans/${id}`)
         .then(()=>
         {
         alert("Deleted Successfully");
