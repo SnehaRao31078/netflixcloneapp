@@ -1,65 +1,107 @@
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Plan() {
+  const { id } = useParams(); 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { plan: selectedPlan, price: selectedPrice } = location.state || {};
+
   const [email, setEmail] = useState("");
   const [card, setCard] = useState("");
   const [holder, setHolder] = useState("");
   const [country, setCountry] = useState("");
-  const location = useLocation();
+  const [plan, setPlan] = useState(selectedPlan || "");
+  const [price, setPrice] = useState(selectedPrice || "");
 
-const { plan, price } = location.state || {};
   const [status, setStatus] = useState("");
+
   
+  useEffect(() => {
+    if (id) {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/plans/${id}`)
+        .then((res) => {
+          const data = res.data;
+          setEmail(data.email);
+          setCard(data.card);
+          setHolder(data.holder);
+          setCountry(data.country);
+          setPlan(data.plan);
+          setPrice(data.price);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [id]);
 
-  const navigate = useNavigate();
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = { email, card, holder, country, plan, price };
 
     try {
-const res = await axios.post(
-  `${import.meta.env.VITE_API_URL}/plans`,
-  data
-);
-
-      if (res.data.success) {
-        localStorage.setItem("userPlan", plan);
-        setStatus("success");
-        alert("Payment successful");
-        navigate("/home");
+      if (id) {
+        
+        await axios.put(
+          `${import.meta.env.VITE_API_URL}/plans/${id}`,
+          data
+        );
+        alert("Plan Updated Successfully");
       } else {
-        setStatus("failed");
-        alert("Subscribe to plan");
-        navigate("/subscribe");
+        // ADD
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL}/plans`,
+          data
+        );
+
+        if (res.data.success) {
+          localStorage.setItem("userPlan", plan);
+          alert("Payment successful");
+        } else {
+          alert("Subscribe to plan");
+        }
       }
+
+      navigate("/viewsub"); 
     } catch (err) {
       console.error(err);
       setStatus("failed");
-      alert("Payment failed");
-      navigate("/subscribe");
+      alert("Operation failed");
+    }
+  };
+
+ 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/plans/${id}`
+      );
+      alert("Deleted Successfully");
+      navigate("/viewsub");
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
     <>
-      <h1>Subscribe to {plan} plan</h1>
-      <h2>Monthly price:${price}</h2>
+      <h1>{id ? "Edit Plan" : "Subscribe Plan"}</h1>
+
       <div className="container">
         <form onSubmit={handleSubmit}>
           <input
             type="email"
-            placeholder="Enter The Email"
+            placeholder="Enter Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
             type="text"
-            placeholder="Enter card details"
+            placeholder="Card details"
             value={card}
             onChange={(e) => setCard(e.target.value)}
           />
@@ -71,25 +113,45 @@ const res = await axios.post(
             onChange={(e) => setHolder(e.target.value)}
           />
 
-          <div>
-            <select
-              className="inputfield"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            >
-              <option value="">Choose a Country:</option>
-              <option value="india">India</option>
-            </select>
-          </div>
+          <select
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          >
+            <option value="">Choose Country</option>
+            <option value="india">India</option>
+          </select>
 
-          <button type="submit">Subscribe</button>
+          <input
+            type="text"
+            placeholder="Plan"
+            value={plan}
+            onChange={(e) => setPlan(e.target.value)}
+          />
+
+          <input
+            type="number"
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+
+          <button type="submit">
+            {id ? "Update Plan" : "Subscribe"}
+          </button>
         </form>
-        {status === "success" && (
-          <h2 style={{ color: "green" }}>Payment Successful </h2>
+
+        
+        {id && (
+          <button
+            onClick={handleDelete}
+            style={{ background: "red", color: "white", marginTop: "10px" }}
+          >
+            Delete Plan
+          </button>
         )}
 
         {status === "failed" && (
-          <h2 style={{ color: "red" }}>subscribe to plan </h2>
+          <h2 style={{ color: "red" }}>Operation Failed</h2>
         )}
       </div>
     </>
