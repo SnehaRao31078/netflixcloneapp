@@ -257,22 +257,6 @@ app.get("/plans", async (req, res) => {
   }
 });
 
-app.delete("/plans/:id", async (req, res) => {
-  try {
-    await planModel.findByIdAndDelete(req.params.id);
-    res.json({ message: "Deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ message: "Delete error" });
-  }
-});
-app.put("/plans/:id", async (req, res) => {
-  try {
-    await planModel.findByIdAndUpdate(req.params.id, req.body);
-    res.json({ message: "Updated Successfully" });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 app.get("/plans/:id", async (req, res) => {
   try {

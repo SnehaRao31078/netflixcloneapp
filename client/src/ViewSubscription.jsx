@@ -17,16 +17,7 @@ function ViewScription()
 
 .catch((err)=>console.log(err));
     },[]);
-    const handleDelete =(id)=>
-    {
-        
-        axios
-        .delete(`${import.meta.env.VITE_API_URL}/plans/${id}`)
-        .then(()=>
-        {
-        alert("Deleted Successfully");
-    });
-}
+    
     return(
         <>
         <div className="view">
@@ -40,7 +31,7 @@ function ViewScription()
     <th>Country</th>
     <th>Plan</th>
     <th>Price</th>
-    <th colspan={2}>Action</th>
+    
 
 </tr>
  </thead>
