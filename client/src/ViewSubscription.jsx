@@ -55,15 +55,7 @@ function ViewScription()
                 <td>{subscribe.country}</td>
                 <td>{subscribe.plan}</td>
                 <td>{subscribe.price}</td>
-                  <td>
-                    <Link to={`/plan/${subscribe._id}`}>
-                     <button className="up">Edit</button>
-                     </Link>
-                  </td>
-                 <td>
-                    <button
-                    className="del" onClick={() => handleDelete(subscribe._id)}>Delete</button>
-                 </td>
+                  
 
 
             </tr>
