@@ -42,7 +42,9 @@ function App() {
         <Route path="/delete/:id" element={<HeroView />} />
         <Route path="/subscribe" element={<Subscription />} />
         <Route path="/plan" element={<Plan />} />
+        <Route path="/plan/:id" element={<Plan />} />
         <Route path="/subview" element={<ViewScription/>}/>
+
         <Route element={<Layout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/shows" element={<Shows />} />

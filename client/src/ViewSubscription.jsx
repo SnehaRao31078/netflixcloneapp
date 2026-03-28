@@ -56,7 +56,7 @@ function ViewScription()
                 <td>{subscribe.plan}</td>
                 <td>{subscribe.price}</td>
                   <td>
-                    <Link to={`/edit/${subscribe._id}`}>
+                    <Link to={`/plan/${subscribe._id}`}>
                      <button className="up">Edit</button>
                      </Link>
                   </td>
