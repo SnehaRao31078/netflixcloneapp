@@ -18,6 +18,7 @@ import HeroAdmin from "./HeroAdmin";
 import HeroView from "./HeroView";
 import Subscription from "./Subscription";
 import Plan from "./Planform";
+import ViewScription  from "./ViewSubscription";
 function App() {
   return (
     <BrowserRouter>
@@ -41,6 +42,7 @@ function App() {
         <Route path="/delete/:id" element={<HeroView />} />
         <Route path="/subscribe" element={<Subscription />} />
         <Route path="/plan" element={<Plan />} />
+        <Route path="/subview" element={<ViewScription/>}/>
         <Route element={<Layout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/shows" element={<Shows />} />
