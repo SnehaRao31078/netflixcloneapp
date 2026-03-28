@@ -5,16 +5,17 @@ function Dash() {
 
   const navigate = useNavigate();
 
-  return (
+  return (<>
+    <h1>Welcome to Admin Dashboard</h1>
     <div className="dash">
-      <h1>Welcome to Admin Dashboard</h1>
+      
 
       <div className="add-box" onClick={() => navigate("/addmovies")}>
-        <h3>Add Movies</h3>
+        <h3>Add Movies Section</h3>
       </div>
 
       <div className="view-box" onClick={() => navigate("/view")}>
-        <h3>View Movies</h3>
+        <h3>View Movies Section</h3>
       </div>
       <div className="hero-box" onClick={() => navigate("/hero")}>
         <h3>Add Hero Section  Movies</h3>
@@ -22,8 +23,12 @@ function Dash() {
       <div className="viewhero-box" onClick={() => navigate("/heroview")}>
         <h3>View Hero Section  Movies</h3>
       </div>
+      <div className="viewsub-box" onClick={()=>navigate("/subview")}>
+        <h3>View Subscription Section</h3>
+      </div>
       
     </div>
+    </>
   );
 }
 
