@@ -248,6 +248,24 @@ app.post("/plans", async (req, res) => {
   }
 });
 
+app.get("/plans", async (req, res) => {
+  try {
+    const data = await planModel.find();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching plans" });
+  }
+});
+
+app.delete("/plans/:id", async (req, res) => {
+  try {
+    await planModel.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Delete error" });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
