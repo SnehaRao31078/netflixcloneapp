@@ -267,7 +267,7 @@ app.delete("/plans/:id", async (req, res) => {
 });
 app.put("/plans/:id", async (req, res) => {
   try {
-    await heroModel.findByIdAndUpdate(req.params.id, req.body);
+    await planModel.findByIdAndUpdate(req.params.id, req.body);
     res.json({ message: "Updated Successfully" });
   } catch (err) {
     res.status(500).json(err);
