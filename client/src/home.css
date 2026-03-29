@@ -312,7 +312,12 @@ body,
   background: black;
   border: 1px solid #333;
   padding: 10px 0;
-  display: relative;
+  display: none;
+}
+
+
+.profile:hover .profile-menu {
+  display: block;
 }
 
 
