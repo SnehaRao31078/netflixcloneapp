@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./home.css";
 import { useState, useEffect } from "react";
 function Nav() {
@@ -9,14 +9,7 @@ function Nav() {
       setUser(email);
     }
   }, []);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userPlan");
-
-    navigate("/");
-  };
+  
   return (
     <nav className="navbar">
       <div className="nav-left">
@@ -94,7 +87,7 @@ function Nav() {
 
             <div className="divider"></div>
 
-            <div className="signout" onClick={handleLogout}>
+            <div className="signout" >
               Sign out of Netflix
             </div>
           </div>
