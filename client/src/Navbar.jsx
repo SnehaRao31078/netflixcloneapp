@@ -1,8 +1,16 @@
  import { Link } from "react-router-dom";
  import "./home.css";
+ import { useState, useEffect } from "react";
  function Nav() {
-  
+  const [user, setUser] = useState("");
+  useEffect(() => {
+  const email = localStorage.getItem("userEmail");
+  if (email) {
+    setUser();
+  }
+}, []);
  return (
+  
  <nav className="navbar">
         <div className="nav-left">
           <div className="logo">NETFLIX</div>
@@ -31,18 +39,10 @@
 
         <div className="menu-row">
           <img src="/redsmile.png"/>
-          <span>Lasya</span>
+          <span>{user}</span>
         </div>
 
-        <div className="menu-row">
-          <img src="/yellowsmile.png"/>
-          <span>Monii</span>
-        </div>
-
-        <div className="menu-row">
-          <img src="/bluesmile.png"/>
-          <span>Sanu</span>
-        </div>
+        
 
         <div className="menu-row">
           <img src="/kids.png"/>
@@ -82,6 +82,7 @@
         </div>
 
       </div>
+     
     </div>
 
   
