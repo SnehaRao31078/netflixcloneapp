@@ -315,7 +315,21 @@ body,
   display: none;
 }
 
+.profile-menu {
+  position: absolute;
+  right: 0;
+  top: 52px;
+  width: 260px;
+  background: black;
+  border: 1px solid #333;
+  padding: 10px 0;
+  display: none;
+}
 
+
+.profile:hover .profile-menu {
+  display: block;
+}
 
 
 
