@@ -6,7 +6,7 @@
   useEffect(() => {
   const email = localStorage.getItem("userEmail");
   if (email) {
-    setUser();
+    setUser(email);
   }
 }, []);
  return (
