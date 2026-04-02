@@ -1,6 +1,9 @@
-const express = require("express");
-const mongoose = require("mongoose");
 require("dotenv").config();
+const express = require("express");
+const crypto = require("crypto");
+const express = require("express");
+const Razorpay = require("razorpay");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
@@ -65,6 +68,76 @@ mongoose.connect(process.env.MONGODB_URL)
     return res.json({ status: "Invalid OTP" });
   }
 });*/
+
+/*Razorpay*/
+
+const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_API_KEY,
+  key_secret: process.env.RAZORPAY_API_SECRET,
+});
+
+
+app.post("/payment/process", async (req, res) => {
+  try {
+    const { amount } = req.body;
+
+    const options = {
+      amount: amount * 100, 
+      currency: "INR",
+      receipt: "receipt_" + Date.now(),
+    };
+
+    const order = await instance.orders.create(options);
+
+    res.json({
+      success: true,
+      order,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false });
+  }
+});
+
+
+app.post("/payment/verify", async (req, res) => {
+  try {
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      email,
+      plan,
+      price,
+      country
+    } = req.body;
+
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
+      .update(body)
+      .digest("hex");
+
+    if (expectedSignature === razorpay_signature) {
+      
+      await planModel.create({
+        email,
+        plan,
+        price,
+        country,
+         paymentId: razorpay_payment_id
+      });
+
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false });
+  }
+});
 
 app.post("/signup", async (req, res) => {
   try {
