@@ -40,11 +40,11 @@ function Player() {
   width="800"
   height="450"
     controls={showControls}
-  poster={`${import.meta.env.VITE_API_URL}/Images/${movie.file}`}
+  poster={movie.file} 
   onClick={toogleControls}
 >
   <source
-    src={`${import.meta.env.VITE_API_URL}/Images/${movie.video}`}
+    src={movie.video}
     type="video/mp4"
   />
   Your browser does not support the video tag.
