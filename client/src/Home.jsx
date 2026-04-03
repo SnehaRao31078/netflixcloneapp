@@ -58,13 +58,7 @@ function Home() {
     <div className="home">
       <div className="hero">
         {banner && (
-          <iframe
-            className="hero-video"
-            src="https://www.youtube.com/embed/nsC5PhXS19Y?"
-            allow="autoplay; encrypted-media"
-            title="Hero Trailer"
-            allowFullScreen
-          ></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/nsC5PhXS19Y?si=CvWIXAEI_OQYLLZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         )}
         <div className="overlay"></div>
         <div className="hero-content">
