@@ -56,7 +56,7 @@ function ViewProducts() {
               
               <td>
                 <img
-                  src={`${import.meta.env.VITE_API_URL}/Images/${movie.file}`}
+                   src={movie.file}  
                   width="100"
                   alt={movie.title}
                 />
@@ -72,10 +72,10 @@ function ViewProducts() {
                     loop
                     autoPlay
                     playsInline
-                    poster={`${import.meta.env.VITE_API_URL}/Images/${movie.file}`}
+                    poster={movie.file}
                   >
                     <source
-                      src={`${import.meta.env.VITE_API_URL}/Images/${movie.video}`}
+                      src={movie.video}
                       type="video/mp4"
                     />
                   </video>
