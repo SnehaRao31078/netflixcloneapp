@@ -441,6 +441,7 @@ body,
   height: 100%;
   border: none;
   object-fit: cover;
+  z-index: 1;
 }
 .search{
   position:relative;
