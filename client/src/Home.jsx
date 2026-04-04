@@ -57,14 +57,7 @@ function Home() {
   return (
     <div className="home">
       <div className="hero">
-        {banner && (
-  <iframe
-  src="https://www.youtube.com/embed/nsC5PhXS19Y"
-  width="600"
-  height="300"
-  allowFullScreen
-/>
-)}
+
         <div className="overlay"></div>
         <div className="hero-content">
           <h1 className="title">{banner ? banner.title : "Loading.."}</h1>
