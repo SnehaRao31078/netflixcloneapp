@@ -58,15 +58,12 @@ function Home() {
     <div className="home">
       <div className="hero">
         {banner && (
-  <video
-    className="hero-video"
-    src={banner.videoLink}
-    autoPlay
-    muted
-    loop
-    playsInline
-    controls
-  />
+  <iframe
+  src="https://www.youtube.com/embed/nsC5PhXS19Y"
+  width="600"
+  height="300"
+  allowFullScreen
+/>
 )}
         <div className="overlay"></div>
         <div className="hero-content">
