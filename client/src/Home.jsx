@@ -98,7 +98,7 @@ function Home() {
     .map((movie) => (
       <img
         key={movie._id}
-        src={movie.file}   
+        src={movies.file}   
         alt={movie.title}
         onClick={() => navigate("/player/" + movie._id)}
       />
@@ -126,7 +126,7 @@ function Home() {
               .map((movie) => (
                 <img
                   key={movie.id}
-                  src={movie.file} 
+                  src={movies.file} 
                   alt={movie.title}
                   onClick={() => navigate("/player/" + movie._id)}
                 />
