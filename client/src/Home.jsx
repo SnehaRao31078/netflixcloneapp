@@ -155,7 +155,7 @@ function Home() {
               .map((movie) => (
                 <img
                   key={movie.id}
-                  src={movies.file} 
+                  src={movie.file} 
                   alt={movie.title}
                   onClick={() => navigate("/player/" + movie._id)}
                 />
