@@ -140,6 +140,36 @@ function Home() {
           </button>
         </div>
 
+
+ <h2 className="row-title">Comedy-Drama</h2>
+        <div className="row-wrapper">
+          <button
+            className="scroll-btn left"
+            onClick={() => scrollLeft("row3")}
+          >
+            ‹
+          </button>
+          <div className="row-posters" id="row2">
+            {movies
+              .filter((movie) => movie.category === "comedy-drama")
+              .map((movie) => (
+                <img
+                  key={movie.id}
+                  src={movies.file} 
+                  alt={movie.title}
+                  onClick={() => navigate("/player/" + movie._id)}
+                />
+              ))}
+          </div>
+          <button
+            className="scroll-btn right"
+            onClick={() => scrollRight("row3")}
+          >
+            ›
+          </button>
+        </div>
+
+
         <h2 className="row-title">Action and adventure Movies</h2>
         <div className="row-wrapper">
           <button

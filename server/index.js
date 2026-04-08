@@ -9,7 +9,7 @@ const multer = require("multer");
 /*const path = require("path");
 const fs = require("fs");*/
 const { v2: cloudinary } = require("cloudinary");
-/*const { Resend } = require("resend");*/
+
 
 const userModel = require("./models/user");
 const productModel = require("./models/products");
@@ -19,11 +19,7 @@ const planModel = require("./models/plans");
 const app = express();
 app.use(express.json());
 app.use(cors());
-/*app.use("/Images", express.static(path.join(__dirname, "public/Images")));
 
-
-const imagesDir = path.join(__dirname, "public", "Images");
-if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });*/
 
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -133,7 +129,7 @@ app.post("/payment/verify", async (req, res) => {
     res.json({ success: false });
   }
 });
-/*Cloudinary Storage*/
+
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -150,6 +146,10 @@ const cloudinarystorage = new CloudinaryStorage({
     public_id: (req, file) => Date.now() + "-" + file.originalname,
   },
 });
+
+const upload = multer({ storage: cloudinarystorage });
+
+
 app.post("/signup", async (req, res) => {
   try {
     const user = await userModel.create(req.body);
@@ -179,7 +179,7 @@ app.post("/signup", async (req, res) => {
 });
 const upload = multer({ storage });*/
 
-const upload = multer({ storage: cloudinarystorage });
+
 
 app.post(
   "/products",
