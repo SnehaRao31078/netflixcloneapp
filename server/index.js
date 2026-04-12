@@ -9,6 +9,10 @@ const multer = require("multer");
 /*const path = require("path");
 const fs = require("fs");*/
 const { v2: cloudinary } = require("cloudinary");
+/*sendgrid*/
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 
 const userModel = require("./models/user");
 const productModel = require("./models/products");
@@ -25,8 +29,44 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
+/*sendgrid*/
 
-//let otpStore = {};
+let otpStore = {};
+app.post("/send-otp", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const otp = Math.floor(100000 + Math.random() * 900000);
+
+    otpStore[email] = otp;
+
+    const msg = {
+      to: email,
+      from: "sneha8484rao@gmail.com", 
+      subject: "OTP Verification",
+      text: `Your OTP is ${otp}`,
+      html: `<h2>Your OTP is: ${otp}</h2>`,
+    };
+
+    await sgMail.send(msg);
+
+    res.json({ status: "OTP SENT" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: "ERROR SENDING MAIL" });
+  }
+});
+
+app.post("/verify-otp", (req, res) => {
+  const { email, otp } = req.body;
+
+  if (otpStore[email] == otp) {
+    delete otpStore[email];
+    return res.json({ status: "SUCCESS" });
+  } else {
+    return res.json({ status: "Invalid OTP" });
+  }
+});
 
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
