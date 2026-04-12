@@ -10,17 +10,14 @@ const multer = require("multer");
 const fs = require("fs");*/
 const { v2: cloudinary } = require("cloudinary");
 
-
-
 const userModel = require("./models/user");
 const productModel = require("./models/products");
-
+const heroModel = require("./models/banners");
 const planModel = require("./models/plans");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 
 mongoose
   .connect(process.env.MONGODB_URL)
