@@ -27,7 +27,7 @@ function Signin() {
           alert("Login successful");
           navigate("/home");
         } else {
-          navigate("/otp");
+          navigate("/subscribe");
         }
 
       } else {
