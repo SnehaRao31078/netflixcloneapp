@@ -9,9 +9,7 @@ const multer = require("multer");
 /*const path = require("path");
 const fs = require("fs");*/
 const { v2: cloudinary } = require("cloudinary");
-/*sendgrid*/
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 
 
 const userModel = require("./models/user");
@@ -29,22 +27,8 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
-/*sendgrid*/
 
-let otpStore = {};
-
-app.post("/verify-otp", (req, res) => {
-  const { email, otp } = req.body;
-
-  if (otpStore[email] == otp) {
-    delete otpStore[email];
-    return res.json({ status: "SUCCESS" });
-  } else {
-    return res.json({ status: "Invalid OTP" });
-  }
-});
-
-/*app.post("/signin", async (req, res) => {
+app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email, password });
@@ -62,64 +46,11 @@ app.post("/verify-otp", (req, res) => {
       plan: userPlan ? userPlan.plan : null,
     },
   });
-});*/
-/*app.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
-
-  const user = await userModel.findOne({ email, password });
-
-  if (!user) {
-    return res.json({ status: "User not found" });
-  }
-
-  // 👉 generate OTP
-  const otp = Math.floor(100000 + Math.random() * 900000);
-  otpStore[email] = otp;
-
-  const msg = {
-    to: email,
-    from: "sneha8484rao@gmail.com",
-    subject: "OTP Verification",
-    text: `Your OTP is ${otp}`,
-    html: `<h2>Your OTP is: ${otp}</h2>`,
-  };
-
-  await sgMail.send(msg);
-
-  res.json({
-    status: "OTP_SENT",
-    email,
-  });
 });
-*/
-app.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email, password });
+//let otpStore = {};
 
-  if (!user) {
-    return res.json({ status: "User not found" });
-  }
 
-  // call same OTP logic
-  const otp = Math.floor(100000 + Math.random() * 900000);
-  otpStore[email] = otp;
-
-  const msg = {
-    to: email,
-    from: "sneha8484rao@gmail.com",
-    subject: "OTP Verification",
-    text: `Your OTP is ${otp}`,
-    html: `<h2>Your OTP is: ${otp}</h2>`,
-  };
-
-  await sgMail.send(msg);
-
-  res.json({
-    status: "OTP_SENT",
-    email,
-  });
-});
 /*app.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;
   if (!otpStore[email]) return res.json({ status: "Invalid OTP" });
@@ -240,19 +171,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-/*const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, imagesDir);
-  },
-  filename: (req, file, cb) => {
-    const name = Date.now() + path.extname(file.originalname);
-    cb(null, name);
-  },
-});
-const upload = multer({ storage });*/
-
-
-
 app.post(
   "/products",
   upload.fields([
@@ -330,25 +248,6 @@ app.put(
   },
 );
 
-/*app.delete("/products/:id", async (req, res) => {
-  try {
-    const product = await productModel.findById(req.params.id);
-
-    if (product.file) {
-      const filePath = path.join(imagesDir, product.file);
-      if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-    }
-    if (product.video) {
-      const videoPath = path.join(imagesDir, product.video);
-      if (fs.existsSync(videoPath)) fs.unlinkSync(videoPath);
-    }
-
-    await productModel.findByIdAndDelete(req.params.id);
-    res.json({ message: "Deleted Successfully" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});*/
 
 app.delete("/products/:id", async (req, res) => {
   try {
@@ -359,50 +258,7 @@ app.delete("/products/:id", async (req, res) => {
   }
 });
 
-app.post("/banners", async (req, res) => {
-  try {
-    const hero = await heroModel.create(req.body);
-    res.json(hero);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
-app.get("/banners", async (req, res) => {
-  try {
-    const heroes = await heroModel.find();
-    res.json(heroes);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch banners" });
-  }
-});
-
-app.get("/banners/:id", async (req, res) => {
-  try {
-    const hero = await heroModel.findById(req.params.id);
-    res.json(hero);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch banner" });
-  }
-});
-
-app.put("/banners/:id", async (req, res) => {
-  try {
-    await heroModel.findByIdAndUpdate(req.params.id, req.body);
-    res.json({ message: "Updated Successfully" });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-app.delete("/banners/:id", async (req, res) => {
-  try {
-    await heroModel.findByIdAndDelete(req.params.id);
-    res.json({ message: "Deleted Successfully" });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 app.post("/plans", async (req, res) => {
   try {

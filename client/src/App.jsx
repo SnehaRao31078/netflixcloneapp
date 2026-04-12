@@ -13,9 +13,7 @@ import Dash from "./Admindash";
 import Addproduct from "./Addproduct";
 import ViewProducts from "./View Products";
 import Player from "./Player";
-import Otp from "./Otp";
-//import HeroAdmin from "./HeroAdmin";
-//import HeroView from "./HeroView";
+//import Otp from "./Otp";
 import Subscription from "./Subscription";
 import Plan from "./Planform";
 import ViewScription  from "./ViewSubscription";
@@ -35,11 +33,8 @@ function App() {
         <Route path="/edit/:id" element={<Addproduct />} />
         <Route path="/delete/:id" element={<ViewProducts />} />
         <Route path="/player/:id" element={<Player />} />
-      <Route path="/otp" element={<Otp />} />
-        {/*<Route path="/hero" element={<HeroAdmin />} />*/}
-       {/* <Route path="/heroview" element={<HeroView />} />*/}
-        {/*<Route path="/heroesedit/:id" element={<HeroAdmin />} />*/}
-        {/*<Route path="/delete/:id" element={<HeroView />} />*/}
+      //<Route path="/otp" element={<Otp />} />
+       
         <Route path="/subscribe" element={<Subscription />} />
         <Route path="/plan" element={<Plan />} />
         
