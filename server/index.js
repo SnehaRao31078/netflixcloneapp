@@ -10,11 +10,6 @@ const multer = require("multer");
 const fs = require("fs");*/
 const { v2: cloudinary } = require("cloudinary");
 
-/* Resend*/
-const { Resend } = require("resend");
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const userModel = require("./models/user");
 const productModel = require("./models/products");
 const heroModel = require("./models/banners");
@@ -30,60 +25,10 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
-/* Resend */
-let otpStore = {};
 
-app.post("/send-otp", async (req, res) => {
-  try {
-    const { email } = req.body;
+//let otpStore = {};
 
-    // generate OTP
-    const otp = Math.floor(100000 + Math.random() * 900000);
-
-    // store OTP
-    otpStore[email] = {
-      otp,
-      expires: Date.now() + 5 * 60 * 1000, // 5 mins
-    };
-
-    // send email using Resend
-    await resend.emails.send({
-      from: "onboarding@resend.dev", // default test email
-      to: email,
-      subject: "Your OTP Code",
-      html: `<h2>Your OTP is: ${otp}</h2><p>Valid for 5 minutes</p>`,
-    });
-
-    res.json({ status: "OTP SENT" });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ status: "ERROR" });
-  }
-});
-
-app.post("/verify-otp", (req, res) => {
-  const { email, otp } = req.body;
-
-  if (!otpStore[email]) {
-    return res.json({ status: "Invalid OTP" });
-  }
-
-  const stored = otpStore[email];
-
-  if (Date.now() > stored.expires) {
-    delete otpStore[email];
-    return res.json({ status: "OTP Expired" });
-  }
-
-  if (stored.otp.toString() === otp.toString()) {
-    delete otpStore[email];
-    return res.json({ status: "SUCCESS" });
-  } else {
-    return res.json({ status: "Wrong OTP" });
-  }
-});
-
-/*app.post("/signin", async (req, res) => {
+app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email, password });
@@ -101,23 +46,8 @@ app.post("/verify-otp", (req, res) => {
       plan: userPlan ? userPlan.plan : null,
     },
   });
-});*/
-
-app.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
-
-  const user = await userModel.findOne({ email, password });
-
-  if (!user) {
-    return res.json({ status: "User not found" });
-  }
-
-  // Instead of login directly → send OTP
-  res.json({
-    status: "OTP_REQUIRED",
-    email: user.email,
-  });
 });
+
 
 /*app.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;
