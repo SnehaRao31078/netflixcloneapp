@@ -9,7 +9,7 @@ function Signin() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
- /*const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
   e.preventDefault();
 
   axios
@@ -37,24 +37,8 @@ function Signin() {
     .catch(() => {
       alert("Server is waking up, try again in few seconds");
     });
-};*/
+};
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
-      .then((res) => {
-        if (res.data.status === "OTP_REQUIRED") {
-          navigate("/otp", { state: { email: res.data.email } });
-        } else {
-          alert(res.data.status);
-        }
-      })
-      .catch(() => {
-        alert("Server is waking up, try again");
-      });
-  };
 
 
   return (

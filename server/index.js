@@ -10,8 +10,8 @@ const multer = require("multer");
 const fs = require("fs");*/
 const { v2: cloudinary } = require("cloudinary");
 /*sendgrid*/
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+/*const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);*/
 
 
 const userModel = require("./models/user");
@@ -31,7 +31,7 @@ mongoose
 
 /*sendgrid*/
 
-let otpStore = {};
+/*let otpStore = {};
 app.post("/send-otp", async (req, res) => {
   try {
     const { email } = req.body;
@@ -66,7 +66,7 @@ app.post("/verify-otp", (req, res) => {
   } else {
     return res.json({ status: "Invalid OTP" });
   }
-});
+});*/
 
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
