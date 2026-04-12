@@ -25,9 +25,9 @@ function Signin() {
 
         if (user.plan) {
           alert("Login successful");
-          navigate("/otp");
+          navigate("/home");
         } else {
-          navigate("/subscribe");
+          navigate("/otp");
         }
 
       } else {
