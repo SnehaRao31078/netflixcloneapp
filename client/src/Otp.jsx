@@ -1,4 +1,4 @@
-/*import { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -16,7 +16,8 @@ const verifyOtp = (e) => {
       .then(res => {
         if (res.data.status === "SUCCESS") {
         
-          localStorage.setItem("userEmail", res.data.email);
+          /*localStorage.setItem("userEmail", res.data.email);*/
+          localStorage.setItem("userEmail", email);
           localStorage.setItem("userPlan", res.data.plan || "");
 
           
@@ -52,4 +53,4 @@ const verifyOtp = (e) => {
   );
 }
 
-export default Otp;*/
+export default Otp;

@@ -12,7 +12,9 @@ const { v2: cloudinary } = require("cloudinary");
 
 const userModel = require("./models/user");
 const productModel = require("./models/products");
-const heroModel = require("./models/banners");
+const { Resend } = require("resend");
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 const planModel = require("./models/plans");
 
 const app = express();
@@ -24,8 +26,41 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
+let otpStore = {};
 
 app.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await userModel.findOne({ email, password });
+
+    if (!user) {
+      return res.json({ status: "User not found" });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    otpStore[email] = { otp };
+
+    console.log("OTP:", otp);
+
+    await resend.emails.send({
+      from: "onboarding@resend.dev", 
+      to: email,
+      subject: "Your OTP",
+      html: `<h2>Your OTP is: ${otp}</h2>`,
+    });
+
+    res.json({ status: "OTP_SENT", email });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: "Server Error" });
+  }
+});
+
+
+
+/*app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email, password });
@@ -43,12 +78,12 @@ app.post("/signin", async (req, res) => {
       plan: userPlan ? userPlan.plan : null,
     },
   });
-});
+});*/
 
 //let otpStore = {};
 
 
-/*app.post("/verify-otp", (req, res) => {
+app.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;
   if (!otpStore[email]) return res.json({ status: "Invalid OTP" });
 
@@ -61,7 +96,7 @@ app.post("/signin", async (req, res) => {
   } else {
     return res.json({ status: "Invalid OTP" });
   }
-});*/
+});
 
 /*Razorpay*/
 
