@@ -18,7 +18,7 @@ function Signin() {
       console.log(res.data);
 
       if (res.data.status === "SUCCESS") {
-        const user = res.data.user;
+   
 
         localStorage.setItem("userEmail", user.email);
         localStorage.setItem("userPlan", user.plan || "");
