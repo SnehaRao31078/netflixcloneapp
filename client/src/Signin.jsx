@@ -9,8 +9,7 @@ function Signin() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-
-const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
   e.preventDefault();
 
   axios
@@ -18,22 +17,20 @@ const handleSubmit = (e) => {
     .then((res) => {
       console.log(res.data);
 
-      
       if (res.data.status === "SUCCESS") {
         const user = res.data.user;
 
         localStorage.setItem("userEmail", user.email);
-        localStorage.setItem("userPlan", user.plan);
+        localStorage.setItem("userPlan", user.plan || "");
 
-        navigate("/home");
-      }
+        if (user.plan) {
+          alert("Login successful");
+          navigate("/home");
+        } else {
+          navigate("/subscribe");
+        }
 
-      
-      else if (res.data.status === "OTP_SENT") {
-        navigate("/otp", { state: { email } });
-      }
-
-      else {
+      } else {
         alert(res.data.status);
       }
     })
