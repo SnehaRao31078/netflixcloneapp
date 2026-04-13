@@ -13,7 +13,7 @@ const { v2: cloudinary } = require("cloudinary");
 const userModel = require("./models/user");
 const productModel = require("./models/products");
 
-
+const planModel = require("./models/plans");
 
 const app = express();
 app.use(express.json());
