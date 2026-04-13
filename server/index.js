@@ -72,7 +72,7 @@ app.post("/signin", async (req, res) => {
 
   // ✅ email message
   const message = {
-    to: email,
+    to: 'sneharao31078@gmail.com',
     from: 'sneha8484rao@gmail.com',
     subject: 'Your OTP',
     text: `Your OTP is ${otp}`,
