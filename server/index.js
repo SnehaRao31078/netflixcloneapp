@@ -14,7 +14,7 @@ const userModel = require("./models/user");
 const productModel = require("./models/products");
 
 const planModel = require("./models/plans");
-
+const sgMail = require('@sendgrid/mail');
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -26,7 +26,18 @@ mongoose
 
 //let otpStore = {};
 
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
+const message={
+  to: email,
+  from: 'sneha8484rao@gmail.com',
+  subject: 'Your OTP for Netflix Subscription',
+  text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
+  html:`<p>Your OTP is <strong>${otp}</strong>. It is valid for 5 minutes.</p>`,
+}
+sgMail.send(message)
+.then(() => console.log("OTP sent successfully"))
+.catch((error) => console.error("Error sending OTP:", error));
 
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
