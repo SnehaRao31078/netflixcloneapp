@@ -80,16 +80,22 @@ app.post("/signin", async (req, res) => {
   };
 
   try {
-    await sgMail.send(message);
-    console.log("Email sent ✅");
-  } catch (err) {
-    console.error("SendGrid error:", err);
-  }
+  await sgMail.send(message);
+  console.log("Email sent ✅");
 
-  res.json({
+  return res.json({
     status: "SUCCESS",
     message: "OTP sent",
   });
+
+} catch (err) {
+  console.log("SENDGRID ERROR 👉", err.response?.body || err);
+
+  return res.json({
+    status: "ERROR",
+    message: "Email failed",
+  });
+}
 });
 /*Razorpay*/
 
