@@ -25,7 +25,6 @@ mongoose
   .catch((err) => console.log(err));
 
 
-
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
