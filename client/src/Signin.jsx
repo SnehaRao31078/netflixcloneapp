@@ -34,9 +34,10 @@ function Signin() {
         alert(res.data.status);
       }
     })
-    .catch(() => {
-      alert("Server is waking up, try again in few seconds");
-    });
+    .catch((err) => {
+  console.log("FRONTEND ERROR 👉", err);
+  alert("Check console");
+});
 };
 
 
