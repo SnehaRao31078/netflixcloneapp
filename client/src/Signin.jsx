@@ -9,55 +9,7 @@ function Signin() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
- /*const handleSubmit = (e) => {
-  e.preventDefault();
 
-  axios
-    .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
-    .then((res) => {
-      console.log(res.data);
-
-     if (res.data.status === "OTP_SENT") {
-        const user = res.data.user;
-
-        localStorage.setItem("userEmail", user.email);
-        localStorage.setItem("userPlan", user.plan || "");
-
-        if (user.plan) {
-          alert("Login successful");
-          navigate("/home");
-        } else {
-          navigate("/subscribe");
-        }
-
-      } else {
-        alert(res.data.status);
-      }
-    })
-    .catch(() => {
-      alert("Server is waking up, try again in few seconds");
-    });
-};*/
-/*const handleSubmit = (e) => {
-  e.preventDefault();
-
-  axios
-    .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
-    .then((res) => {
-      console.log(res.data);
-
-      if (res.data.status === "OTP_SENT") {
-        // ✅ just go to OTP page
-        navigate("/otp", { state: { email } });
-
-      } else {
-        alert(res.data.status);
-      }
-    })
-    .catch(() => {
-      alert("Server is waking up, try again in few seconds");
-    });
-};*/
 const handleSubmit = (e) => {
   e.preventDefault();
 

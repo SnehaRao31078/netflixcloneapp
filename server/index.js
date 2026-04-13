@@ -28,35 +28,6 @@ mongoose
 
 let otpStore = {};
 
-/*app.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const user = await userModel.findOne({ email, password });
-
-    if (!user) {
-      return res.json({ status: "User not found" });
-    }
-
-    const otp = Math.floor(100000 + Math.random() * 900000);
-    otpStore[email] = { otp };
-
-    console.log("OTP:", otp);
-
-    await resend.emails.send({
-      from: "onboarding@resend.dev", 
-      to: email,
-      subject: "Your OTP",
-      html: `<h2>Your OTP is: ${otp}</h2>`,
-    });
-
-    res.json({ status: "OTP_SENT", email });
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ status: "Server Error" });
-  }
-});*/
 
 
 app.post("/signin", async (req, res) => {
@@ -103,25 +74,7 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-/*app.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email, password });
-
-  if (!user) {
-    return res.json({ status: "User not found" });
-  }
-
-  const userPlan = await planModel.findOne({ email });
-
-  res.json({
-    status: "SUCCESS",
-    user: {
-      email: user.email,
-      plan: userPlan ? userPlan.plan : null,
-    },
-  });
-});*/
 
 //let otpStore = {};
 
