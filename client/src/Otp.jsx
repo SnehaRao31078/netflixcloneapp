@@ -1,4 +1,4 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ function Otp() {
   const email = location.state?.email;
   
 
-/*const verifyOtp = (e) => {
+const verifyOtp = (e) => {
     e.preventDefault();
 
     axios.post(`${import.meta.env.VITE_API_URL}/verify-otp`, { email, otp })
@@ -33,7 +33,7 @@ function Otp() {
       .catch(err => console.log(err));
   };
 
-*/
+
 
 
  
@@ -56,75 +56,5 @@ function Otp() {
   );
 }
 
-export default Otp; 
+export default Otp; */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*const verifyOtp = (e) => {
-    e.preventDefault();
-    axios.post(`${import.meta.env.VITE_API_URL}/verify-otp`, { email, otp })
-      .then(res => {
-        if (res.data.status === "SUCCESS") {
-          localStorage.setItem("userEmail", email);
-          localStorage.setItem("userPlan", res.data.user.plan || "");
-
-          if (res.data.user.plan) {
-            navigate("/home"); 
-          } else {
-            navigate("/subscribe"); 
-          }
-        } else {
-          alert(res.data.status);
-        }
-      })
-      .catch(err => console.log(err));
-  };*/
