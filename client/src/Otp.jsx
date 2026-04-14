@@ -34,25 +34,7 @@ function Otp() {
   };
 
 */
-const verifyOtp = (e) => {
-    e.preventDefault();
-    axios.post(`${import.meta.env.VITE_API_URL}/verify-otp`, { email, otp })
-      .then(res => {
-        if (res.data.status === "SUCCESS") {
-          localStorage.setItem("userEmail", email);
-          localStorage.setItem("userPlan", res.data.user.plan || "");
 
-          if (res.data.user.plan) {
-            navigate("/home"); 
-          } else {
-            navigate("/subscribe"); 
-          }
-        } else {
-          alert(res.data.status);
-        }
-      })
-      .catch(err => console.log(err));
-  };
 
  
   return (
@@ -75,3 +57,74 @@ const verifyOtp = (e) => {
 }
 
 export default Otp; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const verifyOtp = (e) => {
+    e.preventDefault();
+    axios.post(`${import.meta.env.VITE_API_URL}/verify-otp`, { email, otp })
+      .then(res => {
+        if (res.data.status === "SUCCESS") {
+          localStorage.setItem("userEmail", email);
+          localStorage.setItem("userPlan", res.data.user.plan || "");
+
+          if (res.data.user.plan) {
+            navigate("/home"); 
+          } else {
+            navigate("/subscribe"); 
+          }
+        } else {
+          alert(res.data.status);
+        }
+      })
+      .catch(err => console.log(err));
+  };*/

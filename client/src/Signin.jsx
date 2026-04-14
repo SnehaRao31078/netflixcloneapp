@@ -9,7 +9,7 @@ function Signin() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
- /*const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
   e.preventDefault();
 
   axios
@@ -37,29 +37,8 @@ function Signin() {
     .catch(() => {
       alert("Server is waking up, try again in few seconds");
     });
-};*/
-const handleSubmit = (e) => {
-  e.preventDefault();
-  axios
-    .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
-    .then((res) => {
-      if (res.data.status === "SUCCESS") {
-        // Direct Login Case
-        localStorage.setItem("userEmail", res.data.user.email);
-        localStorage.setItem("userPlan", res.data.user.plan);
-        alert("Login successful");
-        navigate("/home");
-      } else if (res.data.status === "OTP_SENT") {
-        // No Plan Case: Go to OTP page
-        navigate("/otp", { state: { email } });
-      } else {
-        alert(res.data.status);
-      }
-    })
-    .catch(() => {
-      alert("Connection error. Please try again.");
-    });
 };
+
 
 
   return (
@@ -95,3 +74,68 @@ const handleSubmit = (e) => {
 }
 
 export default Signin;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const handleSubmit = (e) => {
+  e.preventDefault();
+  axios
+    .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+    .then((res) => {
+      if (res.data.status === "SUCCESS") {
+        
+        localStorage.setItem("userEmail", res.data.user.email);
+        localStorage.setItem("userPlan", res.data.user.plan);
+        
+        alert("Login successful");
+        navigate("/home");
+      } else if (res.data.status === "OTP_SENT") {
+        
+        navigate("/otp", { state: { email } });
+      } else {
+        alert(res.data.status);
+      }
+    })
+    .catch(() => {
+      alert("Connection error. Please try again.");
+    });
+};*/
