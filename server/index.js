@@ -74,7 +74,7 @@ app.post("/signin", async (req, res) => {
 });
 */
 
-const otpStore = {}; // Temporary memory storage
+const otpStore = {}; 
 
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
@@ -86,27 +86,32 @@ app.post("/signin", async (req, res) => {
       return res.json({ status: "User not found" });
     }
 
-    // Generate 6-digit OTP
+   
+    const userPlan = await planModel.findOne({ email });
+
+    if (userPlan && userPlan.plan) {
+      
+      return res.json({
+        status: "SUCCESS",
+        user: {
+          email: user.email,
+          plan: userPlan.plan,
+        },
+      });
+    }
+    
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     
-    // Store OTP with a timestamp
     otpStore[email] = { 
       otp, 
-      expiresAt: Date.now() + 5 * 60 * 1000 // Valid for 5 minutes
+      expiresAt: Date.now() + 5 * 60 * 1000 
     };
 
-    console.log(`OTP for ${email}: ${otp}`);
-
-    // Sending via SendGrid (as per your earlier code)
     const msg = {
       to: email,
       from: 'sneha8484rao@gmail.com',
       subject: 'Your Netflix Clone OTP',
-      html: `<div style="font-family: Arial;">
-               <h2>Verification Code</h2>
-               <p>Your OTP is: <strong>${otp}</strong></p>
-               <p>This code expires in 5 minutes.</p>
-             </div>`,
+      html: `<h2>Your OTP is: ${otp}</h2>`,
     };
 
     await sgMail.send(msg);
@@ -117,7 +122,6 @@ app.post("/signin", async (req, res) => {
     res.status(500).json({ status: "Server Error" });
   }
 });
-
 app.post("/verify-otp", async (req, res) => {
   const { email, otp } = req.body;
 
