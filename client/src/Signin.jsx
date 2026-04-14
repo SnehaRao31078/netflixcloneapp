@@ -39,20 +39,27 @@ function Signin() {
     });
 };*/
 const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
-      .then((res) => {
-        if (res.data.status === "OTP_SENT") {
-          navigate("/otp", { state: { email } });
-        } else {
-          alert(res.data.status);
-        }
-      })
-      .catch(() => {
-        alert("Connection error. Please try again.");
-      });
-  };
+  e.preventDefault();
+  axios
+    .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+    .then((res) => {
+      if (res.data.status === "SUCCESS") {
+        // Direct Login Case
+        localStorage.setItem("userEmail", res.data.user.email);
+        localStorage.setItem("userPlan", res.data.user.plan);
+        alert("Login successful");
+        navigate("/home");
+      } else if (res.data.status === "OTP_SENT") {
+        // No Plan Case: Go to OTP page
+        navigate("/otp", { state: { email } });
+      } else {
+        alert(res.data.status);
+      }
+    })
+    .catch(() => {
+      alert("Connection error. Please try again.");
+    });
+};
 
 
   return (
