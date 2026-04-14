@@ -99,7 +99,7 @@ const sendWelcomeEmail = async (userEmail, otp) => {
   }
 };
 
-app.post("/signin", async (req, res) => {
+/*app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email, password });
@@ -123,6 +123,46 @@ app.post("/signin", async (req, res) => {
       email: user.email,
       plan: userPlan ? userPlan.plan : null,
     },
+  });
+});*/
+
+app.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await userModel.findOne({ email, password });
+
+  if (!user) return res.json({ status: "User not found" });
+
+  const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+  
+  // Save OTP and Expiry (e.g., 10 mins) to the database
+  user.otp = generatedOtp;
+  user.otpExpires = Date.now() + 10 * 60 * 1000; 
+  await user.save();
+
+  await sendWelcomeEmail(email, generatedOtp); 
+
+  res.json({ status: "SUCCESS", email: user.email });
+});
+
+app.post("/verify-otp", async (req, res) => {
+  const { email, otp } = req.body;
+  const user = await userModel.findOne({ email });
+
+  if (!user || user.otp !== otp || user.otpExpires < Date.now()) {
+    return res.json({ status: "Invalid or expired OTP" });
+  }
+
+  
+  user.otp = null;
+  user.otpExpires = null;
+  await user.save();
+
+  // Check for plan
+  const userPlan = await planModel.findOne({ email });
+
+  res.json({
+    status: "SUCCESS",
+    plan: userPlan ? userPlan.plan : null, // Returns the plan name or null
   });
 });
 

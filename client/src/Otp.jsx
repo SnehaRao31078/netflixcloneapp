@@ -1,4 +1,4 @@
-/*import { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ function Otp() {
   const email = location.state?.email;
   
 
-const verifyOtp = (e) => {
+/*const verifyOtp = (e) => {
     e.preventDefault();
 
     axios.post(`${import.meta.env.VITE_API_URL}/verify-otp`, { email, otp })
@@ -32,7 +32,30 @@ const verifyOtp = (e) => {
       })
       .catch(err => console.log(err));
   };
+*/
 
+const verifyOtp = (e) => {
+  e.preventDefault();
+
+  axios.post(`${import.meta.env.VITE_API_URL}/verify-otp`, { email, otp })
+    .then(res => {
+      if (res.data.status === "SUCCESS") {
+        // Store user data
+        localStorage.setItem("userEmail", email);
+        localStorage.setItem("userPlan", res.data.plan || "");
+
+       
+        if (res.data.plan) {
+          navigate("/home"); 
+        } else {
+          navigate("/subscribe"); 
+        }
+      } else {
+        alert(res.data.status); 
+      }
+    })
+    .catch(err => console.error("Verification Error:", err));
+};
  
   return (
     <div style={{ textAlign: "center", marginTop: "150px" }}>
@@ -53,4 +76,4 @@ const verifyOtp = (e) => {
   );
 }
 
-export default Otp; */
+export default Otp; 
