@@ -59,7 +59,6 @@ app.post("/signin", async (req, res) => {
     return res.json({ status: "User not found" });
   }
 
-  
   await sendWelcomeEmail(email); 
 
   const userPlan = await planModel.findOne({ email });
