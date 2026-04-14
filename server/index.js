@@ -6,8 +6,7 @@ const Razorpay = require("razorpay");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const multer = require("multer");
-/*const path = require("path");
-const fs = require("fs");*/
+
 const { v2: cloudinary } = require("cloudinary");
 
 const userModel = require("./models/user");
@@ -264,8 +263,6 @@ app.delete("/products/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
 
 app.post("/plans", async (req, res) => {
   try {
