@@ -26,8 +26,9 @@ mongoose
 
 /*Sendgrid*/
 
-const sgMail = require('@sendgrid/mail');
+/*const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const sendWelcomeEmail = async (userEmail) => {
 const msg = {
   to: 'sneharao31078@gmail.com',
   from: 'sneha8484rao@gmail.com', // Use the email address or domain you verified above
@@ -57,6 +58,51 @@ sgMail
     }
   }
 })();
+};*/
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+const sendWelcomeEmail = async (userEmail) => {
+  const msg = {
+    to: userEmail, // Use the parameter passed to the function
+    from: 'sneha8484rao@gmail.com', // Must be a verified sender in SendGrid
+    subject: 'Welcome to Netflix Clone',
+    text: 'Welcome back! You have successfully signed in.',
+    html: '<strong>Welcome back!</strong><p>You have successfully signed in to your account.</p>',
+  };
+
+  try {
+    await sgMail.send(msg);
+    console.log(`Email sent successfully to ${userEmail}`);
+  } catch (error) {
+    console.error('Error sending email:');
+    if (error.response) {
+      console.error(error.response.body);
+    } else {
+      console.error(error.message);
+    }
+  }
+};
+
+/*app.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await userModel.findOne({ email, password });
+
+  if (!user) {
+    return res.json({ status: "User not found" });
+  }
+
+  const userPlan = await planModel.findOne({ email });
+
+  res.json({
+    status: "SUCCESS",
+    user: {
+      email: user.email,
+      plan: userPlan ? userPlan.plan : null,
+    },
+  });
+});*/
 
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
@@ -66,6 +112,9 @@ app.post("/signin", async (req, res) => {
   if (!user) {
     return res.json({ status: "User not found" });
   }
+
+  // --- TRIGGER EMAIL HERE ---
+  await sendWelcomeEmail(email); 
 
   const userPlan = await planModel.findOne({ email });
 
