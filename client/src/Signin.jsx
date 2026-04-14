@@ -38,7 +38,21 @@ function Signin() {
       alert("Server is waking up, try again in few seconds");
     });
 };*/
-
+const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+      .then((res) => {
+        if (res.data.status === "OTP_SENT") {
+          navigate("/otp", { state: { email } });
+        } else {
+          alert(res.data.status);
+        }
+      })
+      .catch(() => {
+        alert("Connection error. Please try again.");
+      });
+  };
 
 
   return (

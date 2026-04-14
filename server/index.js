@@ -74,7 +74,84 @@ app.post("/signin", async (req, res) => {
 });
 */
 
+const otpStore = {}; // Temporary memory storage
 
+app.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await userModel.findOne({ email, password });
+
+    if (!user) {
+      return res.json({ status: "User not found" });
+    }
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    // Store OTP with a timestamp
+    otpStore[email] = { 
+      otp, 
+      expiresAt: Date.now() + 5 * 60 * 1000 // Valid for 5 minutes
+    };
+
+    console.log(`OTP for ${email}: ${otp}`);
+
+    // Sending via SendGrid (as per your earlier code)
+    const msg = {
+      to: email,
+      from: 'sneha8484rao@gmail.com',
+      subject: 'Your Netflix Clone OTP',
+      html: `<div style="font-family: Arial;">
+               <h2>Verification Code</h2>
+               <p>Your OTP is: <strong>${otp}</strong></p>
+               <p>This code expires in 5 minutes.</p>
+             </div>`,
+    };
+
+    await sgMail.send(msg);
+    res.json({ status: "OTP_SENT", email });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ status: "Server Error" });
+  }
+});
+
+app.post("/verify-otp", async (req, res) => {
+  const { email, otp } = req.body;
+
+  const storedData = otpStore[email];
+
+  // 1. Check if OTP exists
+  if (!storedData) {
+    return res.json({ status: "OTP expired or not requested" });
+  }
+
+  // 2. Check if OTP has expired
+  if (Date.now() > storedData.expiresAt) {
+    delete otpStore[email];
+    return res.json({ status: "OTP expired" });
+  }
+
+  // 3. Verify OTP
+  if (storedData.otp === otp.toString()) {
+    delete otpStore[email]; // Clear after success
+
+    // Find the user's plan
+    const userPlan = await planModel.findOne({ email });
+
+    return res.json({
+      status: "SUCCESS", // Capitalized to match your React component
+      user: {
+        email: email,
+        plan: userPlan ? userPlan.plan : null,
+      }
+    });
+  } else {
+    return res.json({ status: "Invalid OTP" });
+  }
+});
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
   key_secret: process.env.RAZORPAY_API_SECRET,
