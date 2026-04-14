@@ -13,7 +13,7 @@ import Dash from "./Admindash";
 import Addproduct from "./Addproduct";
 import ViewProducts from "./View Products";
 import Player from "./Player";
-//import Otp from "./Otp";
+import Otp from "./Otp";
 import Subscription from "./Subscription";
 import Plan from "./Planform";
 import ViewScription  from "./ViewSubscription";
@@ -33,7 +33,7 @@ function App() {
         <Route path="/edit/:id" element={<Addproduct />} />
         <Route path="/delete/:id" element={<ViewProducts />} />
         <Route path="/player/:id" element={<Player />} />
-      {/*<Route path="/otp" element={<Otp />} />*/}
+      <Route path="/otp" element={<Otp />} />
        
         <Route path="/subscribe" element={<Subscription />} />
         <Route path="/plan" element={<Plan />} />
