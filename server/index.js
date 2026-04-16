@@ -6,6 +6,9 @@ const Razorpay = require("razorpay");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const multer = require("multer");
+const fs=require("fs");
+const PDFDocument= require("pdfkit-table");
+
 
 const { v2: cloudinary } = require("cloudinary");
 
@@ -129,6 +132,70 @@ app.post("/payment/process", async (req, res) => {
     res.status(500).json({ success: false });
   }
 });
+const path = require("path");
+
+const fs = require("fs");
+const PDFDocument = require("pdfkit-table");
+const path = require("path");
+
+const sendReceipt = async (email, plan, price, paymentId) => {
+
+  const filePath = path.join(__dirname, `receipt-${paymentId}.pdf`);
+
+ 
+  let doc = new PDFDocument({ margin: 30, size: "A4" });
+
+  
+  doc.pipe(fs.createWriteStream(filePath));
+
+  ;(async function createTable(){
+
+    
+    doc.fontSize(18).text("Payment Receipt", { align: "center" });
+    doc.moveDown();
+
+   
+    const table = {
+      title: "",
+      headers: ["Email", "Plan", "Price", "Payment ID"],
+      rows: [
+        [email, plan, price, paymentId],
+      ],
+    };
+
+  
+    await doc.table(table);
+
+    
+    doc.end();
+
+  })();
+
+  
+  setTimeout(async () => {
+    try {
+      const msg = {
+        to: email,
+        from: "sneha8484rao@gmail.com",
+        subject: "Your Payment Receipt",
+        text: "Please find your receipt attached.",
+        attachments: [
+          {
+            content: fs.readFileSync(filePath).toString("base64"),
+            filename: `receipt-${paymentId}.pdf`,
+            type: "application/pdf",
+            disposition: "attachment",
+          },
+        ],
+      };
+
+      await sgMail.send(msg);
+
+    } catch (err) {
+      console.log("Error sending email:", err);
+    }
+  }, 500);
+};
 
 app.post("/payment/verify", async (req, res) => {
   try {
@@ -157,37 +224,7 @@ app.post("/payment/verify", async (req, res) => {
         country,
         paymentId: razorpay_payment_id,
       });
-      const sendReceipt = async (email, plan, price, paymentId) => {
-        try {
-          const msg = {
-            to: email,
-            from: "sneha8484rao@gmail.com",
-            subject: "Payment Receipt from Netflix Clone",
-            html: `<p>Thank you for your payment!</p>
-      <table border="1">
-      <thead>
-      <tr>
-      <th><strong>Email</strong></th>
-      <th><strong>Plan</strong></th>
-      <th><strong>Price</strong></th>
-      <th><strong>Payment ID</strong></th>
-      </tr>
-      </thead>
-      <tbody>
-      <td>${email}</td>
-      <td>${plan}</td>
-      <td>${price}</td>
-      <td>${paymentId}</td>
-      </tbody>
-
-      </table>`,
-     
-          };
-          await sgMail.send(msg);
-        } catch (err) {
-          console.log("Error sending receipt email:", err);
-        }
-      };
+      
       await sendReceipt(email, plan, price, razorpay_payment_id);
       return res.json({ success: true });
     } else {
