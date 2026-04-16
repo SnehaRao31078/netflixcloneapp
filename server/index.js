@@ -60,7 +60,9 @@ app.post("/signin", async (req, res) => {
       to: email,
       from: "sneha8484rao@gmail.com",
       subject: "Your Netflix Clone OTP",
-      html: `<h2>Your OTP is: ${otp}</h2>`,
+      html: `<h2>Your OTP is: ${otp}</h2>
+      `,
+        
     };
 
     await sgMail.send(msg);
@@ -102,6 +104,36 @@ app.post("/verify-otp", async (req, res) => {
   }
 });
 
+const  sendReceipt = async (email, plan,price,paymentId) => {
+  try
+  {
+    const msg = {
+      to: email,
+      from: "sneha8484rao@gmail.com",
+      subject: "Payment Receipt from Netflix Clone",
+      html:`<p>Thank you for your payment!</p>
+      <table>
+      <thead>
+      <tr>
+      <th><strong>Email</strong></th>
+      <th><strong>Plan</strong></th>
+      <th><strong>Price</strong></th>
+      </tr>
+      </thead>
+      <tbody>
+      <td>${email}</td>
+      <td>${plan}</td>
+      <td>${price}</td>
+      <td>${paymentId}</td>
+      </tbody>
+
+      </table>`
+  }
+}catch(err)
+{
+  console.log("Error sending receipt email:",err);
+}
+}
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
   key_secret: process.env.RAZORPAY_API_SECRET,
@@ -156,7 +188,7 @@ app.post("/payment/verify", async (req, res) => {
         country,
         paymentId: razorpay_payment_id,
       });
-
+      await sendReceipt(email, plan, price,razorpay_payment_id);
       return res.json({ success: true });
     } else {
       return res.json({ success: false });
