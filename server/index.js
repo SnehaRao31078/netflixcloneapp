@@ -170,10 +170,11 @@ app.post("/payment/verify", async (req, res) => {
       <th><strong>Email</strong></th>
       <th><strong>Plan</strong></th>
       <th><strong>Price</strong></th>
+      <th><strong>Payment ID</strong></th>
       </tr>
       </thead>
       <tbody>
-      
+      <td>${email}</td>
       <td>${plan}</td>
       <td>${price}</td>
       <td>${paymentId}</td>
