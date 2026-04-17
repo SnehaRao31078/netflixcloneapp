@@ -358,14 +358,14 @@ app.delete("/products/:id", async (req, res) => {
   }
 });
 
-app.post("/plans", async (req, res) => {
+/*app.post("/plans", async (req, res) => {
   try {
     const data = await planModel.create(req.body);
     res.json({ success: true, message: "Payment successful", data });
   } catch (err) {
     res.status(500).json({ success: false, message: "Error" });
   }
-});
+});*/
 
 app.get("/plans", async (req, res) => {
   try {
@@ -384,6 +384,62 @@ app.get("/plans/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+app.put("/update-user", async (req, res) => {
+  try {
+    const { email, newEmail, newPassword } = req.body;
+
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.json({ status: "User not found" });
+    }
+
+  
+    if (newEmail && newEmail !== "") {
+      user.email = newEmail;
+    }
+
+   
+    if (newPassword && newPassword !== "") {
+      user.password = newPassword; 
+    }
+
+    await user.save();
+
+    res.json({
+      status: "Success",
+      message: "User updated successfully",
+      user,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: "Error" });
+  }
+});
+
+app.get("/plans/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+
+    
+    const user = await userModel.findOne({ email });
+
+    
+    const plan = await planModel.findOne({ email }).sort({ _id: -1 });
+
+    res.json({
+      user,
+      plan,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Error" });
+  }
+});
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
