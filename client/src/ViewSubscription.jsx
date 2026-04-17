@@ -29,6 +29,7 @@ function ViewScription()
     <th>Country</th>
     <th>Plan</th>
     <th>Price</th>
+    <th>Payment ID</th>
     
 
 </tr>
@@ -43,6 +44,7 @@ function ViewScription()
                 <td>{subscribe.country}</td>
                 <td>{subscribe.plan}</td>
                 <td>{subscribe.price}</td>
+                <td>{subscribe.paymentId}</td>
                   
 
 
