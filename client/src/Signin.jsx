@@ -27,7 +27,7 @@ function Signin() {
         }
       })
       .catch(() => {
-        alert("Connection error. Please try again.");
+        toast.error("Connection error. Please try again.");
       });
   };
 
