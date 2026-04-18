@@ -46,6 +46,7 @@ function Player() {
       <h1>{movie.title}</h1>
 
     <video
+  ref={videoRef}
   width="800"
   height="450"
     controls={showControls}
