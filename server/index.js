@@ -171,10 +171,7 @@ const sendReceipt = async (email, plan, price, paymentId, basePrice, gstAmount, 
     /*await doc.table(table);*/
 
     await doc.table(table, {
-  x: 100,
-  width: 500,
-  padding: 8,
-  columnSpacing: 10,
+ columnsSize: [180, 80, 80, 80, 80, 150],
 });
 
     
