@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./product.css";
-
+import { toast } from "react-toastify";
 function Addproduct() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -69,13 +69,13 @@ function Addproduct() {
           `${import.meta.env.VITE_API_URL}/products/${id}`,
           formData
         );
-        alert("Updated Successfully");
+        toast.success("Updated Successfully");
       } else {
         await axios.post(
           `${import.meta.env.VITE_API_URL}/products`,
           formData
         );
-        alert("Added Successfully");
+        toast.success("Added Successfully");
       }
 
       navigate("/view");
