@@ -7,9 +7,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const multer = require("multer");
 
-
-
-
 const { v2: cloudinary } = require("cloudinary");
 
 const userModel = require("./models/user");
@@ -21,10 +18,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+//Mongodb connection
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
+
+  //Otp genaeation and email sending to the netlix user using sendgrid
 
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -75,6 +75,7 @@ app.post("/signin", async (req, res) => {
   }
 });
 
+//Verifying the Otp sent to user
 app.post("/verify-otp", async (req, res) => {
   const { email, otp } = req.body;
 
@@ -106,6 +107,7 @@ app.post("/verify-otp", async (req, res) => {
   }
 });
 
+//Payment Integration using Razorpay
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
   key_secret: process.env.RAZORPAY_API_SECRET,
@@ -132,6 +134,8 @@ app.post("/payment/process", async (req, res) => {
     res.status(500).json({ success: false });
   }
 });
+
+//Generating PDF receipt and sending it to user email after successful payment
 const path = require("path");
 
 const fs = require("fs");
@@ -197,6 +201,8 @@ const sendReceipt = async (email, plan, price, paymentId, basePrice, gstAmount, 
   }, 500);
 };
 
+//Payment verification and storing the plan details in database after successful payment
+
 app.post("/payment/verify", async (req, res) => {
   try {
     const {
@@ -207,7 +213,7 @@ app.post("/payment/verify", async (req, res) => {
       plan,
       price,
       country,
-      
+
     } = req.body;
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;
@@ -217,14 +223,7 @@ app.post("/payment/verify", async (req, res) => {
       .update(body)
       .digest("hex");
 
-   /* if (expectedSignature === razorpay_signature) {
-      await planModel.create({
-        email,
-        plan,
-        price,
-        country,
-        paymentId: razorpay_payment_id,
-      });*/
+  
       if (expectedSignature === razorpay_signature) {
 
   const GST_RATE = 0.18;
@@ -254,6 +253,7 @@ app.post("/payment/verify", async (req, res) => {
   }
 });
 
+//Using cloudinary to store the images  and video for netflix
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -272,6 +272,8 @@ const cloudinarystorage = new CloudinaryStorage({
 
 const upload = multer({ storage: cloudinarystorage });
 
+
+//Signup  for netflix clone
 app.post("/signup", async (req, res) => {
   try {
     const user = await userModel.create(req.body);
@@ -290,6 +292,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+//Add movies
 app.post(
   "/products",
   upload.fields([
@@ -324,6 +327,7 @@ app.post(
   },
 );
 
+//GetMovies
 app.get("/products", async (req, res) => {
   try {
     const products = await productModel.find();
@@ -333,6 +337,7 @@ app.get("/products", async (req, res) => {
   }
 });
 
+//Get Movies By its id
 app.get("/products/:id", async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
@@ -342,6 +347,7 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
+//Update Movies
 app.put(
   "/products/:id",
   upload.fields([
@@ -367,6 +373,7 @@ app.put(
   },
 );
 
+//Delete Movies
 app.delete("/products/:id", async (req, res) => {
   try {
     await productModel.findByIdAndDelete(req.params.id);
@@ -377,7 +384,7 @@ app.delete("/products/:id", async (req, res) => {
 });
 
 
-
+//Get plans 
 app.get("/plans", async (req, res) => {
   try {
     const data = await planModel.find();
@@ -388,7 +395,7 @@ app.get("/plans", async (req, res) => {
 });
 
 
-
+//Update user information
 app.put("/update-user", async (req, res) => {
   try {
     const { email, newEmail, newPassword } = req.body;
@@ -423,6 +430,7 @@ app.put("/update-user", async (req, res) => {
   }
 });
 
+//Get user details and plan details using email
 app.get("/plans/:email", async (req, res) => {
   try {
     const email = req.params.email;

@@ -4,8 +4,8 @@ const planSchema = new mongoose.Schema({
   email: String,
   plan: String,
   price: Number,       
-  basePrice: Number,   // original price
-  gstAmount: Number,   // GST (18%)
+  basePrice: Number,   
+  gstAmount: Number,  
   country: String,
   paymentId: String
 });
