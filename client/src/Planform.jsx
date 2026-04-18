@@ -10,7 +10,7 @@ function Plan() {
 
   const queryParams = new URLSearchParams(location.search);
   const plan = queryParams.get("type");
-  const price = queryParams.get("price");
+  const price = Number(queryParams.get("price"));
 
   const handlePayment = async () => {
     try {

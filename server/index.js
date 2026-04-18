@@ -207,6 +207,7 @@ app.post("/payment/verify", async (req, res) => {
       plan,
       price,
       country,
+      
     } = req.body;
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;
