@@ -138,7 +138,7 @@ const fs = require("fs");
 const PDFDocument = require("pdfkit-table");
 
 
-const sendReceipt = async (email, plan, price, paymentId) => {
+const sendReceipt = async (email, plan, price, paymentId, basePrice, gstAmount, total) => {
 
   const filePath = path.join(__dirname, `receipt-${paymentId}.pdf`);
 
@@ -157,9 +157,9 @@ const sendReceipt = async (email, plan, price, paymentId) => {
    
     const table = {
       title: "",
-      headers: ["Email", "Plan", "Price", "Payment ID"],
+      headers: ["Email", "Plan", "Base Price", "GST (18%)", "Total", "Payment ID"],
       rows: [
-        [email, plan, price, paymentId],
+        [email, plan, `₹${basePrice}`, `₹${gstAmount}`, `₹${total}`, paymentId],
       ],
     };
 
@@ -216,16 +216,33 @@ app.post("/payment/verify", async (req, res) => {
       .update(body)
       .digest("hex");
 
-    if (expectedSignature === razorpay_signature) {
+   /* if (expectedSignature === razorpay_signature) {
       await planModel.create({
         email,
         plan,
         price,
         country,
         paymentId: razorpay_payment_id,
-      });
+      });*/
+      if (expectedSignature === razorpay_signature) {
+
+  const GST_RATE = 0.18;
+
+  const total = price;
+  const basePrice = price / (1 + GST_RATE);
+  const gstAmount = total - basePrice;
+
+  await planModel.create({
+    email,
+    plan,
+    price: total,
+    basePrice,
+    gstAmount,
+    country,
+    paymentId: razorpay_payment_id,
+  });
       
-      await sendReceipt(email, plan, price, razorpay_payment_id);
+      await sendReceipt(email, plan, price, razorpay_payment_id, basePrice.toFixed(2), gstAmount.toFixed(2), total.toFixed(2));
       return res.json({ success: true });
     } else {
       return res.json({ success: false });
