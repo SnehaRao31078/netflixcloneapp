@@ -1,7 +1,7 @@
 import "./adminlog.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 function Adminlog() {
     const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
@@ -18,7 +18,7 @@ function Adminlog() {
               navigate("/admindash");
         }
         else{
-            alert("Incorrect login credentials");
+            toast.error("Incorrect login credentials");
         }
      }
   return (

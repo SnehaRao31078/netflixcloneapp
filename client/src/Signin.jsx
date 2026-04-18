@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./signin.css";
-
+;
+import { toast } from "react-toastify";
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,12 +18,12 @@ function Signin() {
           localStorage.setItem("userEmail", res.data.user.email);
           localStorage.setItem("userPlan", res.data.user.plan);
 
-          alert("Login successful");
+          toast.success("Login successful");
           navigate("/home");
         } else if (res.data.status === "OTP_SENT") {
           navigate("/otp", { state: { email } });
         } else {
-          alert(res.data.status);
+          toast.error(res.data.status);
         }
       })
       .catch(() => {
