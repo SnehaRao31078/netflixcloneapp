@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRef } from "react";
 import "./player.css";
 function Player() {
   const { id } = useParams();
@@ -9,6 +10,7 @@ function Player() {
 
   const [movie, setMovie] = useState(null);
    const [showControls, setShowControls] =useState(false);
+   const videoRef = useRef(null);
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`)
@@ -25,10 +27,17 @@ function Player() {
     return <h2>Loading...</h2>;
   }
 
-  const toogleControls = () => {
+  /*const toogleControls = () => {
     setShowControls(!showControls);
 
-  };
+  };*/
+  const toggleControls = () => {
+  setShowControls(true);
+
+  if (videoRef.current) {
+    videoRef.current.play();   
+  }
+};
 
   return (
     <div style={{ background: "black", color: "white", padding: "30px" }}>
