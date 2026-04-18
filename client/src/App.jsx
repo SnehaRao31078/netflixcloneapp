@@ -20,8 +20,11 @@ import ViewScription from "./ViewSubscription";
 import UserDash from "./Userpanel";
 import Security from "./Security";
 import Membership from "./Membership";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
+    <>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Signin />} />
@@ -54,6 +57,8 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    <ToastContainer />
+    </>
   );
 }
 

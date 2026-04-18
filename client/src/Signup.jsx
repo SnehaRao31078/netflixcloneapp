@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./signuppass.css";
 import axios from "axios";
 
-
+import { toast } from "react-toastify";
 function Signup() {
  
   const [name, setName] = useState("");
@@ -21,7 +21,7 @@ const handleSubmit = (e) => {
       email,
       password,
     })
-    .then((res) => {
+    /*.then((res) => {
   console.log(res.data);
 
   if (res.data.status === "SUCCESS") {
@@ -32,6 +32,19 @@ const handleSubmit = (e) => {
     localStorage.setItem("userEmail", email);
 
    
+  }
+})*/
+.then((res) => {
+  console.log(res.data);
+
+  if (res.data.status === "SUCCESS") {
+    toast.success(res.data.message);   
+
+    localStorage.setItem("userEmail", email);
+
+    setTimeout(() => {
+      navigate("/");
+    }, 1500); 
   }
 })
     .catch((err) => {
