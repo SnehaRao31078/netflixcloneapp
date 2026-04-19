@@ -1,24 +1,4 @@
-/*.security-box
- {
-  background:khaki;
-  padding: 20px;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
-}
-.membership-box
-{
-  background:aliceblue;
-  padding: 20px;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
-}
-h3{
-    color:black;
-}*/
+
 
 .dash {
   display: flex;
@@ -29,7 +9,7 @@ h3{
   margin: 0 auto;
 }
 
-/* Card style (same feel as .basic) */
+
 .card-box {
   background-color: white;
   padding: 20px;
@@ -40,12 +20,12 @@ h3{
   transition: transform 0.3s ease;
 }
 
-/* Hover effect */
+
 .card-box:hover {
   transform: scale(1.05);
 }
 
-/* Text styling */
+
 .card-box h2 {
   color: black;
 }

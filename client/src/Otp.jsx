@@ -29,23 +29,23 @@ function Otp() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "150px" }}>
-      <p className="logo-p">NETFLIX</p>
-      <h2>Enter OTP</h2>
-      <form onSubmit={verifyOtp}>
-        <input
-          className="otp"
-          type="text"
-          placeholder="Enter OTP"
-          onChange={(e) => setOtp(e.target.value)}
-        />
-        <br />
-        <br />
-        <button type="submit" className="otp-btn">
-          Verify OTP
-        </button>
-      </form>
-    </div>
+   <div className="otp-container">
+  <p className="logo-p">NETFLIX</p>
+  <h2>Enter OTP</h2>
+
+  <form onSubmit={verifyOtp}>
+    <input
+      className="otp"
+      type="text"
+      placeholder="Enter OTP"
+      onChange={(e) => setOtp(e.target.value)}
+    />
+
+    <button type="submit" className="otp-btn">
+      Verify OTP
+    </button>
+  </form>
+</div>
   );
 }
 
