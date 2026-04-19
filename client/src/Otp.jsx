@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import "./otp.css";
 function Otp() {
   const [otp, setOtp] = useState("");
   const location = useLocation();
@@ -29,7 +29,7 @@ function Otp() {
   };
 
   return (
-   <div className="otp-container">
+ <div style={{ textAlign: "center", marginTop: "150px" }}>
   <p className="logo-p">NETFLIX</p>
   <h2>Enter OTP</h2>
 

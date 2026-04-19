@@ -1,4 +1,4 @@
-/*.otp-btn{
+.otp-btn{
 
 justify-content: center;
 background:red;
@@ -21,43 +21,4 @@ width:auto;
     position: absolute;
     top: 20px;
     left: 20px;
-}*/
-
-.otp-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 120px;
-}
-
-.otp {
-  width: 300px;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #555;
-  background: #2c2c2c;
-  color: white;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.otp-btn {
-  background: red;
-  color: white;
-  border: none;
-  padding: 12px;
-  width: 300px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.logo-p {
-  color: red;
-  font-weight: bold;
-  font-size: 30px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
 }
