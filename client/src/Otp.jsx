@@ -40,6 +40,8 @@ function Otp() {
       placeholder="Enter OTP"
       onChange={(e) => setOtp(e.target.value)}
     />
+  <br />
+        <br />
 
     <button type="submit" className="otp-btn">
       Verify OTP
