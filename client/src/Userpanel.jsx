@@ -43,23 +43,21 @@ function UserDash() {
       <h1>Welcome to User Dashboard</h1>
 
       <div className="dash">
-
-        <div
-          className="card-box"
-          onClick={() => navigate("/security")}
-        >
-          <h2>Security Settings</h2>
+        <div className="card-box" onClick={() => navigate("/security")}>
+          <h2>
+            <i className="fa-solid fa-lock"></i>Security Settings
+          </h2>
           <p>Manage password, login activity & privacy</p>
         </div>
 
-        <div
-          className="card-box"
-          onClick={() => navigate("/membership")}
-        >
-          <h2>Membership & Billing</h2>
+        <div className="card-box" onClick={() => navigate("/membership")}>
+          <h2>
+           
+            <i className="fa-solid fa-credit-card"></i>
+            Membership & Billing
+          </h2>
           <p>View plans, upgrade or manage billing</p>
         </div>
-
       </div>
     </>
   );
