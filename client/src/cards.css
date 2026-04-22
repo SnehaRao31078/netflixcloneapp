@@ -16,15 +16,17 @@ justify-content:space-between;
 {
   display:grid;
   grid-template-columns: 1fr 1fr 1fr ;
-  gap:20px;
+  gap:25px;
   margin:15px 0;
 }
 .cards{
 display:flex;
 flex-direction:column;
 justify-content: space-between;
-padding:8px 15px;
+padding: 25px; 
 border-radius:5px;
+height:120px;
+font-size:8px;
 }
 
 .cards:first-child
@@ -44,4 +46,12 @@ border-radius:5px;
   display:flex;
   align-items: center;
   justify-content: space-between;
+}
+.cards h3 {
+  font-size: 20px;          
+}
+
+.cards p {
+  font-size: 28px;          
+  font-weight: bold;
 }
