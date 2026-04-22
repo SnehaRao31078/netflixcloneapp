@@ -1,7 +1,7 @@
 import "./cards.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Charts from "./Charts";
+
 function Cards() {
   const [counts, setCounts] = useState({
     totalUsers: 0,
