@@ -12,7 +12,7 @@ function Cards() {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/dashboard-counts");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/dashboard-counts`);
         setCounts(res.data);
       } catch (err) {
         console.log(err);
