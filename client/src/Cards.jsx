@@ -1,7 +1,7 @@
 import "./cards.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import Charts from "./Charts";
 
 function Cards() {
   const [counts, setCounts] = useState({
@@ -49,7 +49,7 @@ function Cards() {
             <p>{counts.totalSubscriptions}</p>
           </div>
         </div>
-      
+      <div className="charts"><Charts/></div>
       </div>
     </main>
   );
