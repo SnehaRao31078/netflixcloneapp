@@ -34,7 +34,7 @@ function Charts() {
         setData(chartData);
       })
       .catch(err => console.log(err));
-  }, [API_URL]);
+  }, []);
 
   return (
     <PieChart width={500} height={300}>
