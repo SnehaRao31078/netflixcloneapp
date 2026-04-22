@@ -457,6 +457,25 @@ app.get("/plans/:email", async (req, res) => {
 });
 
 
+app.get("/dashboard-counts", async (req, res) => {
+  try {
+    const totalUsers = await userModel.countDocuments();
+    const totalSubscriptions = await planModel.countDocuments(); 
+    const totalMovies = await productModel.countDocuments();
+
+    res.json({
+      totalUsers,
+      totalSubscriptions,
+      totalMovies,
+    });
+
+  } catch (err) {
+    console.log(err); 
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
