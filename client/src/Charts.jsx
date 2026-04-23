@@ -26,7 +26,7 @@ const fetchedata =async ()=>
      console.error("Error Fetching MongoDB data")   
     }
 };
-fetchedta();
+fetchedata();
 
 },[]);
 
