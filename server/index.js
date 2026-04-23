@@ -208,39 +208,44 @@ const fs = require("fs");
 };
 */
 
-const sendReceipt = async (paymentId) => {
+const sendReceipt = async (data) => {
   try {
-    const data = await planModel.findOne({ paymentId });
-
-    if (!data) {
-      console.log("No data found");
-      return;
-    }
-
-    const filePath = path.join(__dirname, `receipt-${paymentId}.pdf`);
+    const filePath = path.join(__dirname, `receipt-${data.paymentId}.pdf`);
 
     pdf.create(invoiceTemplate(data)).toFile(filePath, async (err) => {
-      if (err) return console.log(err);
+      if (err) {
+        console.log("❌ PDF Error:", err);
+        return;
+      }
 
-      const msg = {
-        to: data.email,
-        from: "sneha8484rao@gmail.com",
-        subject: "Your Payment Receipt",
-        attachments: [
-          {
-            content: fs.readFileSync(filePath).toString("base64"),
-            filename: `receipt-${paymentId}.pdf`,
-            type: "application/pdf",
-            disposition: "attachment",
-          },
-        ],
-      };
+      console.log("✅ PDF Created");
 
-      await sgMail.send(msg);
+      try {
+        const msg = {
+          to: data.email,
+          from: "sneha8484rao@gmail.com",
+          subject: "Your Payment Receipt",
+          text: "Receipt attached",
+          attachments: [
+            {
+              content: fs.readFileSync(filePath).toString("base64"),
+              filename: `receipt-${data.paymentId}.pdf`,
+              type: "application/pdf",
+              disposition: "attachment",
+            },
+          ],
+        };
+
+        await sgMail.send(msg);
+        console.log("✅ Email sent");
+
+      } catch (error) {
+        console.log("❌ Email Error:", error.response?.body || error);
+      }
     });
 
   } catch (err) {
-    console.log(err);
+    console.log("❌ Main Error:", err);
   }
 };
 //Payment verification and storing the plan details in database after successful payment
@@ -285,7 +290,15 @@ app.post("/payment/verify", async (req, res) => {
   });
       
       //await sendReceipt(email, plan, price, razorpay_payment_id, basePrice.toFixed(2), gstAmount.toFixed(2), total.toFixed(2));
-      await sendReceipt(razorpay_payment_id);
+     await sendReceipt({
+  email,
+  plan,
+  price: total,
+  basePrice,
+  gstAmount,
+  country,
+  paymentId: razorpay_payment_id
+});
       return res.json({ success: true });
     } else {
       return res.json({ success: false });
