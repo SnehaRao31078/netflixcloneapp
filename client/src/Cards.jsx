@@ -49,9 +49,7 @@ function Cards() {
             <p>{counts.totalSubscriptions}</p>
           </div>
         </div>
-     <div className="charts">
-      <Charts />
-     </div>
+     
       </div>
     </main>
   );

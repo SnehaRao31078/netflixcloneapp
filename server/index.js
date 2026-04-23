@@ -6,6 +6,8 @@ const Razorpay = require("razorpay");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const multer = require("multer");
+const pdf = require("html-pdf");
+const invoiceTemplate = require("./invoiceTemplate");
 
 const { v2: cloudinary } = require("cloudinary");
 
@@ -139,10 +141,10 @@ app.post("/payment/process", async (req, res) => {
 const path = require("path");
 
 const fs = require("fs");
-const PDFDocument = require("pdfkit-table");
+//const PDFDocument = require("pdfkit-table");
 
 
-const sendReceipt = async (email, plan, price, paymentId, basePrice, gstAmount, total) => {
+/*const sendReceipt = async (email, plan, price, paymentId, basePrice, gstAmount, total) => {
 
   const filePath = path.join(__dirname, `receipt-${paymentId}.pdf`);
 
@@ -168,7 +170,7 @@ const sendReceipt = async (email, plan, price, paymentId, basePrice, gstAmount, 
     };
 
   
-    /*await doc.table(table);*/
+    await doc.table(table);
 
     await doc.table(table, {
  columnsSize: [125, 80, 80, 80, 80, 150],
@@ -204,7 +206,43 @@ const sendReceipt = async (email, plan, price, paymentId, basePrice, gstAmount, 
     }
   }, 500);
 };
+*/
 
+const sendReceipt = async (paymentId) => {
+  try {
+    const data = await planModel.findOne({ paymentId });
+
+    if (!data) {
+      console.log("No data found");
+      return;
+    }
+
+    const filePath = path.join(__dirname, `receipt-${paymentId}.pdf`);
+
+    pdf.create(invoiceTemplate(data)).toFile(filePath, async (err) => {
+      if (err) return console.log(err);
+
+      const msg = {
+        to: data.email,
+        from: "sneha8484rao@gmail.com",
+        subject: "Your Payment Receipt",
+        attachments: [
+          {
+            content: fs.readFileSync(filePath).toString("base64"),
+            filename: `receipt-${paymentId}.pdf`,
+            type: "application/pdf",
+            disposition: "attachment",
+          },
+        ],
+      };
+
+      await sgMail.send(msg);
+    });
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 //Payment verification and storing the plan details in database after successful payment
 
 app.post("/payment/verify", async (req, res) => {
@@ -246,7 +284,8 @@ app.post("/payment/verify", async (req, res) => {
     paymentId: razorpay_payment_id,
   });
       
-      await sendReceipt(email, plan, price, razorpay_payment_id, basePrice.toFixed(2), gstAmount.toFixed(2), total.toFixed(2));
+      //await sendReceipt(email, plan, price, razorpay_payment_id, basePrice.toFixed(2), gstAmount.toFixed(2), total.toFixed(2));
+      await sendReceipt(razorpay_payment_id);
       return res.json({ success: true });
     } else {
       return res.json({ success: false });
