@@ -23,7 +23,7 @@ const fetchedata =async ()=>
     }
     catch(error)
     {
-     console.error("Error Fetching MongoDB data")   
+     console.error("Error Fetching MongoDB data")   ;
     }
 };
 fetchedata();
@@ -32,7 +32,7 @@ fetchedata();
 
 const COLORS=["#0088FE","#00C49F","#FF8828"];
  return(
-<>
+<div>
 <ResponsiveContainer>
 <PieChart width={200} height={200}>
 <Pie data={data}  value="plan"
@@ -45,7 +45,7 @@ label
     {data.map((entry,index)=>
     {
         <Cell key={`cell-${index}`}
-        fill={COLORS[index%COLORS.length]}></Cell>
+        fill={COLORS[index % COLORS.length]}></Cell>
     })}
     <Tooltip></Tooltip>
 
@@ -53,7 +53,7 @@ label
 </Pie>
 </PieChart>
 </ResponsiveContainer>
-</>
+</div>
     );
 }
 export default Charts;
