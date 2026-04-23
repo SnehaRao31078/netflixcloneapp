@@ -214,11 +214,11 @@ const sendReceipt = async (data) => {
 
     pdf.create(invoiceTemplate(data)).toFile(filePath, async (err) => {
       if (err) {
-        console.log("❌ PDF Error:", err);
+        console.log("PDF Error:", err);
         return;
       }
 
-      console.log("✅ PDF Created");
+      console.log(" PDF Created");
 
       try {
         const msg = {
@@ -237,15 +237,15 @@ const sendReceipt = async (data) => {
         };
 
         await sgMail.send(msg);
-        console.log("✅ Email sent");
+        console.log("Email sent");
 
       } catch (error) {
-        console.log("❌ Email Error:", error.response?.body || error);
+        console.log(" Email Error:", error.response?.body || error);
       }
     });
 
   } catch (err) {
-    console.log("❌ Main Error:", err);
+    console.log(" Main Error:", err);
   }
 };
 //Payment verification and storing the plan details in database after successful payment

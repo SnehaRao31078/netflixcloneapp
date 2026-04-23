@@ -10,9 +10,12 @@ module.exports = (data) => {
       }
 
       .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .header-table {
+        width: 100%;
       }
 
       .company {
@@ -26,20 +29,15 @@ module.exports = (data) => {
       }
 
       h2 {
-        margin-top: 40px;
+        margin-top: 20px;
       }
 
-      .info {
-        display: flex;
-        justify-content: space-between;
+      .info-table {
+        width: 100%;
         margin-top: 20px;
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
         padding: 10px 0;
-      }
-
-      .info div {
-        font-size: 14px;
       }
 
       table {
@@ -52,6 +50,7 @@ module.exports = (data) => {
         text-align: left;
         border-bottom: 2px solid #000;
         padding: 10px;
+        background-color: #f5f5f5;
       }
 
       td {
@@ -66,7 +65,7 @@ module.exports = (data) => {
       .totals {
         margin-top: 20px;
         width: 300px;
-        float: right;
+        margin-left: auto;
       }
 
       .totals div {
@@ -83,29 +82,35 @@ module.exports = (data) => {
 
   <body>
 
-    <div class="header">
-      <div class="company">Netflix Clone</div>
-      <div class="address">
-        Kochi, India<br/>
-        support@netflixclone.com
-      </div>
-    </div>
+    <!-- HEADER -->
+    <table class="header-table">
+      <tr>
+        <td class="company">Netflix Clone</td>
+        <td class="address">
+          Kochi, India<br/>
+          support@netflixclone.com
+        </td>
+      </tr>
+    </table>
 
     <h2>Invoice</h2>
 
-    <div class="info">
-      <div>
-        <p><b>Invoice ID:</b> ${data.paymentId}</p>
-        <p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
-        <p><b>Balance Due:</b> ₹${data.price}</p>
-      </div>
+    <!-- CUSTOMER INFO -->
+    <table class="info-table">
+      <tr>
+        <td>
+          <p><b>Invoice ID:</b> ${data.paymentId}</p>
+          <p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
+          <p><b>Balance Due:</b> ₹${Number(data.price).toFixed(2)}</p>
+        </td>
+        <td class="right">
+          <p><b>${data.email}</b></p>
+          <p>${data.country}</p>
+        </td>
+      </tr>
+    </table>
 
-      <div>
-        <p><b>${data.email}</b></p>
-        <p>${data.country}</p>
-      </div>
-    </div>
-
+    <!-- TABLE -->
     <table>
       <tr>
         <th>Item</th>
@@ -118,24 +123,25 @@ module.exports = (data) => {
       <tr>
         <td>PLAN</td>
         <td>${data.plan} Subscription</td>
-        <td class="right">₹${data.basePrice}</td>
+        <td class="right">₹${Number(data.basePrice).toFixed(2)}</td>
         <td class="right">1</td>
-        <td class="right">₹${data.basePrice}</td>
+        <td class="right">₹${Number(data.basePrice).toFixed(2)}</td>
       </tr>
     </table>
 
+    <!-- TOTALS -->
     <div class="totals">
       <div>
         <span>Subtotal</span>
-        <span>₹${data.basePrice}</span>
+        <span>₹${Number(data.basePrice).toFixed(2)}</span>
       </div>
       <div>
         <span>GST (18%)</span>
-        <span>₹${data.gstAmount}</span>
+        <span>₹${Number(data.gstAmount).toFixed(2)}</span>
       </div>
       <div class="bold">
         <span>Balance Due</span>
-        <span>₹${data.price}</span>
+        <span>₹${Number(data.price).toFixed(2)}</span>
       </div>
     </div>
 
