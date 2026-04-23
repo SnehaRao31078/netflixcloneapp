@@ -32,7 +32,7 @@ fetchedata();
 
 const COLORS=["#0088FE","#00C49F","#FF8828"];
  return(
-<div>
+<div style={{width="100%", height:400}}>
 <ResponsiveContainer>
 <PieChart width={200} height={200}>
 <Pie data={data}  value="plan"
