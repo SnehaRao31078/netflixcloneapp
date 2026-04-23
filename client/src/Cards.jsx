@@ -31,14 +31,14 @@ function Cards() {
         <div className="cards">
         <div className="cards-inner">
         <h3> <span><i className="fa-solid fa-film"></i></span> Number of Movies</h3>
-        <p>{counts.totalMovie}</p>
+        <p>{counts.totalMovies}</p>
         </div>
         </div>
         
         <div className="cards">
         <div className="cards-inner">
             <h3><span><i className="fa-solid fa-user"></i></span> Number of users </h3>
-           <p>{counts.totalUser}</p>
+           <p>{counts.totalUsers}</p>
         </div>
 
         </div>
@@ -46,7 +46,7 @@ function Cards() {
         <div className="cards">
           <div className="cards-inner">
             <h3><span><i className="fa-solid fa-credit-card"></i></span> Number of subscription</h3>
-            <p>{counts.totalSubscription}</p>
+            <p>{counts.totalSubscriptions}</p>
           </div>
         </div>
      <div className="charts">
