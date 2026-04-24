@@ -1,5 +1,94 @@
 
-.planform
+
+
+.plan-container {
+    height: 100vh;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+
+.plan-card {
+    background-color: white;
+    padding: 40px;         
+    border-radius: 12px;
+    width: 400px;           
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+
+.plan-card h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.plan-card h2 {
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+
+.plan-card input,
+.plan-card select {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #2f2f3a;   
+    color: white;
+    outline: none;
+}
+
+
+
+.plan-card button {
+    width: 100%;
+    padding: 14px;          
+    font-size: 17px;
+}
+
+.plan-card input:focus,
+.plan-card select:focus {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(229,9,20,0.5);
+}
+
+
+.plan-card button {
+    width: 100%;
+    padding: 12px;
+    background-color: #E50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+.plan-card button:hover {
+    background-color: darkred;
+}
+
+
+@media (max-width: 400px) {
+    .plan-card {
+        width: 90%;
+    }
+}
+.subscribe
 {
-    background-color: black;
+    color:black;
+}
+.price
+{
+    color:black;
 }

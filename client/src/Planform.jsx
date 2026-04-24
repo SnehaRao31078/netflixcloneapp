@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import "./plan.css";
 function Plan() {
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
@@ -69,9 +69,10 @@ function Plan() {
   };
 
   return (
-    <>
-      <h1>Subscribe to {plan} Plan</h1>
-      <h2>Price: ₹{price}</h2>
+  <div className="plan-container">
+    <div className="plan-card">
+      <h1 className="subscribe">Subscribe to {plan} Plan</h1>
+      <h2 className="price">Price: ₹{price}</h2>
 
       <input
         type="email"
@@ -80,20 +81,17 @@ function Plan() {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-<select value={country} onChange={(e) => setCountry(e.target.value)}>
-  <option value="">Select Country</option>
-  <option value="India">India</option>
-  <option value="USA">USA</option>
-</select>
-      <br /><br />
+      <select value={country} onChange={(e) => setCountry(e.target.value)}>
+        <option value="">Select Country</option>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+      </select>
 
-      <button onClick={handlePayment}>
-        Pay Now
-      </button>
-    </>
-  );
+      <button onClick={handlePayment}>Pay Now</button>
+    </div>
+  </div>
+);
 }
-
 export default Plan;
 
 
