@@ -13,7 +13,7 @@ function Subscription()
              <div className="basic">
                 Basic with add
                 <h3>Monthly price:<br></br>
-                <p className="video">$99.99</p>
+                <p className="video">₹199</p>
                </h3>
                 <hr></hr>
                 <h3 > Video and voice quality<br></br>
@@ -23,7 +23,7 @@ function Subscription()
                  <h3>Resolution</h3>
                <p className="video">4K</p>
                <hr></hr>
-       <Link to="/plan?type=basic&price=99.99">
+       <Link to="/plan?type=basic&price=199">
                 <button>Choose Basic plan</button>
             </Link>
              </div>
@@ -31,7 +31,7 @@ function Subscription()
               <div className="basic">
                Standard
                <h3>Monthly price:<br></br>
-               <p className="video">$149.99</p></h3>
+               <p className="video">₹499</p></h3>
                <p></p><hr></hr>
                <h3>Voice and Video Quality</h3>
                <p className="video">Great</p>
@@ -39,7 +39,7 @@ function Subscription()
               <h3>Resolution</h3>
               <p className="video">1080p</p>
               <hr></hr>
-               <Link to="/plan?type=standard&price=149.99"> <button>Choose Standard plan</button></Link>
+               <Link to="/plan?type=standard&price=499"> <button>Choose Standard plan</button></Link>
              </div>
 
 
@@ -47,7 +47,7 @@ function Subscription()
                 Premium
                 <h3>Monthly price:
                     <br></br>
-                    <p className="video">$199.99</p>
+                    <p className="video">₹799</p>
                 </h3>
                 <p></p><hr></hr>
                 <h3>Video and sound quality</h3>
@@ -56,7 +56,7 @@ function Subscription()
                 <h3>Resolution</h3>
                 <p className="video">1080p</p>
                 <hr></hr>
-                <Link to="/plan?type=premium&price=199.99"> <button>Choose Premium plan</button></Link>
+                <Link to="/plan?type=premium&price=799"> <button>Choose Premium plan</button></Link>
              </div>
              </div>
            

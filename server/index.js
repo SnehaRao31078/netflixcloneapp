@@ -69,7 +69,7 @@ app.post("/signin", async (req, res) => {
       `,
     };
 
-    await sgMail.send(msg);
+    sgMail.send(msg);
     res.json({ status: "OTP_SENT", email });
   } catch (err) {
     console.error(err);
