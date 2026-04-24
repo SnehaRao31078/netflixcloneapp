@@ -66,7 +66,7 @@ function Home() {
         <div>
           <span className="close" onClick={()=>setShowModal(false)}>X</span>
         </div>
-        <h3>Would u like to watch here?</h3>
+        <h3 className="would">Would u like to watch here?</h3>
         <p>Upgrade your plan to start watching here.With Your current plan.you can watch on your phone and tablet </p>
         <div className="modal-buttons">
         <button className="not-nows" onClick={()=>setShowModal(false)}>Not Now</button> 

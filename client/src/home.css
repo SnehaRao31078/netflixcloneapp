@@ -516,8 +516,12 @@ body,
   right: 15px;
   cursor: pointer;
   font-size: 18px;
+  color:black;
 }
-
+.would
+{
+  color:black;
+}
 .modal-buttons {
   margin-top: 15px;
   display: flex;
