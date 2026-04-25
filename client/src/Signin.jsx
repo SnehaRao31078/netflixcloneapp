@@ -22,7 +22,7 @@ function Signin() {
           navigate("/home");
         } else if (res.data.status === "OTP_SENT") {
           navigate("/otp", { state: { email } });
-          tost.success("Otp sent");
+          toast.success("Otp sent");
         } else {
           toast.error(res.data.status);
         }
