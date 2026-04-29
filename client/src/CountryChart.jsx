@@ -73,7 +73,11 @@ function CountryChart() {
           </Pie>
 
           <Tooltip />
-          <Legend verticalAlign="bottom" />
+           <Legend
+            verticalAlign="right"
+            align="center"
+            iconType="square"
+          />
         </PieChart>
       </ResponsiveContainer>
     </div>

@@ -59,7 +59,7 @@ font-size:8px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 60px; /* Space between pie chart and bar chart */
+  gap: 60px; 
   width: 100%;
   margin-top: 40px;
   padding: 20px;
