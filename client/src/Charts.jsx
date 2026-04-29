@@ -1,4 +1,4 @@
-/*import { useEffect,useState } from "react";
+import { useEffect,useState } from "react";
 import {Pie,PieChart,Cell,Tooltip, ResponsiveContainer} from "recharts";
 import axios from "axios";
 function Charts(){
@@ -77,4 +77,4 @@ label
 </div>
     );
 }
-export default Charts;*/
+export default Charts;
