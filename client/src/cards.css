@@ -55,3 +55,17 @@ font-size:8px;
   font-size: 28px;          
   font-weight: bold;
 }
+.charts {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px; /* Space between pie chart and bar chart */
+  width: 100%;
+  margin-top: 40px;
+  padding: 20px;
+}
+
+.charts > div {
+  flex: 1;
+  min-width: 300px;
+}

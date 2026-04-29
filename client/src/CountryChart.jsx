@@ -18,7 +18,17 @@ function CountryChart() {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/plans`);
 
         let countryCount = {};
+res.data.forEach((item) => {
+  if (!item.country) return;
 
+  const country = item.country;
+
+  if (countryCount[country]) {
+    countryCount[country]++;
+  } else {
+    countryCount[country] = 1;
+  }
+});
         
 
         const chartData = Object.keys(countryCount).map((country) => ({

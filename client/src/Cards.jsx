@@ -53,7 +53,7 @@ function Cards() {
       <Charts />
      </div>
      <div className="charts">
-      <CountryCharts />
+      <CountryChart />
      </div>
       </div>
     </main>
