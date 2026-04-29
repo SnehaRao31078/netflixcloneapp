@@ -79,7 +79,7 @@ function Home() {
       <div className="hero">
    <iframe
   className="hero-video"
-  src="https://www.youtube.com/embed/hs3w32RG8L8?autoplay=1&mute=1&controls=0&loop=1&playlist=hs3w32RG8L8"
+  src="https://www.youtube.com/embed/hs3w32RG8L8?autoplay=1&mute=0&controls=0&loop=1&playlist=hs3w32RG8L8"
   title="YouTube video player"
   frameBorder="0"
   allow="autoplay; encrypted-media"
