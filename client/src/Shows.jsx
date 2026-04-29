@@ -93,7 +93,7 @@ function Shows() {
 
       <div className="home">
         <div className="hero">
-          <video
+          <iframe
             className="banner-video"
             src="https://youtu.be/r8O3URprq1M?si=a2du2gYVSR-S7PTN"
             autoPlay
