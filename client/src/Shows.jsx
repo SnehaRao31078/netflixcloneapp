@@ -93,14 +93,7 @@ function Shows() {
 
       <div className="home">
         <div className="hero">
-          <iframe
-            className="banner-video"
-            src="https://youtu.be/r8O3URprq1M?si=a2du2gYVSR-S7PTN"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/r8O3URprq1M?si=a2du2gYVSR-S7PTN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
           <div className="overlay"></div>
 
