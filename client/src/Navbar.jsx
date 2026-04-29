@@ -51,15 +51,7 @@ function Nav() {
           <li>
             <Link to="/games">Games</Link>
           </li>
-          <li>
-            <Link to="/new">New & Popular</Link>
-          </li>
-          <li>
-            <Link to="/mylist">My List</Link>
-          </li>
-          <li>
-            <Link to="/languages">Browse by Languages</Link>
-          </li>
+         
         </ul>
       </div>
 
