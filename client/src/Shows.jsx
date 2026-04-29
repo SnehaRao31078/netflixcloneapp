@@ -83,13 +83,13 @@ function Shows() {
 
           <div className="row-posters" id="row1">
             {shows
-              .filter((show) => show.category === "gems for you")
-              .map((show) => (
+              .filter((movie) => movie.category === "gems for you")
+              .map((movie) => (
                 <img
-                  key={show._id}
-                  src={show.file}
-                  alt={show.title}
-                  onClick={() => navigate("/player/" + show._id)}
+                  key={movie._id}
+                  src={movie.file}
+                  alt={movie.title}
+                  onClick={() => navigate("/player/" + movie._id)}
                 />
               ))}
           </div>
@@ -104,13 +104,13 @@ function Shows() {
 
           <div className="row-posters" id="row2">
             {shows
-              .filter((show) => show.category === "acclaimed writer")
-              .map((show) => (
+              .filter((movie) => movie.category === "acclaimed writer")
+              .map((movie) => (
                 <img
-                  key={show._id}
-                  src={show.file}
-                  alt={show.title}
-                  onClick={() => navigate("/player/" + show._id)}
+                  key={movie._id}
+                  src={movie.file}
+                  alt={movie.title}
+                  onClick={() => navigate("/player/" + movie._id)}
                 />
               ))}
           </div>
@@ -125,13 +125,13 @@ function Shows() {
 
           <div className="row-posters" id="row3">
             {shows
-              .filter((show) => show.category === "international tv shows")
-              .map((show) => (
+              .filter((movie) => movie.category === "international tv shows")
+              .map((movie) => (
                 <img
-                  key={show._id}
-                  src={show.file}
-                  alt={show.title}
-                  onClick={() => navigate("/player/" + show._id)}
+                  key={movie._id}
+                  src={movie.file}
+                  alt={movie.title}
+                  onClick={() => navigate("/player/" + movie._id)}
                 />
               ))}
           </div>
@@ -146,13 +146,13 @@ function Shows() {
 
           <div className="row-posters" id="row4">
             {shows
-              .filter((show) => show.category === "tv comedians")
-              .map((show) => (
+              .filter((movie) => movie.category === "tv comedians")
+              .map((movie) => (
                 <img
-                  key={show._id}
-                  src={show.file}
-                  alt={show.title}
-                  onClick={() => navigate("/player/" + show._id)}
+                  key={movie._id}
+                  src={movie.file}
+                  alt={movie.title}
+                  onClick={() => navigate("/player/" + movie._id)}
                 />
               ))}
           </div>
