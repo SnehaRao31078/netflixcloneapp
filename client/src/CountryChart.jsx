@@ -15,21 +15,21 @@ function CountryChart() {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/plans`);
+        const res = await axios.get("http://localhost:3001/plans");
 
         let countryCount = {};
-res.data.forEach((item) => {
-  if (!item.country) return;
 
-  const country = item.country;
+        res.data.forEach((item) => {
+          if (!item.country || item.country.toLowerCase() === "unknown") return;
 
-  if (countryCount[country]) {
-    countryCount[country]++;
-  } else {
-    countryCount[country] = 1;
-  }
-});
-        
+          const country = item.country;
+
+          if (countryCount[country]) {
+            countryCount[country]++;
+          } else {
+            countryCount[country] = 1;
+          }
+        });
 
         const chartData = Object.keys(countryCount).map((country) => ({
           name: country,
@@ -46,10 +46,11 @@ res.data.forEach((item) => {
   }, []);
 
   const COLORS = [
-    
     "#FFBB28",
     "#FF8042",
-    
+    "#0088FE",
+    "#00C49F",
+    "#AF19FF",
   ];
 
   return (
@@ -74,7 +75,7 @@ res.data.forEach((item) => {
           </Pie>
 
           <Tooltip />
-          <Legend verticalAlign="right" />
+          <Legend verticalAlign="bottom" />
         </PieChart>
       </ResponsiveContainer>
     </div>
