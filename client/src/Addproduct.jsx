@@ -119,6 +119,7 @@ function Addproduct() {
                 <option value="made in india">Made in India</option>
                 <option value="sci-fi horror">Sci-Fi Horror</option>
                 <option  value="comedy-drama">Comedy-Drama</option>
+                <option value="gems-for-you">Gems for You</option>
               </select>
             </div>
 
