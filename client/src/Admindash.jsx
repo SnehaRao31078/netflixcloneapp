@@ -6,7 +6,8 @@ function Dash() {
 
   const navigate = useNavigate();
 
-  return (<>
+  return (
+  <>
    
     <div className="grid-container">
     < Sidebar />
