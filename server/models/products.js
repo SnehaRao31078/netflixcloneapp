@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+/*const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
   title: String,
@@ -12,4 +12,24 @@ const movieSchema = new mongoose.Schema({
 
 const productModel = mongoose.model("movies", movieSchema);
 
-module.exports = productModel;
+module.exports = productModel;*/
+
+const mongoose = require("mongoose");
+
+const productSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  language: String,
+  category: String,
+  plan: String,
+
+  file: String,
+
+  // uploaded mp4
+  video: String,
+
+  // youtube link
+  youtubeLink: String,
+});
+
+module.exports = mongoose.model("products", productSchema);

@@ -284,7 +284,7 @@ app.post("/signup", async (req, res) => {
 });
 
 //Add movies
-app.post(
+{/*app.post(
   "/products",
   upload.fields([
     { name: "file", maxCount: 1 },
@@ -316,6 +316,50 @@ app.post(
       res.status(500).json({ error: err.message });
     }
   },
+);*/}
+app.post(
+  "/products",
+  upload.fields([
+    { name: "file", maxCount: 1 },
+    { name: "video", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      if (!req.files || !req.files.file) {
+        return res
+          .status(400)
+          .json({ error: "Image is required" });
+      }
+
+      const newProduct = {
+        title: req.body.title,
+        description: req.body.description,
+        language: req.body.language,
+        category: req.body.category,
+        plan: req.body.plan,
+
+        youtubeLink: req.body.youtubeLink,
+
+        file: req.files.file[0].path,
+
+        video: req.files.video
+          ? req.files.video[0].path
+          : null,
+      };
+
+      const created =
+        await productModel.create(newProduct);
+
+      res.json(created);
+
+    } catch (err) {
+      console.log(err);
+
+      res.status(500).json({
+        error: err.message,
+      });
+    }
+  }
 );
 
 //GetMovies
@@ -339,7 +383,7 @@ app.get("/products/:id", async (req, res) => {
 });
 
 //Update Movies
-app.put(
+{/*app.put(
   "/products/:id",
   upload.fields([
     { name: "file", maxCount: 1 },
@@ -363,7 +407,56 @@ app.put(
     }
   },
 );
+*/}
+app.put(
+  "/products/:id",
+  upload.fields([
+    { name: "file", maxCount: 1 },
+    { name: "video", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const updateData = {
+        ...req.body,
+      };
 
+      if (req.files && req.files.file) {
+        updateData.file =
+          req.files.file[0].path;
+      }
+
+      if (req.files && req.files.video) {
+        updateData.video =
+          req.files.video[0].path;
+
+        updateData.youtubeLink = "";
+      }
+
+      if (req.body.youtubeLink) {
+        updateData.youtubeLink =
+          req.body.youtubeLink;
+
+        updateData.video = "";
+      }
+
+      await productModel.findByIdAndUpdate(
+        req.params.id,
+        updateData
+      );
+
+      res.json({
+        message: "Updated Successfully",
+      });
+
+    } catch (err) {
+      console.log(err);
+
+      res.status(500).json({
+        error: err.message,
+      });
+    }
+  }
+);
 //Delete Movies
 app.delete("/products/:id", async (req, res) => {
   try {

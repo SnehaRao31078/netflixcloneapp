@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/*import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./product.css";
@@ -181,6 +181,289 @@ function Addproduct() {
                 <p className="cross" onClick={removeVideo}>
                   X
                 </p>
+              </div>
+            )}
+
+            <button type="submit">
+              {id ? "Update Movie" : "Add Movie"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Addproduct;*/
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import "./product.css";
+import { toast } from "react-toastify";
+
+function Addproduct() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [file, setFile] = useState(null);
+  const [video, setVideo] = useState(null);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [language, setLanguage] = useState("");
+  const [category, setCategory] = useState("");
+  const [plan, setPlan] = useState("");
+
+  const [youtubeLink, setYoutubeLink] = useState("");
+
+  const [imagePreview, setImagePreview] = useState("");
+  const [videoPreview, setVideoPreview] = useState("");
+
+  useEffect(() => {
+    if (id) {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/products/${id}`)
+        .then((res) => {
+          setTitle(res.data.title);
+          setDescription(res.data.description);
+          setLanguage(res.data.language);
+          setCategory(res.data.category);
+          setPlan(res.data.plan);
+
+          setYoutubeLink(res.data.youtubeLink || "");
+
+          setImagePreview(res.data.file);
+          setVideoPreview(res.data.video);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [id]);
+
+  const removeImage = () => {
+    setImagePreview("");
+    setFile(null);
+  };
+
+  const removeVideo = () => {
+    setVideoPreview("");
+    setVideo(null);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("language", language);
+    formData.append("category", category);
+    formData.append("plan", plan);
+
+    formData.append("youtubeLink", youtubeLink);
+
+    if (file) formData.append("file", file);
+    if (video) formData.append("video", video);
+
+    try {
+      if (id) {
+        await axios.put(
+          `${import.meta.env.VITE_API_URL}/products/${id}`,
+          formData
+        );
+
+        toast.success("Updated Successfully");
+      } else {
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/products`,
+          formData
+        );
+
+        toast.success("Added Successfully");
+      }
+
+      navigate("/view");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <div className="product-page">
+      <div className="product-wrapper">
+        <div className="container">
+          <h1>{id ? "Update Movie" : "Add Movie"}</h1>
+
+          <form onSubmit={handleSubmit}>
+            <input
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+
+            <input
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+
+            <input
+              placeholder="Language"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            />
+
+            <div>
+              <select
+                className="inputfield"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="">Select Category</option>
+
+                <option value="made in india">
+                  Made in India
+                </option>
+
+                <option value="sci-fi horror">
+                  Sci-Fi Horror
+                </option>
+
+                <option value="comedy-drama">
+                  Comedy-Drama
+                </option>
+
+                <option value="gems-for-you">
+                  Gems for You
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <select
+                className="inputfield"
+                value={plan}
+                onChange={(e) => setPlan(e.target.value)}
+              >
+                <option value="">Select Plan</option>
+
+                <option value="basic">Basic</option>
+
+                <option value="Standard">Standard</option>
+
+                <option value="premium">Premium</option>
+              </select>
+            </div>
+
+            {/* IMAGE */}
+            <input
+              type="file"
+              name="file"
+              accept="image/*"
+              onChange={(e) => {
+                const selected = e.target.files[0];
+
+                setFile(selected);
+
+                if (selected) {
+                  setImagePreview(
+                    URL.createObjectURL(selected)
+                  );
+                }
+              }}
+            />
+
+            {imagePreview && (
+              <div
+                style={{
+                  position: "relative",
+                  display: "inline-block",
+                }}
+              >
+                <img
+                  src={imagePreview}
+                  width="120"
+                  alt="preview"
+                />
+
+                <p
+                  className="cross"
+                  onClick={removeImage}
+                >
+                  X
+                </p>
+              </div>
+            )}
+
+            {/* VIDEO FILE */}
+            <input
+              type="file"
+              name="video"
+              accept="video/mp4"
+              onChange={(e) => {
+                const selected = e.target.files[0];
+
+                setVideo(selected);
+
+                if (selected) {
+                  setVideoPreview(
+                    URL.createObjectURL(selected)
+                  );
+
+                  setYoutubeLink("");
+                }
+              }}
+            />
+
+            {/* YOUTUBE LINK */}
+            <input
+              type="text"
+              placeholder="Paste YouTube Link"
+              value={youtubeLink}
+              onChange={(e) => {
+                setYoutubeLink(e.target.value);
+
+                setVideo(null);
+                setVideoPreview("");
+              }}
+            />
+
+            {/* VIDEO PREVIEW */}
+            {videoPreview && (
+              <div
+                style={{
+                  position: "relative",
+                  display: "inline-block",
+                }}
+              >
+                <video
+                  src={videoPreview}
+                  width="200"
+                  controls
+                />
+
+                <p
+                  className="cross"
+                  onClick={removeVideo}
+                >
+                  X
+                </p>
+              </div>
+            )}
+
+            {/* YOUTUBE PREVIEW */}
+            {youtubeLink && (
+              <div>
+                <iframe
+                  width="250"
+                  height="150"
+                  src={youtubeLink.replace(
+                    "watch?v=",
+                    "embed/"
+                  )}
+                  title="YouTube Preview"
+                  allowFullScreen
+                ></iframe>
               </div>
             )}
 
