@@ -582,4 +582,4 @@ function Addproduct() {
   );
 }
 
-export default Addproduct;
+export default Addproduct ;
