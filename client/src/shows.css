@@ -463,7 +463,7 @@ body {
 .popup {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
