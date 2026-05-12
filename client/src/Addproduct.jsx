@@ -397,10 +397,10 @@ function Addproduct() {
                 <option value="gems-for-you">
                   Gems for You
                 </option>
-                <option value="gems-for-you">
+                <option value="action">
                   Action and Adventure
                 </option>
-                <option value="gems-for-you">
+                <option value="bollywood">
                   Bollywood suprstars
                 </option>
               </select>
