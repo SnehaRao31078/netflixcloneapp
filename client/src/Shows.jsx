@@ -114,7 +114,7 @@ function Shows() {
             <h1 className="title">Dhurandhar</h1>
 
             <p className="description">
-              A fearless undercover agent enters Karachi’s dangerous criminal underworld while uncovering secrets linked to the 26/11 attacks in this intense spy action thriller.
+              An undercover agent enters Karachi’s dangerous criminal underworld to uncover secrets connected to the 26/11 attacks. Packed with action, suspense, and high-stakes missions, Dhurandhar 2 follows his fight against powerful enemies in a gripping spy thriller.
             </p>
 
             <div className="buttons">
