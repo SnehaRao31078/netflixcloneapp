@@ -14,21 +14,20 @@
 
 
 .hero {
-  position: relative;
-  width: 100%;
   height: 100vh;
+  position: relative;
   overflow: hidden;
+  padding-top: 80px; 
 }
-.hero-video {
+
+.banner-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: none;
   object-fit: cover;
   z-index: 1;
-  pointer-events: none;
 }
 
 .overlay {
@@ -41,9 +40,6 @@
     rgba(0, 0, 0, 0.8)
   );
   z-index: 2;
-
-  display: flex;
-  align-items: center;
 }
 
 
@@ -104,44 +100,40 @@
 
 .hero-content {
   position: relative;
-  z-index: 5;
+  z-index: 3;
   max-width: 600px;
+  margin-top: 180px;   
   padding: 0 60px;
-  margin-top: 120px;
 }
 
 
 .title {
   font-size: 60px;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 
 .description {
   font-size: 16px;
-  line-height: 1.7;
+  margin-bottom: 20px;
+  line-height: 1.6;
   color: #e5e5e5;
-  margin-bottom: 25px;
 }
 
 .buttons {
   display: flex;
   gap: 15px;
-  margin-top: 20px;
 }
-
 
 .play-btn {
   background-color: white;
   color: black;
-  padding: 12px 28px;
+  padding: 10px 25px;
   border: none;
-  border-radius: 4px;
   font-size: 16px;
-  font-weight: bold;
   cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
 }
-
 
 .play-btn:hover {
   background-color: #e6e6e6;
@@ -150,15 +142,15 @@
 .info-btn {
   background-color: rgba(109, 109, 110, 0.7);
   color: white;
-  padding: 12px 28px;
+  padding: 10px 25px;
   border: none;
-  border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .info-btn:hover {
-  background-color: rgba(109, 109, 110, 0.5);
+  background-color: rgba(109, 109, 110, 0.4);
 }
 
 

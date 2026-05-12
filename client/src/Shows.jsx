@@ -92,7 +92,7 @@ function Shows() {
       )}
 
       <div className="home">
-        <div className="hero shows-hero">
+        <div className="hero">
           <iframe
  className="hero-video"
   src="https://www.youtube.com/embed/r8O3URprq1M?autoplay=1&mute=0&controls=0&loop=1&playlist=r8O3URprq1M"
