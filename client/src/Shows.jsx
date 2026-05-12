@@ -233,7 +233,7 @@ function Shows() {
 
             <div className="row-posters" id="row4">
               {shows
-                .filter((movie) => movie.category === "tv comedians")
+                .filter((movie) => movie.category === "c")
                 .map((movie) => (
                   <img
                     key={movie._id}

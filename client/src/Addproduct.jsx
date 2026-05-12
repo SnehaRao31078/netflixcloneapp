@@ -403,6 +403,15 @@ function Addproduct() {
                 <option value="bollywood">
                   Bollywood superstars
                 </option>
+                  <option value="acclaimed writer">
+                 Acclaimed writer
+                </option>
+                  <option value="international tv shows">
+                 International TV Shows
+                </option>
+                  <option value="bollywood">
+                  TV comedians
+                </option>
               </select>
             </div>
 
