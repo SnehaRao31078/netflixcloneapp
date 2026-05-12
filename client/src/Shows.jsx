@@ -106,7 +106,7 @@ function Shows() {
 
           <div className="tv-topbar">
             <div className="tv-left">
-              <h2> Shows</h2>
+              
             </div>
           </div>
 
