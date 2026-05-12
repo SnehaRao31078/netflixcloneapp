@@ -401,7 +401,7 @@ function Addproduct() {
                   Action and Adventure
                 </option>
                 <option value="bollywood">
-                  Bollywood suprstars
+                  Bollywood superstars
                 </option>
               </select>
             </div>

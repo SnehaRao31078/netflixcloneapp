@@ -219,7 +219,7 @@ function Home() {
 
 
 
-        <h2 className="row-title">Bollywood suprstars</h2>
+        <h2 className="row-title">Bollywood superstars</h2>
         <div className="row-wrapper">
           <button
             className="scroll-btn left"
