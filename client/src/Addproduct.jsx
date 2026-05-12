@@ -409,7 +409,7 @@ function Addproduct() {
                   <option value="international tv shows">
                  International TV Shows
                 </option>
-                  <option value="bollywood">
+                  <option value="tv comedians">
                   TV comedians
                 </option>
               </select>
