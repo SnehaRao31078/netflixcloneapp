@@ -189,36 +189,7 @@ function Home() {
           </button>
         </div>
 
-
-        <h2 className="row-title">Action and adventure Movies</h2>
-        <div className="row-wrapper">
-          <button
-            className="scroll-btn left"
-            onClick={() => scrollLeft("row3")}
-          >
-            ‹
-          </button>
-          <div className="row-posters" id="row3">
-            <img src="/pushpa.jpg" />
-            <img src="/og.jpg" />
-            <img src="/nara.jpg" />
-            <img src="/whisper.jpg" />
-            <img src="/animal.jpg" />
-            <img src="/bison.jpg" />
-            <img src="/sikh.jpg" />
-            <img src="/raid.jpg" />
-            <img src="/war.jpg" />
-            <img src="/dangall.jpg" />
-          </div>
-          <button
-            className="scroll-btn right"
-            onClick={() => scrollRight("row3")}
-          >
-            ›
-          </button>
-        </div>
-
-        <h2 className="row-title">Bollywood superstars</h2>
+        <h2 className="row-title">Action and Adventure</h2>
         <div className="row-wrapper">
           <button
             className="scroll-btn left"
@@ -227,21 +198,50 @@ function Home() {
             ‹
           </button>
           <div className="row-posters" id="row4">
-            <img src="/kabhi.jpg" />
-            <img src="/fighter.jpg" />
-            <img src="/chennaiexpress.jpg" />
-            <img src="/yeh.jpg" />
-            <img src="/sikh.jpg" />
-            <img src="/veer.jpg" />
-            <img src="/jab.jpg" />
-            <img src="/dhoom3.jpg" />
-            <img src="/jawan.jpg" />
-            <img src="/chak.jpg" />
-            <img src="/om.jpg" />
+            {movies
+              .filter((movie) => movie.category === "action")
+              .map((movie) => (
+                <img
+                  key={movie.id}
+                  src={movie.file} 
+                  alt={movie.title}
+                  onClick={() => navigate("/player/" + movie._id)}
+                />
+              ))}
           </div>
           <button
             className="scroll-btn right"
             onClick={() => scrollRight("row4")}
+          >
+            ›
+          </button>
+        </div>
+
+
+
+        <h2 className="row-title">Bollywood suprstars</h2>
+        <div className="row-wrapper">
+          <button
+            className="scroll-btn left"
+            onClick={() => scrollLeft("row5")}
+          >
+            ‹
+          </button>
+          <div className="row-posters" id="row5">
+            {movies
+              .filter((movie) => movie.category === "bollywood")
+              .map((movie) => (
+                <img
+                  key={movie.id}
+                  src={movie.file} 
+                  alt={movie.title}
+                  onClick={() => navigate("/player/" + movie._id)}
+                />
+              ))}
+          </div>
+          <button
+            className="scroll-btn right"
+            onClick={() => scrollRight("row5")}
           >
             ›
           </button>
