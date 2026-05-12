@@ -409,9 +409,22 @@ function Addproduct() {
                   <option value="international tv shows">
                  International TV Shows
                 </option>
-                  <option value="tv comedians">
+                  <option value="odd">
+                 oddballs and out casts
+                </option>
+                 <option value="tv comedians">
                   TV comedians
                 </option>
+                 <option value="horror">
+                  Horror
+                </option>
+                 <option value="social">
+                  Indian social issues
+                </option>
+                 <option value="thrill">
+                  Action Thrillers
+                </option>
+
               </select>
             </div>
 
