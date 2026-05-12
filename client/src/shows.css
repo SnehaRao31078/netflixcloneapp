@@ -14,13 +14,12 @@
 
 
 .hero {
-  height: 100vh;
   position: relative;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
-  padding-top: 80px; 
 }
-
-.banner-video {
+.hero-video {
   position: absolute;
   top: 0;
   left: 0;
