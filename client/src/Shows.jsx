@@ -114,7 +114,7 @@ function Shows() {
             <h1 className="title">Dhurandhar</h1>
 
             <p className="description">
-              The Revenge (Dhurandhar 2) is a 2026 Indian Hindi-language spy action-thriller directed by Aditya Dhar and starring Ranveer Singh, released in theaters on March 19, 2026. As the sequel to the 2025 film, it follows an undercover agent navigating Karachi's criminal underworld while addressing the 26/11 attacks, aiming for a massive pan-India release in five languages.
+              A fearless undercover agent enters Karachi’s dangerous criminal underworld while uncovering secrets linked to the 26/11 attacks in this intense spy action thriller.
             </p>
 
             <div className="buttons">
