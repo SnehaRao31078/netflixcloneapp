@@ -116,9 +116,7 @@ function Games() {
           </p>
 
           <div className="buttons">
-            <button className="play-btn">
-              <i className="fas fa-mobile"></i> Get Mobile Game
-            </button>
+            
 
             <button className="info-btn">
               <i className="fa-solid fa-circle-info"></i> More Info
