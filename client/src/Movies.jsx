@@ -95,7 +95,7 @@ function Shows() {
         <div className="hero">
           <iframe
  className="hero-video"
-  src="https://youtu.be/TkBP_z9rqiA?si=MinnutzrGGP_kgn6"
+  src="https://www.youtube.com/embed/1qH_9vVZtXo?autoplay=1&mute=1&controls=0&loop=1&playlist=1qH_9vVZtXo"
   title="YouTube video player"
   frameborder="0"
   allow="autoplay; encrypted-media"
