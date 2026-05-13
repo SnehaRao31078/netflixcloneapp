@@ -111,10 +111,10 @@ function Shows() {
           </div>
 
           <div className="hero-content">
-            <h1 className="title">Dhurandhar</h1>
+            <h1 className="title">Kalki 2898 AD</h1>
 
             <p className="description">
-              An undercover agent enters Karachi’s dangerous criminal underworld to uncover secrets connected to the 26/11 attacks. Packed with action, suspense, and high-stakes missions, Dhurandhar 2 follows his fight against powerful enemies in a gripping spy thriller.
+               In a dystopian future ruled by darkness and chaos, a warrior rises to protect humanity and fulfill an ancient prophecy in this epic sci-fi action adventure.
             </p>
 
             <div className="buttons">
