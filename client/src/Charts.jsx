@@ -35,7 +35,7 @@ function Charts() {
         const prices = {
           basic: 199,
           standard: 499,
-          premium: 649,
+          premium: 799,
         };
 
         res.data.forEach((item) => {
