@@ -424,7 +424,13 @@ function Addproduct() {
                  <option value="thrill">
                   Action Thrillers
                 </option>
+                <option value="popular-games">
+                  Popular Mobile Games
+                </option>
 
+                <option value="pickup-play">
+                  Pick Up & Play
+                </option>
               </select>
             </div>
 
