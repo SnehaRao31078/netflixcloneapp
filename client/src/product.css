@@ -138,11 +138,14 @@ form {
   gap: 15px;
 }
 
+/* AFTER */
 .inputfield,
 input[type="text"],
 input[type="file"],
-select {
-  width: 100%;
+select,
+select.inputfield {
+  width: 100%;             /* This forces them to stretch full width */
+  display: block;          /* Ensures it acts as a layout block element */
   padding: 15px;
   border: 1px solid #555;
   border-radius: 5px;
@@ -150,9 +153,8 @@ select {
   color: white;
   font-size: 16px;
   outline: none;
-  box-sizing: border-box;
+  box-sizing: border-box;  /* Includes padding inside the 100% width calculation */
 }
-
 input::placeholder {
   color: #999;
 }
