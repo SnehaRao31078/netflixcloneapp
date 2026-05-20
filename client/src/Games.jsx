@@ -11,7 +11,7 @@ function Games() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/products`)
+      .get(`${import.meta.env.VITE_API_URL}/products`)
       .then((res) => {
         setGames(res.data);
       })
