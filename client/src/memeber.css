@@ -31,8 +31,8 @@
 }
 
 .update-btn {
-  display: block;        /* 1. Change from inline-block to block */
-  margin: 25px auto 0;   /* 2. Top margin stays 25px, Left/Right set to auto to center it */
+  display: block;        
+  margin: 25px auto 0;   
   padding: 12px 20px;
   background-color: #e50914;
   border: none;
