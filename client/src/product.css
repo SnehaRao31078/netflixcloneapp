@@ -3,7 +3,7 @@ body {
   padding: 0;
   background: black;
   font-family: Arial, Helvetica, sans-serif;
-  height: 100vh;
+   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,13 +37,18 @@ html {
   margin-top: 10px;
 }
 
+.container h1 {
+  color: white;
+  font-size: 55px;
+  margin-bottom: 20px;
+}
+
 form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Unified style group for all form inputs */
 .inputfield,
 input[type="text"],
 input[type="file"],
@@ -56,12 +61,7 @@ select {
   color: white;
   font-size: 16px;
   outline: none;
-  box-sizing: border-box; 
-  display: block; 
-}
-
-select {
-  cursor: pointer;
+  box-sizing: border-box;
 }
 
 input::placeholder {
@@ -121,10 +121,8 @@ iframe {
   justify-content: center;
   align-items: center;
 }
-
-.title {
-  color: white;
-  font-size: 28px;
-  line-height: 1.1;
-  margin-bottom: 20px;
+.title{
+   font-size: 28px;
+   line-height: 1.1;
 }
+
