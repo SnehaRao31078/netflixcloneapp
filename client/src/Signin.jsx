@@ -17,7 +17,6 @@ function Signin() {
         if (res.data.status === "SUCCESS") {
           localStorage.setItem("userEmail", res.data.user.email);
           localStorage.setItem("userPlan", res.data.user.plan);
-
           toast.success("Login successful");
           navigate("/home");
         } else if (res.data.status === "OTP_SENT") {
@@ -46,11 +45,13 @@ function Signin() {
             <input
               type="text"
               placeholder="Email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button type="submit">Continue</button>
