@@ -173,6 +173,7 @@ function Addproduct() {
 
             {/* CATEGORY */}
             
+            
               <select
                 className="inputfield"
                 value={category}
