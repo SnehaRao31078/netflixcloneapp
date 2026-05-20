@@ -142,7 +142,8 @@ input[type="text"],
 input[type="file"],
 select {
   width: 100%;
-  padding: 15px;
+  height: 52px;
+  padding: 0 15px;
   border: 1px solid #555;
   border-radius: 5px;
   background: #2f2f3b;
@@ -150,6 +151,14 @@ select {
   font-size: 16px;
   outline: none;
   box-sizing: border-box;
+}
+
+/* Dropdown specific */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
 }
 
 input::placeholder {
