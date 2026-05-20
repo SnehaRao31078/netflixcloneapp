@@ -59,7 +59,7 @@ function Adminlog() {
       <form onSubmit={handleSubmit}>
         
         {/* Your clean H1 tag without the class attribute */}
-        <h1>Enter your info to signin info</h1>
+        <h1>Enter your info</h1>
 
         <input
           type="text"
