@@ -25,7 +25,7 @@ function Charts() {
     const fetchPlans = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/plans`
+          `http://localhost:3001/plans`
         );
 
         let basic = 0;

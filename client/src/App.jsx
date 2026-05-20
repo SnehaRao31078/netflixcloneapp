@@ -6,7 +6,7 @@ import Games from "./Games";
 import Layout from "./Layout";
 import Shows from "./Shows";
 import Movies from "./Movies";
-import Forgot from "./Forgotmail";
+
 import Learn from "./learn";
 import Signup from "./Signup";
 import Dash from "./Admindash";
