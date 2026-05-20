@@ -23,34 +23,7 @@ function Adminlog() {
   };
 
   return (
-    /*<div className="admin">
-      <img src="/netflixxx.jpeg" className="logo" alt="Netflix" />
-
-      <div className="signin-wrapper">
-        <div className="container">
-            <h1 >Enter your info to signin info</h1>
-          <form onSubmit={handleSubmit}>
-          
-
-            <input
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <button type="submit">Continue</button>
-          </form>
-        </div>
-      </div>
-    </div>*/
+    
     <div className="admin">
   <img src="/netflixxx.jpeg" className="logo" alt="Netflix" />
 
@@ -58,7 +31,7 @@ function Adminlog() {
     <div className="container">
       <form onSubmit={handleSubmit}>
         
-        {/* Your clean H1 tag without the class attribute */}
+       
         <h1>Enter your info</h1>
 
         <input
