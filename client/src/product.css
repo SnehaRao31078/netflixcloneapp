@@ -125,14 +125,4 @@ iframe {
    font-size: 28px;
    line-height: 1.1;
 }
-/* Add this at the bottom of your product.css file */
-.form-row {
-  display: flex;
-  gap: 15px;
-  width: 100%;
-}
 
-.form-row select {
-  flex: 1;
-  width: 150px; /* Overrides the width: 100% to let flexgrow balance them evenly */
-}
