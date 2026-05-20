@@ -1,3 +1,4 @@
+
 .signin-page {
     margin: 0;
     height: 100vh;
@@ -22,18 +23,20 @@
 .container {
     text-align: center;
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
 .tit {
     color: white;
-    font-size: 48px;
-    margin-bottom: 16px;
+    font-size: 36px;
+    margin: 0 auto 16px auto;
     text-align: center;
     font-weight: bold;
     line-height: 1.2;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .signin-page h2 {
@@ -101,3 +104,4 @@ button:hover {
     font-size: 14px;
     font-weight: bold;
 }
+
