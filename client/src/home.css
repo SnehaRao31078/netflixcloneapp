@@ -549,10 +549,10 @@ body,
 }
 
 .see-plans {
-  padding: 8px 12px;
+   padding: 10px 18px;
   background-color: red;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
 }
