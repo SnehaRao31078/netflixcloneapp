@@ -116,7 +116,8 @@ button:hover {
 
 .tit {
     color: white;
-    font-size: 55px;
+    font-size: 28px;
     margin-bottom: 10px;
     white-space: nowrap;
+    text-align: center;
 }
