@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 
 function Addproduct() {
   const { id } = useParams();
-
-  const navigate = useNavigate();
+const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
   const [video, setVideo] = useState(null);
