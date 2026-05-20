@@ -1,17 +1,14 @@
-
-.signin-page
- {
+.signin-page {
     margin: 0;
     height: 100vh;
     font-family: Arial, sans-serif;
     background: black;
     color: white;
-     width: 100vw;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 
 .logo-signin {
     color: red;
@@ -22,25 +19,27 @@
     left: 20px;
 }
 
-
-
 .container {
     text-align: center;
     width: 100%;
-    max-width: 900px;
+    max-width: 450px;
 }
 
-
+.tit {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+    white-space: nowrap;
+}
 
 .signin-page h2 {
     color: white;
     margin-bottom: 30px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
 }
-
-
-
 
 input {
     width: 100%;
@@ -52,6 +51,7 @@ input {
     font-size: 16px;
     color: white;
     box-sizing: border-box;
+    margin-bottom: 16px;
 }
 
 button {
@@ -63,14 +63,13 @@ button {
     color: white;
     font-size: 16px;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 4px;
     cursor: pointer;
 }
 
 button:hover {
     background-color: #f6121d;
 }
-
 
 .help {
     margin-top: 30px;
@@ -87,17 +86,6 @@ button:hover {
     text-decoration: underline;
 }
 
-
-.captcha {
-    margin-top: 30px;
-    font-size: 12px;
-    color: #b3b3b3;
-}
-
-.captcha a {
-    color: #b3b3b3;
-    text-decoration: underline;
-}
 .admin-btn {
     position: absolute;
     top: 25px;
@@ -109,12 +97,4 @@ button:hover {
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
-}
-
-.tit {
-    color: white;
-    font-size: 10px;
-    margin-bottom: 3px;
-    text-align: center;
-    font-weight: 600;
 }

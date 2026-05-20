@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./signin.css";
-
 import { toast } from "react-toastify";
+
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,6 @@ function Signin() {
     <div className="signin-page">
       <p className="logo-signin">NETFLIX</p>
       <Link to="/adminlog" className="admin-btn">
-        
         Admin Login
       </Link>
       <div className="signin-wrapper">
@@ -58,7 +57,6 @@ function Signin() {
           </form>
           <div className="help">
             <Link to="/signup">Signup if you dont have account</Link>
-           
           </div>
         </div>
       </div>
