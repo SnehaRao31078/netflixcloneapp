@@ -123,10 +123,9 @@ html {
   margin-top: 10px;
 }
 
-/* Reduced size slightly to match the first screenshot better */
 .container h1 {
   color: white;
-  font-size: 42px; 
+  font-size: 55px;
   margin-bottom: 20px;
 }
 
@@ -134,11 +133,12 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 100%; /* Ensures the form takes full container width */
-  align-items: stretch; /* Forces all children to span full width */
+  width: 100%;
+  /* This property forces every single element inside the form to stretch full width */
+  align-items: stretch; 
 }
 
-/* Consolidated all input and select styling into one clean block */
+/* Combined styling rule block to keep everything identical */
 .inputfield,
 input[type="text"],
 input[type="file"],
@@ -146,7 +146,7 @@ select {
   width: 100%;
   height: 52px;
   padding: 0 15px;
-  border: 1px solid #3a3a4a; /* Slightly adjusted to match the gray border */
+  border: 1px solid #555;
   border-radius: 5px;
   background: #2f2f3b;
   color: white;
@@ -155,21 +155,21 @@ select {
   box-sizing: border-box;
 }
 
-/* Specific styling for the custom dropdown arrow */
+/* Keeps the down arrow functional and visible while ensuring full width alignment */
 select {
-  appearance: auto; /* Reverts to default arrow to match screenshot 1 */
-  /* If you want a custom arrow instead, keep 'none' and add a background-image */
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
 }
 
 input::placeholder {
   color: #999;
 }
 
-/* File inputs require vertical alignment adjustments for the text */
+/* Adjust file element rendering alignment */
 input[type="file"] {
   display: flex;
   align-items: center;
-  line-height: 20px;
 }
 
 button {
