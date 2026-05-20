@@ -125,6 +125,7 @@ iframe {
    font-size: 28px;
    line-height: 1.1;
 }
+/* Add this at the bottom of your product.css file */
 .form-row {
   display: flex;
   gap: 15px;
