@@ -42,7 +42,7 @@ function Signin() {
       <div className="signin-wrapper">
         <div className="container">
           <form onSubmit={handleSubmit}>
-            <h1>Enter your info to sign in</h1>
+            <h1 className="tit">Enter your info to sign in</h1>
             <h2>Or get started with a new account.</h2>
             <input
               type="text"
