@@ -2,71 +2,55 @@ import "./adminlog.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-function Adminlog() {
-    const [email, setEmail] = useState("");
-     const [password, setPassword] = useState("");
 
-     const ADMIN_EMAIL="sneha123@gmail.com";
-     const ADMIN_PASS="sneha123*(_#*";
-     
-     const  navigate=useNavigate();
-     const handleSubmit=(e)=>
-     {
-        e.preventDefault();
-        if(email===ADMIN_EMAIL && password===ADMIN_PASS)
-        {
-          toast.success("Logged in successfully");
-              navigate("/admindash");
-              
-        }
-        else{
-            toast.error("Incorrect login credentials");
-        }
-     }
+function Adminlog() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const ADMIN_EMAIL = "sneha123@gmail.com";
+  const ADMIN_PASS = "sneha123*(_#*";
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
+      toast.success("Logged in successfully");
+      navigate("/admindash");
+    } else {
+      toast.error("Incorrect login credentials");
+    }
+  };
+
   return (
-     
     <div className="admin">
-      
-    
-            <img src="/netflixxx.jpeg" className="logo" alt="Netflix" />
-            
-        <div className="signin-wrapper">
+      <img src="/netflixxx.jpeg" className="logo" alt="Netflix" />
+
+      <div className="signin-wrapper">
         <div className="container">
-           <form onSubmit={handleSubmit}>
-            <h1 className="titu">Enter your info to signin info </h1>
-            
+          <form onSubmit={handleSubmit}>
+            <h1 className="titu">Enter your info to signin info</h1>
 
             <input
               type="text"
               placeholder="Email"
-              onChange={(e) =>setEmail(e.target.value)}
-              
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <input
               type="password"
               placeholder="Password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button type="submit">
-                Continue </button>
-            </form>
-            </div>
-            </div>
-          
-
-          
-            
-          </div>
-      
-      
-      
-     
-   
+            <button type="submit">Continue</button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
-
-
 
 export default Adminlog;
