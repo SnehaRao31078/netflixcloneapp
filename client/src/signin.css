@@ -31,7 +31,10 @@
 }
 
 
-
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 .signin-page h2 {
     color: white;
     margin-bottom: 30px;
@@ -113,8 +116,9 @@ button:hover {
 
 .tit {
     color: white;
-    font-size: 10px;
-    margin-bottom: 3px;
+    font-size: 22px;
+    margin-bottom: 10px;
+    white-space: nowrap;
     text-align: center;
-    font-weight: 600;
+    font-weight: bold;
 }
