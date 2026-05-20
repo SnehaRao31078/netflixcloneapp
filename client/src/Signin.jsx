@@ -33,41 +33,34 @@ function Signin() {
 
   return (
     <div className="signin-page">
-      <header className="signin-header">
-        <p className="logo-signin">NETFLIX</p>
-        <Link to="/adminlog" className="admin-btn">
-          Admin Login
-        </Link>
-      </header>
-
-      <main className="signin-wrapper">
+      <p className="logo-signin">NETFLIX</p>
+      <Link to="/adminlog" className="admin-btn">
+        Admin Login
+      </Link>
+      <div className="signin-wrapper">
         <div className="container">
           <form onSubmit={handleSubmit}>
             <h1 className="tit">Enter your info to sign in</h1>
-            <h2 className="sub-tit">Or get started with a new account.</h2>
-            
+            <h2>Or get started with a new account.</h2>
             <input
               type="text"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
-            <button type="submit" className="continue-btn">Continue</button>
+            <button type="submit">Continue</button>
           </form>
-          
           <div className="help">
             <Link to="/signup">Signup if you dont have account</Link>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
