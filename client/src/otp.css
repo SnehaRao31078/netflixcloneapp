@@ -1,18 +1,28 @@
-.otp-btn{
-
-justify-content: center;
-background:red;
-color:white;
-border:none;
-padding:8px 75px;
-font-size:13px;
-border-radius:6px;
-cursor:pointer;
-width:auto;
+.otp-btn {
+  display: block;
+  margin: 25px auto;
+  background: red;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  width: fit-content;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
-.otp{
-    width:35%;
-    justify-content: center;
+.otp {
+  width: 320px;
+  padding: 12px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #2c2c3c;
+  color: white;
+  display: block;
+  margin: 20px auto;
+  outline: none;
 }
 .logo-p{
     color: red;
