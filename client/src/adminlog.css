@@ -1,9 +1,9 @@
 .container {
     text-align: center;
     width: 100%;
-    max-width: 100%; 
+    max-width: 600px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
     box-sizing: border-box;
 }
 
@@ -19,9 +19,10 @@
     box-sizing: border-box;
 }
 
-input, button {
-    width: 100%;
-    box-sizing: border-box;
+input ,button{
+    width: 110%;
+    max-width: 550px;
+    margin-left: -5%;
 }
 
 .logo {
