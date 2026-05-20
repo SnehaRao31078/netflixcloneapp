@@ -207,3 +207,7 @@ iframe {
   justify-content: center;
   align-items: center;
 }
+.title{
+   font-size: 45px;
+   line-height: 1.1;
+}

@@ -133,7 +133,7 @@ function Addproduct() {
     <div className="product-page">
       <div className="product-wrapper">
         <div className="container">
-          <h1>
+          <h1 className="title">
             {id
               ? "Update Movie"
               : "Add Movie"}
