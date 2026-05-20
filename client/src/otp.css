@@ -12,6 +12,15 @@
   width: fit-content;
   transition: background 0.3s ease, transform 0.2s ease;
 }
+body {
+  margin: 0;
+  background:black;
+  font-family: Arial;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .otp {
   width: 320px;
   max-width: 35%;
