@@ -31,8 +31,7 @@
 }
 
 .update-btn {
-  display: block;        
-  margin: 25px auto 0;   
+  margin-top: 25px;
   padding: 12px 20px;
   background-color: #e50914;
   border: none;
