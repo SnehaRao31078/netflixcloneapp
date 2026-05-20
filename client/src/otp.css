@@ -13,7 +13,8 @@
   transition: background 0.3s ease, transform 0.2s ease;
 }
 .otp {
-  width: 35%;
+  width: 320px;
+  max-width: 90%;
   padding: 12px;
   border: 1px solid #555;
   border-radius: 6px;
@@ -23,6 +24,7 @@
   display: block;
   margin: 20px auto;
   outline: none;
+  box-sizing: border-box;
 }
 .logo-p{
     color: red;
