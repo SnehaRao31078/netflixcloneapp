@@ -1,18 +1,26 @@
-
-.titu {
-    color: white;
-    font-size: 11px;
-    margin-bottom: 12px;
-    text-align: center;
-    font-weight: bold;
-    white-space: nowrap;
-}
 .container {
     text-align: center;
     width: 100%;
-    max-width: 500px;
+    max-width: 500px; 
     margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
+
+.titu {
+    color: white;
+    font-size: 2.2rem; 
+    margin-bottom: 28px;
+    text-align: left;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+input, button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .logo {
     width: 120px;
     height: auto;
@@ -20,12 +28,11 @@
     top: 20px;
     left: 30px;
 }
-.admin
-{
-    margin:0;
+
+.admin {
+    margin: 0;
     align-items: center;
-    display:flex;
+    display: flex;
     justify-content: center;
     margin-top: 80px;
-    
 }
