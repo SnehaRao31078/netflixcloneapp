@@ -216,3 +216,10 @@ iframe {
    font-size: 28px;
    line-height: 1.1;
 }
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: stretch; /* <-- Add this! It forces all children to match widths exactly */
+  width: 100%;          /* <-- Ensures the form wrapper takes up the container space */
+}
