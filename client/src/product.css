@@ -87,6 +87,8 @@ input[type="file"]{
 }*/
 /* product.css */
 
+/* product.css */
+
 body {
   margin: 0;
   padding: 0;
@@ -102,22 +104,22 @@ html {
 }
 
 .product-page {
-  width: 100% !important;
+  width: 100%;
   min-height: 100vh;
   background: black;
-  display: flex !important;
-  justify-content: center !important;
+  display: flex;
+  justify-content: center;
 }
 
 .product-wrapper {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
-  width: 100% !important;
-  max-width: 550px !important;
+  width: 100%;
+  max-width: 550px;
   padding: 20px;
   text-align: center;
   margin-top: 10px;
@@ -130,35 +132,24 @@ html {
 }
 
 form {
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: column;
   gap: 15px;
-  width: 100% !important;
-  align-items: stretch !important; /* Forces all components to match parent layout space */
 }
 
-/* Consolidated style override blocks */
 .inputfield,
 input[type="text"],
 input[type="file"],
 select {
-  width: 100% !important;
-  display: block !important;
-  height: 52px !important;
-  padding: 0 15px !important;
-  border: 1px solid #555 !important;
-  border-radius: 5px !important;
-  background: #2f2f3b !important;
-  color: white !important;
-  font-size: 16px !important;
-  outline: none !important;
-  box-sizing: border-box !important;
-}
-
-select {
-  appearance: auto !important;
-  -webkit-appearance: auto !important;
-  -moz-appearance: auto !important;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background: #2f2f3b;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
 }
 
 input::placeholder {
@@ -166,12 +157,11 @@ input::placeholder {
 }
 
 input[type="file"] {
-  display: flex !important;
-  align-items: center !important;
+  padding: 12px;
 }
 
 button {
-  width: 100% !important;
+  width: 100%;
   padding: 15px;
   border: none;
   border-radius: 5px;
