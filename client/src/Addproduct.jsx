@@ -32,7 +32,7 @@ function Addproduct() {
     if (id) {
       axios
         .get(
-          `${import.meta.env.VITE_API_URL}/products/${id}`
+          `http://localhost:3001/products/${id}`
         )
         .then((res) => {
           setTitle(res.data.title);
@@ -105,7 +105,7 @@ function Addproduct() {
     try {
       if (id) {
         await axios.put(
-          `${import.meta.env.VITE_API_URL}/products/${id}`,
+          `http://localhost:3001/products/${id}`,
           formData
         );
 
@@ -114,7 +114,7 @@ function Addproduct() {
         );
       } else {
         await axios.post(
-          `${import.meta.env.VITE_API_URL}/products`,
+          `http://localhost:3001/products`,
           formData
         );
 

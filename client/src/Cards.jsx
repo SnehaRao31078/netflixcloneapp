@@ -14,7 +14,7 @@ function Cards() {
     const fetchCounts = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/dashboard-counts`
+          `http://localhost:3001/dashboard-counts`
         );
         setCounts(res.data);
       } catch (err) {

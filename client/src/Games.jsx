@@ -1,71 +1,5 @@
-/*import "./games.css";
 
-function Games() {
-  const scrollLeft = (id) => {
-    document.getElementById(id).scrollLeft -= 300;
-  };
 
-  const scrollRight = (id) => {
-    document.getElementById(id).scrollLeft += 300;
-  };
-
-  return (
-    <div className="games-page">
-      <div className="hero">
-        <video
-          className="banner-video"
-          src="/game.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-           disablePictureInPicture
-        />
-
-        <div className="overlay"></div>
-
-        <div className="hero-content">
-          <h1 className="title">Red Dead Redemption</h1>
-          <p className="description">
-            Journey into the sprawling American west and experience action,
-            survival and adventure.
-          </p>
-
-          <div className="buttons">
-            <button className="play-btn">
-              <i className="fas fa-mobile"></i> Get Mobile Game
-            </button>
-
-            <button className="info-btn">
-              <i className="fa-solid fa-circle-info"></i> More Info
-            </button>
-          </div>
-        </div>
-      </div>
-
-     
-
-       
-       
-
-        
-
-     
-      <div className="games-banner">
-        <div className="text-box">
-          <h2>Find more games in the mobile app</h2>
-          <p>
-            From familiar favorites to Netflix exclusives,get unlimited mobile
-            games in Netflix <br />
-            app- all included in your membership.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Games;*/
 import "./games.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -77,7 +11,7 @@ function Games() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/products`)
+      .get(`http://localhost:3001/products`)
       .then((res) => {
         setGames(res.data);
       })
