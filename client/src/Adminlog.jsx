@@ -33,7 +33,7 @@ function Adminlog() {
         <div className="signin-wrapper">
         <div className="container">
            <form onSubmit={handleSubmit}>
-            <h1>Enter your info to signin info </h1>
+            <h1 className="titu">Enter your info to signin info </h1>
             
 
             <input
