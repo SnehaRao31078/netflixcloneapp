@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 
 function Addproduct() {
   const { id } = useParams();
-const navigate = useNavigate();
+
+  const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
   const [video, setVideo] = useState(null);
@@ -31,7 +32,7 @@ const navigate = useNavigate();
     if (id) {
       axios
         .get(
-          `${import.meta.env.VITE_API_URL}/${id}`
+          `${import.meta.env.VITE_API_URL}/products/${id}`
         )
         .then((res) => {
           setTitle(res.data.title);
