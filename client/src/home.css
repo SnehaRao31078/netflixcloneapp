@@ -91,7 +91,9 @@
   object-fit: cover;
   z-index: 1;
 }
-
+.sne{
+color:black;
+}
 
 .overlay {
   position: absolute;
