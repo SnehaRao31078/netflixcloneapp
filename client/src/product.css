@@ -67,8 +67,11 @@ input[type="file"] {
 
 .select-wrapper {
   width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
-
 
 select.inputfield {
   width: 100%;
@@ -144,4 +147,11 @@ img {
   line-height: 1.1;
   text-align: center;
   color: white;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  align-items: stretch; /* Forces all children to align perfectly from edge to edge */
 }
