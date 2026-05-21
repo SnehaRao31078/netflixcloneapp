@@ -175,7 +175,7 @@ function Addproduct() {
             
            
              {/* CATEGORY */}
-<div className="select-wrapper">
+
   <select
     className="inputfield"
     value={category}
@@ -247,10 +247,10 @@ function Addproduct() {
       Pick Up & Play
     </option>
   </select>
-</div>
+
 
 {/* PLAN */}
-<div className="select-wrapper">
+
   <select
     className="inputfield"
     value={plan}
@@ -274,7 +274,7 @@ function Addproduct() {
       Premium
     </option>
   </select>
-</div>
+
 
             {/* IMAGE */}
             <input
