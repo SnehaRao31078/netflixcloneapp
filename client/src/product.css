@@ -35,10 +35,12 @@ html {
   padding: 20px;
   margin-top: 20px;
 }
-.container h1 {
+
+.title {
   color: white;
   font-size: 55px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 form {
@@ -48,10 +50,9 @@ form {
   width: 100%;
 }
 
-/* COMMON INPUT STYLE */
-.inputfield,
+/* TEXT INPUTS + SELECT */
 input[type="text"],
-input[type="file"] {
+select {
   width: 100%;
   height: 55px;
   padding: 0 15px;
@@ -61,42 +62,30 @@ input[type="file"] {
   color: white;
   font-size: 16px;
   outline: none;
-  box-sizing: border-box;
+  display: block;
 }
 
-/* SELECT WRAPPER */
-.select-wrapper {
-  width: 100%;
-}
-
-/* SELECT FIELD */
-select.inputfield {
-  width: 100%;
-  height: 55px;
-  padding: 0 45px 0 15px;
-  border: 1px solid #555;
-  border-radius: 5px;
-  background-color: #2f2f3b;
-  color: white;
-  font-size: 16px;
-  outline: none;
-  box-sizing: border-box;
-
+/* SELECT */
+select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
-  display: block;
   cursor: pointer;
+}
+
+/* FILE INPUT */
+input[type="file"] {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background: #2f2f3b;
+  color: white;
+  font-size: 16px;
 }
 
 input::placeholder {
   color: #999;
-}
-
-input[type="file"] {
-  padding: 12px;
-  height: auto;
 }
 
 button {
@@ -129,7 +118,6 @@ img {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: none;
   background: red;
   color: white;
   font-weight: bold;
@@ -137,11 +125,4 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.title {
-  font-size: 28px;
-  line-height: 1.1;
-  text-align: center;
-  color: white;
 }

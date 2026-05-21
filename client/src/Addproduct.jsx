@@ -175,106 +175,101 @@ function Addproduct() {
             
            
              {/* CATEGORY */}
-<div className="select-wrapper">
-  <select
-    className="inputfield"
-    value={category}
-    onChange={(e) =>
-      setCategory(e.target.value)
-    }
-  >
-    <option value="">
-      Select Category
-    </option>
+{/* CATEGORY */}
+<select
+  value={category}
+  onChange={(e) =>
+    setCategory(e.target.value)
+  }
+>
+  <option value="">
+    Select Category
+  </option>
 
-    <option value="made in india">
-      Made in India
-    </option>
+  <option value="made in india">
+    Made in India
+  </option>
 
-    <option value="sci-fi horror">
-      Sci-Fi Horror
-    </option>
+  <option value="sci-fi horror">
+    Sci-Fi Horror
+  </option>
 
-    <option value="comedy-drama">
-      Comedy-Drama
-    </option>
+  <option value="comedy-drama">
+    Comedy-Drama
+  </option>
 
-    <option value="gems-for-you">
-      Gems for You
-    </option>
+  <option value="gems-for-you">
+    Gems for You
+  </option>
 
-    <option value="action">
-      Action and Adventure
-    </option>
+  <option value="action">
+    Action and Adventure
+  </option>
 
-    <option value="bollywood">
-      Bollywood superstars
-    </option>
+  <option value="bollywood">
+    Bollywood superstars
+  </option>
 
-    <option value="acclaimed writer">
-      Acclaimed writer
-    </option>
+  <option value="acclaimed writer">
+    Acclaimed writer
+  </option>
 
-    <option value="international tv shows">
-      International TV Shows
-    </option>
+  <option value="international tv shows">
+    International TV Shows
+  </option>
 
-    <option value="odd">
-      oddballs and out casts
-    </option>
+  <option value="odd">
+    oddballs and out casts
+  </option>
 
-    <option value="tv comedians">
-      TV comedians
-    </option>
+  <option value="tv comedians">
+    TV comedians
+  </option>
 
-    <option value="horror">
-      Horror
-    </option>
+  <option value="horror">
+    Horror
+  </option>
 
-    <option value="social">
-      Indian social issues
-    </option>
+  <option value="social">
+    Indian social issues
+  </option>
 
-    <option value="thrill">
-      Action Thrillers
-    </option>
+  <option value="thrill">
+    Action Thrillers
+  </option>
 
-    <option value="popular-games">
-      Popular Mobile Games
-    </option>
+  <option value="popular-games">
+    Popular Mobile Games
+  </option>
 
-    <option value="pickup-play">
-      Pick Up & Play
-    </option>
-  </select>
-</div>
+  <option value="pickup-play">
+    Pick Up & Play
+  </option>
+</select>
 
 {/* PLAN */}
-<div className="select-wrapper">
-  <select
-    className="inputfield"
-    value={plan}
-    onChange={(e) =>
-      setPlan(e.target.value)
-    }
-  >
-    <option value="">
-      Select Plan
-    </option>
+<select
+  value={plan}
+  onChange={(e) =>
+    setPlan(e.target.value)
+  }
+>
+  <option value="">
+    Select Plan
+  </option>
 
-    <option value="basic">
-      Basic
-    </option>
+  <option value="basic">
+    Basic
+  </option>
 
-    <option value="Standard">
-      Standard
-    </option>
+  <option value="Standard">
+    Standard
+  </option>
 
-    <option value="premium">
-      Premium
-    </option>
-  </select>
-</div>
+  <option value="premium">
+    Premium
+  </option>
+</select>
 
             {/* IMAGE */}
             <input
