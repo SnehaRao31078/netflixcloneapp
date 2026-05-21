@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,16 +6,18 @@ import { toast } from "react-toastify";
 
 function Addproduct() {
   const { id } = useParams();
-
   const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
   const [video, setVideo] = useState(null);
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [language, setLanguage] = useState("");
-  const [category, setCategory] = useState("");
+  const [description, setDescription] =
+    useState("");
+  const [language, setLanguage] =
+    useState("");
+  const [category, setCategory] =
+    useState("");
   const [plan, setPlan] = useState("");
 
   const [youtubeLink, setYoutubeLink] =
@@ -48,7 +49,6 @@ function Addproduct() {
           );
 
           setImagePreview(res.data.file);
-
           setVideoPreview(res.data.video);
         })
         .catch((err) =>
@@ -77,18 +77,13 @@ function Addproduct() {
     const formData = new FormData();
 
     formData.append("title", title);
-
     formData.append(
       "description",
       description
     );
-
     formData.append("language", language);
-
     formData.append("category", category);
-
     formData.append("plan", plan);
-
     formData.append(
       "youtubeLink",
       youtubeLink
@@ -131,51 +126,47 @@ function Addproduct() {
 
   return (
     <div className="product-page">
-      <div className="product-wrapper">
-        <div className="container">
-          <h1 className="title">
-            {id
-              ? "Update Movie"
-              : "Add Movie"}
-          </h1>
+      <div className="container">
+        <h1 className="title">
+          {id
+            ? "Update Movie"
+            : "Add Movie"}
+        </h1>
 
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) =>
-                setTitle(e.target.value)
-              }
-            />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) =>
+              setTitle(e.target.value)
+            }
+          />
 
-            <input
-              type="text"
-              placeholder="Description"
-              value={description}
-              onChange={(e) =>
-                setDescription(
-                  e.target.value
-                )
-              }
-            />
+          <input
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) =>
+              setDescription(
+                e.target.value
+              )
+            }
+          />
 
-            <input
-              type="text"
-              placeholder="Language"
-              value={language}
-              onChange={(e) =>
-                setLanguage(
-                  e.target.value
-                )
-              }
-            />
+          <input
+            type="text"
+            placeholder="Language"
+            value={language}
+            onChange={(e) =>
+              setLanguage(
+                e.target.value
+              )
+            }
+          />
 
-            {/* CATEGORY */}
-            
-           
-             {/* CATEGORY */}
-<div className="select-wrapper">
+         {/* CATEGORY */}
+<div>
   <select
     className="inputfield"
     value={category}
@@ -208,11 +199,11 @@ function Addproduct() {
     </option>
 
     <option value="bollywood">
-      Bollywood superstars
+      Bollywood Superstars
     </option>
 
     <option value="acclaimed writer">
-      Acclaimed writer
+      Acclaimed Writer
     </option>
 
     <option value="international tv shows">
@@ -220,11 +211,11 @@ function Addproduct() {
     </option>
 
     <option value="odd">
-      oddballs and out casts
+      Oddballs and Outcasts
     </option>
 
     <option value="tv comedians">
-      TV comedians
+      TV Comedians
     </option>
 
     <option value="horror">
@@ -232,7 +223,7 @@ function Addproduct() {
     </option>
 
     <option value="social">
-      Indian social issues
+      Indian Social Issues
     </option>
 
     <option value="thrill">
@@ -249,8 +240,7 @@ function Addproduct() {
   </select>
 </div>
 
-{/* PLAN */}
-<div className="select-wrapper">
+          <div>
   <select
     className="inputfield"
     value={plan}
@@ -266,7 +256,7 @@ function Addproduct() {
       Basic
     </option>
 
-    <option value="Standard">
+    <option value="standard">
       Standard
     </option>
 
@@ -275,20 +265,58 @@ function Addproduct() {
     </option>
   </select>
 </div>
+          <input
+            type="file"
+            name="file"
+            accept="image/*"
+            onChange={(e) => {
+              const selected =
+                e.target.files[0];
 
-            {/* IMAGE */}
+              setFile(selected);
+
+              if (selected) {
+                setImagePreview(
+                  URL.createObjectURL(
+                    selected
+                  )
+                );
+              }
+            }}
+          />
+
+          {imagePreview && (
+            <div className="preview-box">
+              <img
+                src={imagePreview}
+                width="120"
+                alt="preview"
+              />
+
+              <p
+                className="cross"
+                onClick={
+                  removeImage
+                }
+              >
+                X
+              </p>
+            </div>
+          )}
+
+          {!youtubeLink && (
             <input
               type="file"
-              name="file"
-              accept="image/*"
+              name="video"
+              accept="video/mp4"
               onChange={(e) => {
                 const selected =
                   e.target.files[0];
 
-                setFile(selected);
+                setVideo(selected);
 
                 if (selected) {
-                  setImagePreview(
+                  setVideoPreview(
                     URL.createObjectURL(
                       selected
                     )
@@ -296,137 +324,73 @@ function Addproduct() {
                 }
               }}
             />
+          )}
 
-            {/* IMAGE PREVIEW */}
-            {imagePreview && (
-              <div
-                style={{
-                  position: "relative",
-                  display:
-                    "inline-block",
-                }}
-              >
-                <img
-                  src={imagePreview}
-                  width="120"
-                  alt="preview"
-                />
+          {!video && (
+            <input
+              type="text"
+              placeholder="Paste YouTube Link"
+              value={youtubeLink}
+              onChange={(e) =>
+                setYoutubeLink(
+                  e.target.value
+                )
+              }
+            />
+          )}
 
-                <p
-                  className="cross"
-                  onClick={
-                    removeImage
-                  }
-                >
-                  X
-                </p>
-              </div>
-            )}
-
-            {/* VIDEO FILE INPUT */}
-            {!youtubeLink && (
-              <input
-                type="file"
-                name="video"
-                accept="video/mp4"
-                onChange={(e) => {
-                  const selected =
-                    e.target.files[0];
-
-                  setVideo(selected);
-
-                  if (selected) {
-                    setVideoPreview(
-                      URL.createObjectURL(
-                        selected
-                      )
-                    );
-                  }
-                }}
+          {videoPreview && (
+            <div className="preview-box">
+              <video
+                src={videoPreview}
+                width="250"
+                controls
               />
-            )}
 
-            {/* YOUTUBE LINK INPUT */}
-            {!video && (
-              <input
-                type="text"
-                placeholder="Paste YouTube Link"
-                value={youtubeLink}
-                onChange={(e) => {
-                  setYoutubeLink(
-                    e.target.value
-                  );
-                }}
-              />
-            )}
-
-            {/* VIDEO PREVIEW */}
-            {videoPreview && (
-              <div
-                style={{
-                  position: "relative",
-                  display:
-                    "inline-block",
-                }}
+              <p
+                className="cross"
+                onClick={
+                  removeVideo
+                }
               >
-                <video
-                  src={videoPreview}
-                  width="250"
-                  controls
-                />
+                X
+              </p>
+            </div>
+          )}
 
-                <p
-                  className="cross"
-                  onClick={
-                    removeVideo
-                  }
-                >
-                  X
-                </p>
-              </div>
-            )}
+          {youtubeLink && (
+            <div className="preview-box">
+              <iframe
+                width="250"
+                height="150"
+                src={youtubeLink.replace(
+                  "watch?v=",
+                  "embed/"
+                )}
+                title="YouTube Preview"
+                allowFullScreen
+              ></iframe>
 
-            {/* YOUTUBE PREVIEW */}
-            {youtubeLink && (
-              <div
-                style={{
-                  position: "relative",
-                  display:
-                    "inline-block",
-                }}
+              <p
+                className="cross"
+                onClick={
+                  removeYoutube
+                }
               >
-                <iframe
-                  width="250"
-                  height="150"
-                  src={youtubeLink.replace(
-                    "watch?v=",
-                    "embed/"
-                  )}
-                  title="YouTube Preview"
-                  allowFullScreen
-                ></iframe>
+                X
+              </p>
+            </div>
+          )}
 
-                <p
-                  className="cross"
-                  onClick={
-                    removeYoutube
-                  }
-                >
-                  X
-                </p>
-              </div>
-            )}
-
-            <button type="submit">
-              {id
-                ? "Update Movie"
-                : "Add Movie"}
-            </button>
-          </form>
-        </div>
+          <button type="submit">
+            {id
+              ? "Update Movie"
+              : "Add Movie"}
+          </button>
+        </form>
       </div>
     </div>
   );
 }
 
-export default Addproduct ;
+export default Addproduct;
