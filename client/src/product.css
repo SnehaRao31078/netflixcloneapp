@@ -1,4 +1,4 @@
-* {
+/** {
   box-sizing: border-box;
 }
 
@@ -144,4 +144,159 @@ img {
   line-height: 1.1;
   text-align: center;
   color: white;
+}*/
+/* product.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-page {
+  width: 100%;
+  min-height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+}
+
+.product-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 550px;
+  padding: 20px;
+}
+
+.title {
+  color: white;
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* EXACT SAME STYLE FOR ALL INPUTS + SELECTS */
+
+.inputfield,
+select,
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  height: 55px;
+
+  padding-left: 15px;
+  padding-right: 15px;
+
+  border: 1px solid #555;
+  border-radius: 5px;
+
+  background: #2f2f3b;
+  color: white;
+
+  font-size: 16px;
+
+  outline: none;
+
+  display: block;
+}
+
+/* SELECT FIX */
+
+select.inputfield {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  cursor: pointer;
+}
+
+/* FILE INPUT */
+
+input[type="file"] {
+  padding-top: 14px;
+}
+
+/* PLACEHOLDER */
+
+input::placeholder {
+  color: #999;
+}
+
+/* BUTTON */
+
+button {
+  width: 100%;
+  height: 55px;
+
+  border: none;
+  border-radius: 5px;
+
+  background: red;
+  color: white;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* PREVIEW */
+
+.preview-box {
+  position: relative;
+  display: inline-block;
+}
+
+img,
+video,
+iframe {
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* REMOVE BUTTON */
+
+.cross {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  background: red;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  cursor: pointer;
 }
