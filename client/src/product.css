@@ -106,6 +106,7 @@ select.inputfield {
   -moz-appearance: none;
 
   cursor: pointer;
+  margin-left: -5%;
 }
 
 /* PLACEHOLDER */
