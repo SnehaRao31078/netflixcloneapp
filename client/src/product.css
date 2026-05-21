@@ -1,69 +1,92 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-body,
-html {
+body {
+  margin: 0;
+  padding: 0;
   background: black;
-  font-family: Arial, Helvetica,
-    sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: black;
 }
 
 .product-page {
   width: 100%;
   min-height: 100vh;
+  background: black;
   display: flex;
   justify-content: center;
-  background: black;
+}
+
+.product-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
   width: 100%;
   max-width: 550px;
   padding: 20px;
+  margin-top: 20px;
 }
-
-.title {
+.container h1 {
   color: white;
-  font-size: 40px;
-  text-align: center;
-  margin-bottom: 25px;
+  font-size: 55px;
+  margin-bottom: 20px;
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
-/* INPUT + SELECT */
+
+.inputfield,
 input[type="text"],
-input[type="file"],
-select {
+input[type="file"] {
   width: 100%;
   height: 55px;
-  padding: 0 15px;
+  padding:  0 45px 0 15px;
   border: 1px solid #555;
-  border-radius: 6px;
+  border-radius: 5px;
   background: #2f2f3b;
   color: white;
   font-size: 16px;
   outline: none;
+  box-sizing: border-box;
 }
 
-/* FILE INPUT */
-input[type="file"] {
-  padding: 14px;
-  height: auto;
+
+.select-wrapper {
+  width: 100%;
 }
 
-/* SELECT */
-select {
+
+select.inputfield {
+  width: 100%;
+  height: 55px;
+  padding: 0 45px 0 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #2f2f3b;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+
+  display: block;
   cursor: pointer;
 }
 
@@ -71,14 +94,19 @@ input::placeholder {
   color: #999;
 }
 
+input[type="file"] {
+  padding: 12px;
+  height: auto;
+}
+
 button {
   width: 100%;
   padding: 15px;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   background: red;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -87,14 +115,9 @@ button:hover {
   opacity: 0.9;
 }
 
-.preview-box {
-  position: relative;
-  display: inline-block;
-}
-
-img,
 video,
-iframe {
+iframe,
+img {
   margin-top: 10px;
   border-radius: 5px;
 }
@@ -105,13 +128,20 @@ iframe {
   right: -8px;
   width: 22px;
   height: 22px;
+  border-radius: 50%;
+  border: none;
   background: red;
   color: white;
-  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
+}
+
+.title {
+  font-size: 28px;
+  line-height: 1.1;
+  text-align: center;
+  color: white;
 }
